@@ -1,6 +1,6 @@
 # Chapter 2 Quick Start
 
-This chapter offers a step-by-step tutorial that allows for hands-on learning. We will begin by setting up required environment and then proceed to develop an application with BigDL-LLM transformers INT4 optimization. This application will allow us to conduct inferences on a large language model with low latency. By following this tutorial, you will gain a seamless experience that will enable you to easily comprehend and follow the upcoming tutorials.
+This chapter offers a step-by-step tutorial that allows for hands-on learning. We will begin by setting up required environment and then proceed to develop an application with BigDL-LLM INT4 optimizations. This application will allow us to conduct inferences on a large language model with low latency. By following this tutorial, you will gain a seamless experience that will enable you to easily comprehend and follow the upcoming chapters.
 
 ## 1. Environment Setup
 
@@ -41,10 +41,10 @@ For WSL users, you could follow the same instructions in section [1.2.1.1 Linux]
 
 > **Related Readings**
 >
-> For how to install WSL on your windows, refer to [here](https://bigdl.readthedocs.io/en/latest/doc/UserGuide/win.html#install-wsl2) for more information.
+> For how to install WSL on Windows, refer to [here](https://bigdl.readthedocs.io/en/latest/doc/UserGuide/win.html#install-wsl2) for more information.
 
 #### 1.2.2 Create Environment
-We suggest using Python 3.9 for BigDL-LLM. To create an environment with Python 3.9, run:
+We suggest Python 3.9 with BigDL-LLM. To create a Python 3.9 environment, run:
 ```
 conda create -n llm-tutorial python=3.9
 ```
@@ -63,7 +63,7 @@ pip install jupyter
 ```
 
 #### 1.3.1 Client
-After installation, you could just use the following command on **client** machine:
+After installation, you could just use the following command on client machine:
 ```
 jupyter notebook
 ```
