@@ -69,7 +69,7 @@ jupyter notebook
 ```
 to open and run the tutorial notebook [quick_start.ipynb](./quick_start.ipynb) in web browser.
 
-#### 1.3.1 Server
+#### 1.3.2 Server
 For server users, it is recommended to run the tutorial with all the physical cores of a single socket. Run:
 ```bash
 # e.g. for a server with 48 cores per socket
