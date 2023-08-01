@@ -12,12 +12,12 @@ For OS, BigDL-LLM supports Ubuntu 20.04 or later, CentOS 7 or later, and Windows
 
 ### 2.1.2 Conda and Environment Management
 
-[Conda](https://docs.conda.io/projects/conda/en/stable/) is an open-source package & environment management system which is supported in multiple platforms. It provides a convenient way to manage packages and create isolated environments for different projects. We highly recommend using Conda here to create environment for the tutorials.
+[Conda](https://docs.conda.io/projects/conda/en/stable/) is an open-source package & environment management system which is supported in multiple platforms. It provides a convenient way to manage packages and create isolated environments for different projects. We highly recommend using conda here to create environment for the tutorials.
 
 #### 2.1.2.1 Install Conda
 
 **Linux:**
-For Linux users, you could install Conda through:
+For Linux users, you could install conda through:
 
 ```bash
 wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
@@ -28,11 +28,11 @@ Then you could run:
 ```bash
 conda init
 ```
-and follow the output instructions to finish the Conda initialization.
+and follow the output instructions to finish the conda initialization.
 
 
 **Native Windows:**
-For native Windows users, you could download Conda installer [here](https://docs.conda.io/en/latest/miniconda.html#latest-miniconda-installer-links) based on your system information.
+For native Windows users, you could download conda installer [here](https://docs.conda.io/en/latest/miniconda.html#latest-miniconda-installer-links) based on your system information.
 
 After the installation, open "Anaconda Powershell Prompt (Miniconda3)" for the following steps.
 
