@@ -21,7 +21,7 @@ Next, use a python environment management tool (we recommend using [Conda](https
 
 
 ### 2.2.1 Install Conda
-Install Conda following the instructions corresponding to your OS.
+Follow the instructions corresponding to your OS to install conda.
 
 #### 2.2.1.1 Linux
 
