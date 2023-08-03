@@ -67,7 +67,7 @@ After installation, you could just use the following command on client machine:
 ```
 jupyter notebook
 ```
-to open and run the tutorial notebook [quick_start.ipynb](./quick_start.ipynb) in web browser.
+to open and run the tutorial notebook [Quick_Start.ipynb](./Quick_Start.ipynb) in web browser.
 
 #### 2.1.3.2 Server
 For server users, it is recommended to run the tutorial with all the physical cores of a single socket. Run:
@@ -76,4 +76,4 @@ For server users, it is recommended to run the tutorial with all the physical co
 export OMP_NUM_THREADS=48
 numactl -C 0-47 -m 0 jupyter notebook
 ```
-to open and execute the tutorial notebook [quick_start.ipynb](./quick_start.ipynb) in web browser.
+to open and execute the tutorial notebook [Quick_Start.ipynb](./Quick_Start.ipynb) in web browser.
