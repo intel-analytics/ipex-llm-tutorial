@@ -51,7 +51,7 @@ Open a WSL2 shell and execute the same commands as in [2.2.1.1 Linux](#2211-linu
 
 
 ### 2.2.2 Create Environment
-We suggest using Python 3.9 to run BigDL-LLM.
+We recommend using Python 3.9 to run BigDL-LLM.
 
 Create a Python 3.9 environment with a name you choose, for example `llm-tutorial`:
 ```
