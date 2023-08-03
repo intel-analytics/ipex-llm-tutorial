@@ -33,11 +33,11 @@ BigDL-LLM provides a variety of low-precision optimizations (e.g., INT4/INT5/INT
 ```bash
 pip install bigdl-llm[all]
 ```
-Python 3.9 and conda are recommended for installing BigDL-LLM. Read [Chapter 2: Quick Start]() to learn more about the best practices. 
+Python 3.9 and conda are recommended before installing BigDL-LLM. Read [Chapter 2: Enviroment Setup](../ch_2_Environment_Setup/README.md) to learn more about the best practices for preparing your environment.
 
 ## What's Next
 
-The following chapters in this tutorial will explain in more details about how to use BigDL-LLM to build LLM applications, e.g. transformers API, langchain APIs, non-English support, etc. Each chapter will provide runnable notebooks using popular open source models. Read along to learn more and run the code on your laptop.
+The following chapters in this tutorial will explain in more details about how to use BigDL-LLM to build LLM applications, e.g. transformers API, langchain APIs, multi-language support, etc. Each chapter will provide runnable notebooks using popular open source models. Read along to learn more and run the code on your laptop.
 
 
 Also, you can check out our [GitHub repo](https://github.com/intel-analytics/BigDL/tree/main/python/llm) for more information and latest news.
