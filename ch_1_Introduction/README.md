@@ -33,7 +33,7 @@ BigDL-LLM provides a variety of low-precision optimizations (e.g., INT4/INT5/INT
 ```bash
 pip install bigdl-llm[all]
 ```
-Python 3.9 and conda are recommended for installing BigDL-LLM. Read [Chapter 2: Quick Start]() to learn more about the best practices. 
+Python 3.9 and conda are recommended before installing BigDL-LLM. Read [Chapter 2: Enviroment Setup](../ch_2_Environment_Setup/README.md) to learn more about the best practices for preparing your environment.
 
 ## What's Next
 
