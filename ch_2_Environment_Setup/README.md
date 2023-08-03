@@ -1,81 +1,92 @@
 # Chapter 2 Environment Setup
 
-This chapter introduces some best practices for setting up your environment. Before running the notebooks in this tutorial, it is highly recommended to follow below steps according to your system. 
+This chapter provides some best practices for environment setup. Before preceeding with the notebooks in following chapters, it is highly recommended to take the corresponding steps below to configure your environment.  
 
-### 2.1 Recommended System
+## 2.1 System Recommendation
+First of all, choose a proper system. Here's a list of recommended hardware and OS.
+>⚠️**Hardware**
 
->**Device**
+- PCs equipped with 12th Gen Intel® Core™ processor or higher, and at least 16GB RAM
+- Servers equipped with Intel® Xeon® processors, at least 32G RAM.
 
-PCs equipped with 12th Gen Intel® Core™ processor or higher, and at least 16GB RAM. Or Servers with Intel® Xeon® processors.
+>⚠️**Operating System**
 
->**Operating System**
+- Ubuntu 20.04 or later
+- CentOS 7 or later
+- Windows 10/11, with or without WSL
 
-Ubuntu 20.04 or later, CentOS 7 or later, and Windows 10/11.
+## 2.2 Setup Python Environment
 
-### 2.1.2 Conda and Environment Management
+Next, use a python environment management tool (we recommend using [Conda](https://docs.conda.io/projects/conda/en/stable/)) to create a python enviroment and install necessary libs.  
 
-We recommend using [Conda](https://docs.conda.io/projects/conda/en/stable/) to manage your python environment management. 
 
-#### 2.1.2.1 Install Conda
+### 2.2.1 Install Conda
+Follow the instructions corresponding to your OS to install conda.
 
-**Linux:**
-For Linux users, you could install conda through:
+#### 2.2.1.1 Linux
+
+For Linux users, open a terminal and execute the following commands:
 
 ```bash
 wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
 bash ./Miniconda3-latest-Linux-x86_64.sh
-```
-
-Then you could run:
-```bash
 conda init
 ```
-and follow the output instructions to finish the conda initialization.
+>**Note**
+> Follow the instructions popped up on the console until conda initialization finished successfully.
 
 
-**Native Windows:**
-For native Windows users, you could download conda installer [here](https://docs.conda.io/en/latest/miniconda.html#latest-miniconda-installer-links) based on your system information.
+#### 2.2.1.2 Windows
 
-After the installation, open "Anaconda Powershell Prompt (Miniconda3)" for the following steps.
+For Windows users, download conda installer [here](https://docs.conda.io/en/latest/miniconda.html#latest-miniconda-installer-links) and execute it.
 
-**Windows with WSL:**
-For WSL users, you could follow the same instructions in section [1.2.1.1 Linux](#1211-linux).
+After the installation finished, open "Anaconda Powershell Prompt (Miniconda3)" for following steps.
 
-> **Related Readings**
->
-> For how to install WSL on Windows, refer to [here](https://bigdl.readthedocs.io/en/latest/doc/UserGuide/win.html#install-wsl2) for more information.
+#### 2.2.1.3 Windows Subsystem for Linux (WSL):
 
-#### 2.1.2.2 Create Environment
-We suggest Python 3.9 with BigDL-LLM. To create a Python 3.9 environment, run:
+For WSL users, ensure you have already installed WSL2. If not, refer to [here](https://bigdl.readthedocs.io/en/latest/doc/UserGuide/win.html#install-wsl2l) for how to install.
+
+Open a WSL2 shell and execute the same commands as in [2.2.1.1 Linux](#2211-linux) section.
+
+
+
+### 2.2.2 Create Environment
+>**Note**
+>We recommend using Python 3.9 to run BigDL-LLM.
+
+Create a Python 3.9 environment with the name you choose, for example `llm-tutorial`:
 ```
 conda create -n llm-tutorial python=3.9
 ```
-You have the flexibility to choose any name you prefer instead of `llm-tutorial`.
-
-You can then activate the environment through:
+Then activate the environment `llm-tutorial`:
 ```
 conda activate llm-tutorial
 ```
-and proceed with the installation of other packages.
+Now move on to [Section 2.3](#23-setup-jupyter-service) to setup Jupyter Service.
 
-### 2.1.3 Launch Tutorial Notebooks
-Package `jupyter` is required to be installed for running the tutorial notebooks (i.e. the `.ipynb` files). Under your activated Python 3.9 environment, run:
+## 2.3 Setup Jupyter Service
+
+### 2.3.1 Install Jupyter
+The `jupyter` library is required for running the tutorial notebooks (i.e. the `.ipynb` files). Under your activated Python 3.9 environment, run:
 ```
 pip install jupyter
 ```
 
-#### 2.1.3.1 Client
-After installation, you could just use the following command on client machine:
+### 2.2 Start Jupyter Service
+The recommended command to start jupyter service is slightly different on PC and server. 
+
+#### 2.3.1 On PC
+On PC, just execute the command:
 ```
 jupyter notebook
 ```
-to open and run the tutorial notebook [Quick_Start.ipynb](./Quick_Start.ipynb) in web browser.
 
-#### 2.1.3.2 Server
-For server users, it is recommended to run the tutorial with all the physical cores of a single socket. Run:
+#### 2.3.2 On Server
+On server, it is recommended to use all physical cores of a single socket for better performance. So execute the command:
 ```bash
 # e.g. for a server with 48 cores per socket
 export OMP_NUM_THREADS=48
 numactl -C 0-47 -m 0 jupyter notebook
 ```
-to open and execute the tutorial notebook [Quick_Start.ipynb](./Quick_Start.ipynb) in web browser.
+
+Congratulations! Now you can use a web browser to access the jupyter service url and execute the notebooks provided in this tutorial. 
