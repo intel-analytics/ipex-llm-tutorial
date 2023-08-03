@@ -73,7 +73,7 @@ pip install jupyter
 ```
 
 ### 2.2 Start Jupyter Service
-Now we can start the jupyter service to run the tutorial notebooks. The recommended command is slightly different on PC and server. 
+The recommended command to start jupyter service is slightly different on PC and server. 
 
 #### 2.3.1 On PC
 On PC, just execute the command:
@@ -82,11 +82,11 @@ jupyter notebook
 ```
 
 #### 2.3.2 On Server
-On server, it is recommended to use all physical cores of a single socket for better performance. You can execute the command:
+On server, it is recommended to use all physical cores of a single socket for better performance. So execute the command:
 ```bash
 # e.g. for a server with 48 cores per socket
 export OMP_NUM_THREADS=48
 numactl -C 0-47 -m 0 jupyter notebook
 ```
 
-Then you can use a web browser to access the jupyter service url and execute the notebooks provided in this tutorial. 
+Congratulations! Now you can use a web browser to access the jupyter service url and execute the notebooks provided in this tutorial. 
