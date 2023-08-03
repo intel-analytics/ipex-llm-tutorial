@@ -21,11 +21,17 @@ BigDL-LLM provides a variety of low-precision optimizations (e.g., INT4/INT5/INT
 
 #### 7B model running on an Intel 12-Gen Core PC (real-time screen capture):
 
-![image](https://github.com/bigdl-project/bigdl-project.github.io/blob/master/assets/llm-7b.gif)
+<p align="center">
+            <img src="https://github.com/bigdl-project/bigdl-project.github.io/blob/master/assets/llm-7b.gif" width='80%' /> 
+
+</p>
 
 #### 13B model running on an Intel 12-Gen Core PC (real-time screen capture): 
 
-![image](https://github.com/bigdl-project/bigdl-project.github.io/blob/master/assets/llm-13b.gif)
+<p align="center">
+            <img src="https://github.com/bigdl-project/bigdl-project.github.io/blob/master/assets/llm-13b.gif" width='80%' /> 
+
+</p>
 
 
 ## Quick Installation
