@@ -61,7 +61,7 @@ Then activate the environment `llm-tutorial`:
 ```
 conda activate llm-tutorial
 ```
-Now move on to [sectoin 2.3](#23-setup-jupyter-service) to setup Jupyter Service.
+Now move on to [Section 2.3](#23-setup-jupyter-service) to setup Jupyter Service.
 
 ## 2.3 Setup Jupyter Service
 
