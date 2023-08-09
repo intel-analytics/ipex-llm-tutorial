@@ -6,4 +6,7 @@ Therefore, in the large language model, multi-language support is an indispensab
 
 Large language model achieve this ability by training on a diverse corpus of text from different languages. Through this training process, the model learns not only the grammar and vocabulary of each language but also the details and context that make language unique.
 
-We temporarily provide two examples of multi-language support for Chinese using BigDL-LLM, [ChatGLM2-6B](chatglm2-tutorial.ipynb) and [Baichuan-13B](baichuan-tutorial.ipynb), for your further understanding.
+We provide two notebook examples showing the usage of two popular multi-language models, using Chinese for illustration.
+
++ [ChatGLM2-6B](chatglm2-tutorial.ipynb)
++ [Baichuan-13B](baichuan-tutorial.ipynb)
