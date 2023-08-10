@@ -1,6 +1,6 @@
 # Chapter 2 Environment Setup
 
-This chapter provides some best practices for environment setup. Before preceeding with the notebooks in following chapters, it is highly recommended to take the corresponding steps below to configure your environment.  
+This chapter presents a set of best practices for setting up your environment. To ensure a smooth experience with the notebooks in the subsequent chapters, it is strongly recommended that you follow the corresponding steps below to configure your environment properly.  
 
 ## 2.1 System Recommendation
 First of all, choose a proper system. Here's a list of recommended hardware and OS.
@@ -21,11 +21,11 @@ Next, use a python environment management tool (we recommend using [Conda](https
 
 
 ### 2.2.1 Install Conda
-Follow the instructions corresponding to your OS to install conda.
+Follow the instructions corresponding to your OS below.
 
 #### 2.2.1.1 Linux
 
-For Linux users, open a terminal and execute the following commands:
+For Linux users, open a terminal and run below commands.
 
 ```bash
 wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
@@ -46,13 +46,13 @@ After the installation finished, open "Anaconda Powershell Prompt (Miniconda3)" 
 
 For WSL users, ensure you have already installed WSL2. If not, refer to [here](https://bigdl.readthedocs.io/en/latest/doc/UserGuide/win.html#install-wsl2l) for how to install.
 
-Open a WSL2 shell and execute the same commands as in [2.2.1.1 Linux](#2211-linux) section.
+Open a WSL2 shell and run the same commands as in [2.2.1.1 Linux](#2211-linux) section.
 
 
 
 ### 2.2.2 Create Environment
->**Note**
->We recommend using Python 3.9 to run BigDL-LLM.
+> **Note**
+> Python 3.9 is recommended for running BigDL-LLM.
 
 Create a Python 3.9 environment with the name you choose, for example `llm-tutorial`:
 ```
@@ -62,8 +62,6 @@ Then activate the environment `llm-tutorial`:
 ```
 conda activate llm-tutorial
 ```
-Now move on to [Section 2.3](#23-setup-jupyter-service) to setup Jupyter Service.
-
 ## 2.3 Setup Jupyter Service
 
 ### 2.3.1 Install Jupyter
@@ -76,13 +74,13 @@ pip install jupyter
 The recommended command to start jupyter service is slightly different on PC and server. 
 
 #### 2.3.1 On PC
-On PC, just execute the command:
+On PC, just run the command in shell:
 ```
 jupyter notebook
 ```
 
 #### 2.3.2 On Server
-On server, it is recommended to use all physical cores of a single socket for better performance. So execute the command:
+On server, it is recommended to use all physical cores of a single socket for better performance. So run below command instead:
 ```bash
 # e.g. for a server with 48 cores per socket
 export OMP_NUM_THREADS=48
