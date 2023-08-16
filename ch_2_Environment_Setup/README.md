@@ -70,16 +70,16 @@ The `jupyter` library is required for running the tutorial notebooks (i.e. the `
 pip install jupyter
 ```
 
-### 2.2 Start Jupyter Service
+### 2.3.2 Start Jupyter Service
 The recommended command to start jupyter service is slightly different on PC and server. 
 
-#### 2.3.1 On PC
+#### 2.3.2.1 On PC
 On PC, just run the command in shell:
 ```
 jupyter notebook
 ```
 
-#### 2.3.2 On Server
+#### 2.3.2.2 On Server
 On server, it is recommended to use all physical cores of a single socket for better performance. So run below command instead:
 ```bash
 # e.g. for a server with 48 cores per socket
