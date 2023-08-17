@@ -1,13 +1,13 @@
 # Chapter 1 Introduction
 
 ## What is BigDL-LLM
-[BigDL-LLM](https://github.com/intel-analytics/BigDL/tree/main/python/llm) is a library that makes LLMs (language language models) run fast on low-cost PCs (without the need of discrete GPU). It is released as part of the open source [BigDL](https://github.com/intel-analytics/bigdl) project under Apache 2.0 License. 
+[BigDL-LLM](https://github.com/intel-analytics/BigDL/tree/main/python/llm) is a library that makes LLMs (large language models) run fast [^1] on low-cost PCs (without the need of discrete GPU). It is released as part of the open source [BigDL](https://github.com/intel-analytics/bigdl) project under Apache 2.0 License. 
 
 
 ## What can you do with BigDL-LLM
 You can use BigDL-LLM to run _any [HuggingFace transformer](https://huggingface.co/docs/transformers/index) model_. It automatically optimizes and accelerates LLMs using low-precision techniques, modern hardware accelerations and latest software optimizations. 
 
-HuggingFace transformers-based applications can run on BigDL-LLM with one-line code change, and you'll immediately observe significant speedup. 
+HuggingFace transformers-based applications can run on BigDL-LLM with one-line code change, and you'll immediately observe significant speedup [^1]. 
 
 ```python
 # change import, specify precision when loading the model
@@ -17,7 +17,7 @@ model = AutoModelForCausalLM.from_pretrained('/path/to/model/', load_in_4bit=Tru
 ...
 ```
 
-BigDL-LLM provides a variety of low-precision optimizations (e.g., INT4/INT5/INT8), and allows you to run LLMs on PCs with limited resources. For example, you will be able to run a 7B or 13B model on a 16G memory laptop with very low latency.  
+BigDL-LLM provides a variety of low-precision optimizations (e.g., INT4/INT5/INT8), and allows you to run LLMs on PCs with limited resources. For example, you will be able to run a 7B or 13B model on a 16G memory laptop with very low latency [^1].  
 
 #### 7B model running on an Intel 12-Gen Core PC (real-time screen capture):
 
@@ -48,8 +48,8 @@ The following chapters in this tutorial will explain in more details about how t
 
 Also, you can check out our [GitHub repo](https://github.com/intel-analytics/BigDL/tree/main/python/llm) for more information and latest news.
 
-We have already verified many models on BigDL-LLM and provided ready-to-run examples, such as [Llama](https://github.com/intel-analytics/BigDL/blob/main/python/llm/example/transformers/native_int4), [Llama2](https://github.com/intel-analytics/BigDL/blob/main/python/llm/example/transformers/transformers_int4/llama2), [Vicuna](https://github.com/intel-analytics/BigDL/blob/main/python/llm/example/transformers/transformers_int4/vicuna), [ChatGLM](https://github.com/intel-analytics/BigDL/blob/main/python/llm/example/transformers/transformers_int4/chatglm), [ChatGLM2](https://github.com/intel-analytics/BigDL/blob/main/python/llm/example/transformers/transformers_int4/chatglm2), [Baichuan](https://github.com/intel-analytics/BigDL/blob/main/python/llm/example/transformers/transformers_int4/baichuan), [MOSS](https://github.com/intel-analytics/BigDL/blob/main/python/llm/example/transformers/transformers_int4/moss), [Falcon](https://github.com/intel-analytics/BigDL/blob/main/python/llm/example/transformers/transformers_int4/falcon), [Dolly-v1](https://github.com/intel-analytics/BigDL/blob/main/python/llm/example/transformers/transformers_int4/dolly_v1), [Dolly-v2](https://github.com/intel-analytics/BigDL/blob/main/python/llm/example/transformers/transformers_int4/dolly_v2), StarCoder([link1](https://github.com/intel-analytics/BigDL/blob/main/python/llm/example/transformers/native_int4), [link2](https://github.com/intel-analytics/BigDL/blob/main/python/llm/example/transformers/transformers_int4/starcoder)), Phoenix([link1](https://github.com/intel-analytics/BigDL/blob/main/python/llm/example/transformers/native_int4),[link2](https://github.com/intel-analytics/BigDL/blob/main/python/llm/example/transformers/transformers_int4/redpajama)), RedPajama([link1](https://github.com/intel-analytics/BigDL/blob/main/python/llm/example/transformers/native_int4), [link2](https://github.com/intel-analytics/BigDL/blob/main/python/llm/example/transformers/transformers_int4/redpajama)), [Whisper](https://github.com/intel-analytics/BigDL/blob/main/python/llm/example/transformers/transformers_int4/whisper), etc. You can find model examples [here](https://github.com/intel-analytics/BigDL/tree/main/python/llm/example/transformers/transformers_int4).
+We have already verified many models on BigDL-LLM and provided ready-to-run examples, such as [Llama](https://github.com/intel-analytics/BigDL/blob/main/python/llm/example/transformers/native_int4), [Llama2](https://github.com/intel-analytics/BigDL/blob/main/python/llm/example/transformers/transformers_int4/llama2), [Vicuna](https://github.com/intel-analytics/BigDL/blob/main/python/llm/example/transformers/transformers_int4/vicuna), [ChatGLM](https://github.com/intel-analytics/BigDL/blob/main/python/llm/example/transformers/transformers_int4/chatglm), [ChatGLM2](https://github.com/intel-analytics/BigDL/blob/main/python/llm/example/transformers/transformers_int4/chatglm2), [Baichuan](https://github.com/intel-analytics/BigDL/blob/main/python/llm/example/transformers/transformers_int4/baichuan), [MOSS](https://github.com/intel-analytics/BigDL/blob/main/python/llm/example/transformers/transformers_int4/moss), [Falcon](https://github.com/intel-analytics/BigDL/blob/main/python/llm/example/transformers/transformers_int4/falcon), [Dolly-v1](https://github.com/intel-analytics/BigDL/blob/main/python/llm/example/transformers/transformers_int4/dolly_v1), [Dolly-v2](https://github.com/intel-analytics/BigDL/blob/main/python/llm/example/transformers/transformers_int4/dolly_v2), StarCoder([link1](https://github.com/intel-analytics/BigDL/blob/main/python/llm/example/transformers/native_int4), [link2](https://github.com/intel-analytics/BigDL/blob/main/python/llm/example/transformers/transformers_int4/starcoder)), Phoenix([link1](https://github.com/intel-analytics/BigDL/blob/main/python/llm/example/transformers/native_int4),[link2](https://github.com/intel-analytics/BigDL/tree/main/python/llm/example/transformers/transformers_int4/phoenix)), RedPajama([link1](https://github.com/intel-analytics/BigDL/blob/main/python/llm/example/transformers/native_int4), [link2](https://github.com/intel-analytics/BigDL/blob/main/python/llm/example/transformers/transformers_int4/redpajama)), [Whisper](https://github.com/intel-analytics/BigDL/blob/main/python/llm/example/transformers/transformers_int4/whisper), etc. You can find model examples [here](https://github.com/intel-analytics/BigDL/tree/main/python/llm/example/transformers/transformers_int4).
 
-> **NOTE**  
-> BigDL-LLM is optimized on Intel laptops, and performance on other platforms may not be optimal.
+
+[^1]: Performance varies by use, configuration and other factors. `bigdl-llm` may not optimize to the same degree for non-Intel products. Learn more at www.Intel.com/PerformanceIndex.
 
