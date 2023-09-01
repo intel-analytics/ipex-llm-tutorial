@@ -4,6 +4,11 @@ Apart from the significant acceleration capabilites on Intel CPUs, BigDL-LLM als
 
 BigDL-LLM supports optimizations of any [*HuggingFace transformers*](https://huggingface.co/docs/transformers/index) model on Intel GPUs with the help of low-precision techniques, modern hardware accelerations and latest software optimizations.
 
+In Chapter 7, you will learn how to run LLMs, as well as build stream chat application, using BigDL-LLM optimizations on Intel GPUs. Two popular open source models are used as examples:
+
++ [Llama2-7B](./7_1_GPU_Llama2-7B.ipynb)
++ [ChatGLM2-6B](./7_2_GPU_ChatGLM2-6B.ipynb) (with Chinese capabilities)
+
 ## 7.0 Environment Setup
 
 Here are some best practices for setting up your environment. It is strongly recommended that you follow the corresponding steps below to configure your environment properly.
@@ -102,3 +107,69 @@ sudo apt update
 sudo apt install intel-basekit
 ```
 </details>
+
+### 7.0.3 Python Environment Setup
+
+Next, use a python environment management tool (we recommend using [Conda](https://docs.conda.io/projects/conda/en/stable/)) to create a python enviroment and install necessary libs.
+
+#### 7.0.3.1 Install Conda
+
+For Linux users, open a terminal and run below commands:
+
+```bash
+wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
+bash ./Miniconda3-latest-Linux-x86_64.sh
+conda init
+```
+
+> **Note**
+> Follow the instructions popped up on the console until conda initialization finished successfully.
+
+#### 7.0.3.2 Create Environment
+
+> **Note**
+> Python 3.9 is recommended for running BigDL-LLM.
+
+Create a Python 3.9 environment with the name you choose, for example `llm-tutorial-gpu`:
+
+```bash
+conda create -n llm-tutorial-gpu python=3.9
+```
+
+Then activate the environment `llm-tutorial-gpu`:
+
+```bash
+conda activate llm-tutorial-gpu
+```
+
+### 7.0.4 Best Known Configuration on Linux
+
+For optimal performance on Intel GPUs, it is recommended to set several environment variables:
+
+```bash
+# configure OneAPI environment variables
+source /opt/intel/oneapi/setvars.sh
+
+export USE_XETLA=OFF
+export SYCL_PI_LEVEL_ZERO_USE_IMMEDIATE_COMMANDLISTS=1
+```
+
+### 7.0.5 Jupyter Service Setup
+
+#### 7.0.5.1 Install Jupyter
+
+The `jupyter` library is required for running the tutorial notebooks (i.e. the `.ipynb` files). Under your activated Python 3.9 environment, run:
+
+```bash
+pip install jupyter
+```
+
+#### 7.0.5.2 Start Jupyter Service
+
+Then start jupyter service through
+
+```bash
+jupyter notebook
+```
+
+Congratulations! Now you can use a web browser to access the jupyter service url and execute the notebooks provided in Chatpter 7.
