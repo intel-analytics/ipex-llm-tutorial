@@ -9,6 +9,6 @@ The tutorials are organized as follows:
 - Chapter 4 elaborates how to load and accelerate Transformes models using _BigDL-LLM_
 - Chapter 5 explains how to use _BigDL-LLM_ with langchain.
 - Chapter 6 is about multi-language support, e.g. Chinese  
-
+- Chapter 7 highlights the GPU support capabilities of _BigDL-LLM_.
 
 [^1]: Performance varies by use, configuration and other factors. `bigdl-llm` may not optimize to the same degree for non-Intel products. Learn more at www.Intel.com/PerformanceIndex.
