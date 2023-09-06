@@ -13,7 +13,6 @@ pip install bigdl-llm[xpu] -f https://developer.intel.com/ipex-whl-stable-xpu
 ```
 
 > **Note**
->
 > The above command will install `intel_extension_for_pytorch==2.0.110+xpu` as default
 
 ## 7.1.2 Import `intel_extension_for_pytorch`
@@ -38,7 +37,6 @@ model_path = snapshot_download(repo_id='/meta-llama/Llama-2-7b-chat-hf',
 ```
 
 > **Note**
->
 > The model will by default be downloaded to `HF_HOME='~/.cache/huggingface'`.
 
 ## 7.1.4 Load Model in Low Precision
@@ -61,7 +59,6 @@ model_in_4bit_gpu = model_in_4bit.to('xpu')
 ```
 
 > **Note**
->
 > BigDL-LLM has supported `AutoModel`, `AutoModelForCausalLM`, `AutoModelForSpeechSeq2Seq` and `AutoModelForSeq2SeqLM`.
 >
 > If you have already downloaded the Llama 2 (7B) model and skipped step [7.1.2.2](#712-optional-download-llama-2-7b), you could specify `pretrained_model_name_or_path` to the model path.
@@ -79,7 +76,6 @@ model_in_8bit_gpu = model_in_8bit.to('xpu')
 ```
 
 > **Note**
->
 > * Currently, BigDL-LLM on Intel GPUs has supported `load_in_low_bit` to be `sym_int4` and `sym_int8`
 >
 > *  `load_in_4bit=True` is equivalent to `load_in_low_bit='sym_int4'`.
@@ -123,7 +119,6 @@ with torch.inference_mode():
 ```
 
 > **Note**
->
 > The initial generation of optimized LLMs on Intel GPUs could be slow. Therefore, it's advisable to perform a warm-up run before the actual generation.
 >
 > For the next section of stream chat, we could treat this time of generation as a warm-up.
@@ -208,7 +203,6 @@ def stream_chat(model, tokenizer, input_str, chat_history):
 ```
 
 > **Note**
->
 > To successfully observe the text streaming behavior in standard output, we need to set the environment variable `PYTHONUNBUFFERED=1 `to ensure that the standard output streams are directly sent to the terminal without being buffered first.
 >
 > The [Hugging Face *transformers* streamer classes](https://huggingface.co/docs/transformers/main/generation_strategies#streaming) is currently being developed and is subject to future changes.
