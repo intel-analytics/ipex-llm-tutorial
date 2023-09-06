@@ -207,7 +207,7 @@ def stream_chat(model, tokenizer, input_str, chat_history):
 ```
 
 > **Note**
-> To successfully observe the text streaming behavior in standard output, we need to set the environment variable `PYTHONUNBUFFERED=1 `to ensure that the standard output streams are directly sent to the terminal without being buffered first.
+> To successfully observe the text streaming behavior in standard output, we need to set the environment variable `PYTHONUNBUFFERED=1` to ensure that the standard output streams are directly sent to the terminal without being buffered first.
 >
 > The [Hugging Face *transformers* streamer classes](https://huggingface.co/docs/transformers/main/generation_strategies#streaming) is currently being developed and is subject to future changes.
 
