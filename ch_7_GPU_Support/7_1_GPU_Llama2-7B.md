@@ -67,7 +67,7 @@ model_in_4bit_gpu = model_in_4bit.to('xpu')
 >
 > If you have already downloaded the Llama 2 (7B) model and skipped step [7.1.2.2](#712-optional-download-llama-2-7b), you could specify `pretrained_model_name_or_path` to the model path.
 
-**For INT8 Optimizations (with `load_in_low_bit="sym_int8"`):**
+**(Optional) For INT8 Optimizations (with `load_in_low_bit="sym_int8"`):**
 
 ```python
 # note that the AutoModelForCausalLM here is imported from bigdl.llm.transformers
@@ -216,12 +216,14 @@ We can then achieve interactive, multi-turn stream chat between humans and the b
 ```python
 chat_history = []
 
+print('-'*20, 'Stream Chat', '-'*20, end="")
 while True:
     with torch.inference_mode():
-        user_input = input("Input:")
+        print("\n", end="")
+        user_input = input("Input: ")
         if user_input == "stop": # let's stop the conversation when user input "stop"
-          print("Stream Chat with Llama 2 (7B) stopped.")
-          break
+            print("Stream Chat with Llama 2 (7B) stopped.")
+            break
         stream_chat(model=model_in_4bit_gpu,
                     tokenizer=tokenizer,
                     input_str=user_input,
