@@ -4,9 +4,9 @@ Apart from the significant acceleration capabilites on Intel CPUs, BigDL-LLM als
 
 BigDL-LLM supports optimizations of any [*HuggingFace transformers*](https://huggingface.co/docs/transformers/index) model on Intel GPUs with the help of low-precision techniques, modern hardware accelerations and latest software optimizations.
 
-In Chapter 7, you will learn how to run LLMs, as well as implement stream chat functionalities, using BigDL-LLM optimizations on Intel GPUs. An popular open source model is used as an example:
+In Chapter 7, you will learn how to run LLMs, as well as implement stream chat functionalities, using BigDL-LLM optimizations on Intel GPUs. Popular open source models are used as examples:
 
-+ [Llama2-7B](./7_1_GPU_Llama2-7B.ipynb)
++ [Llama2-7B](./7_1_GPU_Llama2-7B.md)
 
 ## 7.0 Environment Setup
 
