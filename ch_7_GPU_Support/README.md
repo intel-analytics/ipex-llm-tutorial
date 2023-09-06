@@ -4,10 +4,9 @@ Apart from the significant acceleration capabilites on Intel CPUs, BigDL-LLM als
 
 BigDL-LLM supports optimizations of any [*HuggingFace transformers*](https://huggingface.co/docs/transformers/index) model on Intel GPUs with the help of low-precision techniques, modern hardware accelerations and latest software optimizations.
 
-In Chapter 7, you will learn how to run LLMs, as well as implement stream chat functionalities, using BigDL-LLM optimizations on Intel GPUs. Two popular open source models are used as examples:
+In Chapter 7, you will learn how to run LLMs, as well as implement stream chat functionalities, using BigDL-LLM optimizations on Intel GPUs. An popular open source model is used as an example:
 
 + [Llama2-7B](./7_1_GPU_Llama2-7B.ipynb)
-+ [ChatGLM2-6B]() (with Chinese capabilities)
 
 ## 7.0 Environment Setup
 
@@ -23,6 +22,9 @@ For a smooth experience with the notebooks in Chatper 7, please ensure your hard
 
 > ⚠️Operating System
   - Linux system, Ubuntu 22.04 is preferred
+
+    > **Note**
+    > Please note that only Linux OS has been supported for BigDL-LLM optimizations on Intel GPUs.
 
 ### 7.0.2 Driver and Toolkit Installation
 
@@ -153,23 +155,3 @@ source /opt/intel/oneapi/setvars.sh
 export USE_XETLA=OFF
 export SYCL_PI_LEVEL_ZERO_USE_IMMEDIATE_COMMANDLISTS=1
 ```
-
-### 7.0.5 Jupyter Service Setup
-
-#### 7.0.5.1 Install Jupyter
-
-The `jupyter` library is required for running the tutorial notebooks (i.e. the `.ipynb` files). Under your activated Python 3.9 environment, run:
-
-```bash
-pip install jupyter
-```
-
-#### 7.0.5.2 Start Jupyter Service
-
-Then start jupyter service through
-
-```bash
-jupyter notebook
-```
-
-Congratulations! Now you can use a web browser to access the jupyter service url and execute the notebooks provided in Chatpter 7.
