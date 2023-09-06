@@ -1,4 +1,4 @@
-# 7.1: Run Llama 2 (7B) on Intel GPUs
+# 7.1 Run Llama 2 (7B) on Intel GPUs
 
 You can use BigDL-LLM to load any Hugging Face *transformers* model for acceleration on Intel GPUs. With BigDL-LLM, PyTorch models (in FP16/BF16/FP32) hosted on Hugging Face can be loaded and optimized automatically on Intel GPUs with low-bit quantizations (supported precisions include INT4 and INT8).
 
@@ -6,7 +6,9 @@ In this tutorial, you will learn how to run LLMs on Intel GPUs with BigDL-LLM op
 
 ## 7.1.1 Install BigDL-LLM on Intel GPUs
 
-First of all, install BigDL-LLM in your prepared environment. For best practices of environment setup on Intel GPUs, refer to the [README](./README.md#70-environment-setup) in this chapter. In terminal, run:
+First of all, install BigDL-LLM in your prepared environment. For best practices of environment setup on Intel GPUs, refer to the [README](./README.md#70-environment-setup) in this chapter.
+
+In terminal, run:
 
 ```bash
 pip install bigdl-llm[xpu] -f https://developer.intel.com/ipex-whl-stable-xpu
@@ -17,7 +19,9 @@ pip install bigdl-llm[xpu] -f https://developer.intel.com/ipex-whl-stable-xpu
 
 ## 7.1.2 Import `intel_extension_for_pytorch`
 
-After installation, let's move to the python scripts for BigDL-LLM optimizations on Intel GPUs. You need to import `intel_extension_for_pytorch` first:
+After installation, let's move to the Python scripts of this tutorial.
+
+To enable BigDL-LLM optimizations on Intel GPUs, you need to import `intel_extension_for_pytorch` first:
 
 ```python
 import intel_extension_for_pytorch as ipex
@@ -78,7 +82,7 @@ model_in_8bit_gpu = model_in_8bit.to('xpu')
 > **Note**
 > * Currently, BigDL-LLM on Intel GPUs has supported `load_in_low_bit` to be `sym_int4` and `sym_int8`
 >
-> *  `load_in_4bit=True` is equivalent to `load_in_low_bit='sym_int4'`.
+> * `load_in_4bit=True` is equivalent to `load_in_low_bit='sym_int4'`.
 
 ## 7.1.5 Load Tokenizer 
 
@@ -119,9 +123,9 @@ with torch.inference_mode():
 ```
 
 > **Note**
-> The initial generation of optimized LLMs on Intel GPUs could be slow. Therefore, it's advisable to perform a warm-up run before the actual generation.
+> The initial generation of optimized LLMs on Intel GPUs could be slow. Therefore, it's advisable to perform a **warm-up** run before the actual generation.
 >
-> For the next section of stream chat, we could treat this time of generation as a warm-up.
+> For the next section of stream chat, we could treat this time of generation in section 7.1.6 as a warm-up.
 
 ## 7.1.7 Stream Chat
 
@@ -164,7 +168,7 @@ def format_prompt(input_str, chat_history):
     return ''.join(prompt)
 ```
 
-[^1] The conversation context format is referenced from [here](https://huggingface.co/spaces/huggingface-projects/llama-2-7b-chat/blob/323df5680706d388eff048fba2f9c9493dfc0152/model.py#L20) and [here](https://huggingface.co/spaces/huggingface-projects/llama-2-7b-chat/blob/323df5680706d388eff048fba2f9c9493dfc0152/app.py#L9).
+[^1]: The conversation context format is referenced from [here](https://huggingface.co/spaces/huggingface-projects/llama-2-7b-chat/blob/323df5680706d388eff048fba2f9c9493dfc0152/model.py#L20) and [here](https://huggingface.co/spaces/huggingface-projects/llama-2-7b-chat/blob/323df5680706d388eff048fba2f9c9493dfc0152/app.py#L9).
 
 Next, define the `stream_chat` function, which continuously adds model outputs to the chat history. This ensures that conversation context can be properly formatted for next generation of responses. Here, the response is generated in a streaming (word-by-word) way:
 
