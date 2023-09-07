@@ -1,92 +1,90 @@
-# 第二章 配置环境
+# Chapter 2 Environment Setup
 
-本章介绍了一系列环境配置的最佳实践。为了确保在后续章节中顺利使用 Jupyter Notebook, 强烈建议您按照以下相应步骤正确配置环境。
+This chapter presents a set of best practices for setting up your environment. To ensure a smooth experience with the notebooks in the subsequent chapters, it is strongly recommended that you follow the corresponding steps below to configure your environment properly.  
 
-## 2.1 系统建议
-首先，选择一个合适的系统。以下是推荐的硬件与操作系统列表：
+## 2.1 System Recommendation
+First of all, choose a proper system. Here's a list of recommended hardware and OS.
+>⚠️**Hardware**
 
->⚠️**硬件**
+- PCs equipped with 12th Gen Intel® Core™ processor or higher, and at least 16GB RAM
+- Servers equipped with Intel® Xeon® processors, at least 32G RAM.
 
-- 搭载第 12 代英特尔®酷睿™或更高版本的处理器和至少 16GB 内存的个人电脑
-- 搭载英特尔®至强®处理器和至少 32GB 内存的服务器
+>⚠️**Operating System**
 
->⚠️**操作系统**
+- Ubuntu 20.04 or later
+- CentOS 7 or later
+- Windows 10/11, with or without WSL
 
-- Ubuntu 20.04 或更高版本
-- CentOS 7 或更高版本
-- Windows 10/11, 有无WSL均可
+## 2.2 Setup Python Environment
 
-## 2.2 设置 Python 环境
-
-接下来，使用 Python 环境管理工具（推荐使用 [Conda](https://docs.conda.io/projects/conda/en/stable/) ）创建 Python 环境并安装必要的库。
+Next, use a python environment management tool (we recommend using [Conda](https://docs.conda.io/projects/conda/en/stable/)) to create a python enviroment and install necessary libs.  
 
 
-### 2.2.1 安装 Conda
-请按照下面与您的操作系统相对应的说明进行操作。
+### 2.2.1 Install Conda
+Follow the instructions corresponding to your OS below.
 
 #### 2.2.1.1 Linux
 
-对于 Linux 用户，打开终端并且运行以下命令。
+For Linux users, open a terminal and run below commands.
 
 ```bash
 wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
 bash ./Miniconda3-latest-Linux-x86_64.sh
 conda init
 ```
->**注意**
-> 请按照终端显示的说明进行操作，直到 conda 初始化成功完成。
+>**Note**
+> Follow the instructions popped up on the console until conda initialization finished successfully.
 
 
 #### 2.2.1.2 Windows
 
-对于 Windows 用户，在[这里](https://docs.conda.io/en/latest/miniconda.html#latest-miniconda-installer-links)下载 conda 安装包并运行。
+For Windows users, download conda installer [here](https://docs.conda.io/en/latest/miniconda.html#latest-miniconda-installer-links) and execute it.
 
-在安装完成后，打开 "Anaconda Powershell Prompt (Miniconda3)" 执行以下步骤。
+After the installation finished, open "Anaconda Powershell Prompt (Miniconda3)" for following steps.
 
-#### 2.2.1.3 适用于 Linux 的 Windows 子系统 (WSL):
+#### 2.2.1.3 Windows Subsystem for Linux (WSL):
 
-对于 WSL 用户，请确保已经安装了 WSL2. 如果没有，请参阅[此处](https://bigdl.readthedocs.io/en/latest/doc/UserGuide/win.html#install-wsl2l) for how to install.
-了解安装方法。
+For WSL users, ensure you have already installed WSL2. If not, refer to [here](https://bigdl.readthedocs.io/en/latest/doc/UserGuide/win.html#install-wsl2l) for how to install.
 
-打开 WSL2 shell 并运行与 [2.2.1.1 Linux](#2211-linux) 相同的命令。
-
+Open a WSL2 shell and run the same commands as in [2.2.1.1 Linux](#2211-linux) section.
 
 
-### 2.2.2 创建环境
-> **注意**
-> 推荐使用 Python 3.9 运行 BigDL-LLM.
 
-创建一个 Python 3.9 环境，名称由您选择，例如 `llm-tutorial`:
+### 2.2.2 Create Environment
+> **Note**
+> Python 3.9 is recommended for running BigDL-LLM.
+
+Create a Python 3.9 environment with the name you choose, for example `llm-tutorial`:
 ```
 conda create -n llm-tutorial python=3.9
 ```
-然后激活环境 `llm-tutorial`:
+Then activate the environment `llm-tutorial`:
 ```
 conda activate llm-tutorial
 ```
-## 2.3 安装 Jupyter 服务
+## 2.3 Setup Jupyter Service
 
-### 2.3.1 安装 Jupyter
-运行教程提供的笔记本 (即 `.ipynb` 文件) 需要 `jupyter` 库。在激活的 Python 3.9 环境下运行：
+### 2.3.1 Install Jupyter
+The `jupyter` library is required for running the tutorial notebooks (i.e. the `.ipynb` files). Under your activated Python 3.9 environment, run:
 ```
 pip install jupyter
 ```
 
-### 2.3.2 启动 Jupyter 服务
-启动 jupyter 服务的推荐指令在个人电脑和服务器上略有不同。
+### 2.3.2 Start Jupyter Service
+The recommended command to start jupyter service is slightly different on PC and server. 
 
-#### 2.3.2.1 在个人电脑上
-在个人电脑上，只需在 shell 中运行以下命令：
+#### 2.3.2.1 On PC
+On PC, just run the command in shell:
 ```
 jupyter notebook
 ```
 
-#### 2.3.2.2 在服务器上
-在服务器上，建议使用单个插槽的所有物理核心以获得更好的性能。因此，请运行以下命令：
+#### 2.3.2.2 On Server
+On server, it is recommended to use all physical cores of a single socket for better performance. So run below command instead:
 ```bash
-# 以每个插槽有48个核心的服务器为例
+# e.g. for a server with 48 cores per socket
 export OMP_NUM_THREADS=48
 numactl -C 0-47 -m 0 jupyter notebook
 ```
 
-祝贺您！现在您可以使用浏览器来访问 jupyter 服务 url 并运行本教程提供的笔记本。
+Congratulations! Now you can use a web browser to access the jupyter service url and execute the notebooks provided in this tutorial. 
