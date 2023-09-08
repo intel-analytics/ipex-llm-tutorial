@@ -285,5 +285,3 @@ checkpoint
 参考链接：
 
 https://github.com/intel-analytics/bigdl-llm-tutorial/tree/main/ch_2_Environment_Setup
-
-https://github.com/intel-analytics/BigDL
