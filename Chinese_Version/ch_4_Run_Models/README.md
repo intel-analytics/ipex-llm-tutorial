@@ -6,6 +6,6 @@
 
 本章包含两个笔记本。
 
-在笔记本 [4_1_Run_Transformer_Models](./4_1_Run_Transformer_Models.ipynb) 中，您将首先学习如何在不同场景中使用 `transformers` 样式的 API（例如保存/加载、精度选择等），然后继续构建一个具有流式和多轮聊天功能的聊天机器人应用程序。
+在笔记本 [4.1 运行 Transformer 模型](./4_1_Run_Transformer_Models.ipynb) 中，您将首先学习如何在不同场景中使用 `transformers` 样式的 API（例如保存/加载、精度选择等），然后继续构建一个具有流式显示和多轮聊天功能的聊天机器人应用程序。
 
-在笔记本 [4_2_Speech_Recognition](./4_2_Speech_Recognition.ipynb) 中，您将学习如何使用 BigDL-LLM 加载基于 Transformer 的语音识别模型 [Whisper](https://openai.com/research/whisper)，然后使用它转录和翻译音频文件。
+在笔记本 [4.2 语音识别](./4_2_Speech_Recognition.ipynb) 中，您将学习如何使用 BigDL-LLM 加载基于 Transformer 的语音识别模型 [Whisper](https://openai.com/research/whisper)，然后使用它转录和翻译音频文件。

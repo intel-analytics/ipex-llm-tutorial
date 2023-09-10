@@ -34,7 +34,7 @@ BigDL-LLM 借助低精度技术、现代硬件加速和最新的软件优化，�
   > **注意**
   > 对于使用默认 IPEX 版本（IPEX 2.0.110+xpu）的 BigDL-LLM，需要英特尔 GPU 驱动程序版本 [Stable 647.21](https://dgpu-docs.intel.com/releases/stable_647_21_20230714.html)。
 
-- 您还需要下载并安装[英特尔® oneAPI Base Toolkit](https://www.intel.com/content/www/us/en/developer/tools/oneapi/base-toolkit-download.html)。OneMKL 和 DPC++ 编译器是必选项，其他为可选想。
+- 您还需要下载并安装[英特尔® oneAPI Base Toolkit](https://www.intel.com/content/www/us/en/developer/tools/oneapi/base-toolkit-download.html)。OneMKL 和 DPC++ 编译器是必选项，其他为可选项。
   > **注意**
   > 使用默认 IPEX 版本（IPEX 2.0.110+xpu）的 BigDL-LLM 需要英特尔® oneAPI Base Toolkit 的版本 >= 2023.2.0。
 

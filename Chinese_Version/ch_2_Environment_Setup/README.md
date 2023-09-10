@@ -45,8 +45,7 @@ conda init
 
 #### 2.2.1.3 适用于 Linux 的 Windows 子系统 (WSL):
 
-对于 WSL 用户，请确保已经安装了 WSL2. 如果没有，请参阅[此处](https://bigdl.readthedocs.io/en/latest/doc/UserGuide/win.html#install-wsl2l) for how to install.
-了解安装方法。
+对于 WSL 用户，请确保已经安装了 WSL2. 如果没有，请参阅[此处](https://bigdl.readthedocs.io/en/latest/doc/UserGuide/win.html#install-wsl2l)了解安装方法。
 
 打开 WSL2 shell 并运行与 [2.2.1.1 Linux](#2211-linux) 相同的命令。
 
