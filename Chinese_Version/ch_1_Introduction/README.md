@@ -19,17 +19,17 @@ model = AutoModelForCausalLM.from_pretrained('/path/to/model/', load_in_4bit=Tru
 
 BigDL-LLM 提供各种低精度优化（如 INT4/INT5/INT8），允许您在资源有限的 PC 上运行 LLM。例如，您可以在 16G 内存的笔记本电脑上运行 7B 或 13B 模型，而且延迟非常低[^1]。
 
-#### 在英特尔 12 代酷睿电脑上运行 7B 模型（实时屏幕画面）:
+#### 在英特尔 12 代酷睿电脑上运行 6B 模型（实时屏幕画面）:
 
 <p align="left">
-            <img src="https://github.com/bigdl-project/bigdl-project.github.io/blob/master/assets/llm-7b.gif" width='60%' /> 
+            <img src="https://llm-assets.readthedocs.io/en/latest/_images/chatglm2-6b.gif" width='60%' /> 
 
 </p>
 
 #### 在英特尔 12 代酷睿电脑上运行 13B 模型（实时屏幕画面）: 
 
 <p align="left">
-            <img src="https://github.com/bigdl-project/bigdl-project.github.io/blob/master/assets/llm-13b.gif" width='60%' /> 
+            <img src="https://llm-assets.readthedocs.io/en/latest/_images/llama-2-13b-chat.gif" width='60%' /> 
 
 </p>
 

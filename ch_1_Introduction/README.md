@@ -19,17 +19,17 @@ model = AutoModelForCausalLM.from_pretrained('/path/to/model/', load_in_4bit=Tru
 
 BigDL-LLM provides a variety of low-precision optimizations (e.g., INT4/INT5/INT8), and allows you to run LLMs on PCs with limited resources. For example, you will be able to run a 7B or 13B model on a 16G memory laptop with very low latency [^1].  
 
-#### 7B model running on an Intel 12-Gen Core PC (real-time screen capture):
+#### 6B model running on an Intel 12-Gen Core PC (real-time screen capture):
 
 <p align="left">
-            <img src="https://github.com/bigdl-project/bigdl-project.github.io/blob/master/assets/llm-7b.gif" width='60%' /> 
+            <img src="https://llm-assets.readthedocs.io/en/latest/_images/chatglm2-6b.gif" width='60%' /> 
 
 </p>
 
 #### 13B model running on an Intel 12-Gen Core PC (real-time screen capture): 
 
 <p align="left">
-            <img src="https://github.com/bigdl-project/bigdl-project.github.io/blob/master/assets/llm-13b.gif" width='60%' /> 
+            <img src="https://llm-assets.readthedocs.io/en/latest/_images/llama-2-13b-chat.gif" width='60%' />
 
 </p>
 
