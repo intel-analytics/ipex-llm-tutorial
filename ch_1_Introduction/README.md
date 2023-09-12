@@ -29,7 +29,7 @@ BigDL-LLM provides a variety of low-precision optimizations (e.g., INT4/INT5/INT
 #### 13B model running on an Intel 12-Gen Core PC (real-time screen capture): 
 
 <p align="left">
-            <img src="https://llm-assets.readthedocs.io/en/latest/_images/llama-2-13b-chat.gif" width='60%' />
+            <img src="https://llm-assets.readthedocs.io/en/latest/_images/llama-2-13b-chat.gif" width='60%' /> 
 
 </p>
 
