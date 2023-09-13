@@ -4,6 +4,20 @@ BigDL-LLM 除了在英特尔 CPU 上具有显著的加速能力外，还支持�
 
 BigDL-LLM 借助低精度技术、现代硬件加速和最新的软件优化，支持在英特尔 GPU 上优化任何 [*HuggingFace transformers*](https://huggingface.co/docs/transformers/index) 模型。
 
+#### 在英特尔锐炫 GPU 上运行 6B 模型（实时屏幕画面）:
+
+<p align="left">
+            <img src="https://llm-assets.readthedocs.io/en/latest/_images/chatglm2-arc.gif" width='60%' /> 
+
+</p>
+
+#### 在英特尔锐炫 GPU 上运行 13B 模型（实时屏幕画面）: 
+
+<p align="left">
+            <img src="https://llm-assets.readthedocs.io/en/latest/_images/llama2-13b-arc.gif" width='60%' /> 
+
+</p>
+
 在第七章中，您将学习如何在英特尔 GPU 上使用 BigDL-LLM 优化来运行 LLM 以及实现流式对话功能。本章将使用流行的开源模型作为示例：
 
 + [Llama2-7B](./7_1_GPU_Llama2-7B.md)

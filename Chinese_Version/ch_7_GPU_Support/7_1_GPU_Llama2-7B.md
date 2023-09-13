@@ -1,6 +1,6 @@
 # 7.1 在英特尔 GPU 上运行 Llama 2 (7B)
 
-您可以使用 BigDL-LLM 加载任何 Hugging Face *transformers* 模型，以便在英特尔 GPU 上加速。有了 BigDL-LLM，Hugging Face 上托管的 PyTorch 模型（FP16/BF16/FP32）可以在英特尔 GPU 上以低位量化（支持的精度包括 INT4 和 INT8）的方式自动加载和优化。
+您可以使用 BigDL-LLM 加载任何 Hugging Face *transformers* 模型，以便在英特尔 GPU 上加速。有了 BigDL-LLM，Hugging Face 上托管的 PyTorch 模型（FP16/BF16/FP32）可以在英特尔 GPU 上以低位量化（支持的精度包括 INT4/NF4/INT5/INT8）的方式自动加载和优化。
 
 在本教程中，您将学习如何在英特尔 GPU 上运行经过 BigDL-LLM 优化的 LLM，并在此基础上构建一个流式对话机器人。本教程以一个流行的开源 LLM [meta-llama/Llama-2-7b-chat-hf](https://huggingface.co/meta-llama/Llama-2-7b-chat-hf)为例。
 
@@ -80,7 +80,7 @@ model_in_8bit_gpu = model_in_8bit.to('xpu')
 ```
 
 > **注意**
-> * 目前英特尔 GPU 上的 BigDL-LLM 支持将 `load_in_low_bit` 设置为 `sym_int4` 以及 `sym_int8`
+> * 目前英特尔 GPU 上的 BigDL-LLM 支持 `'sym_int4'`, `'asym_int4'`, `'sym_int5'`, `'asym_int5'` 或 `'sym_int8'`选项，其中 'sym' 和 'asym' 用于区分对称量化与非对称量化。选项 `'nf4'` ，也就是 4-bit NormalFloat，同样也是支持的。
 >
 > * `load_in_4bit=True` 等价于 `load_in_low_bit='sym_int4'`.
 
