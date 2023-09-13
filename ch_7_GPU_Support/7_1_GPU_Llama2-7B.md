@@ -1,6 +1,6 @@
 # 7.1 Run Llama 2 (7B) on Intel GPUs
 
-You can use BigDL-LLM to load any Hugging Face *transformers* model for acceleration on Intel GPUs. With BigDL-LLM, PyTorch models (in FP16/BF16/FP32) hosted on Hugging Face can be loaded and optimized automatically on Intel GPUs with low-bit quantizations (supported precisions include INT4 and INT8).
+You can use BigDL-LLM to load any Hugging Face *transformers* model for acceleration on Intel GPUs. With BigDL-LLM, PyTorch models (in FP16/BF16/FP32) hosted on Hugging Face can be loaded and optimized automatically on Intel GPUs with low-bit quantizations (supported precisions include INT4/NF4/INT5/INT8).
 
 In this tutorial, you will learn how to run LLMs on Intel GPUs with BigDL-LLM optimizations, and based on that build a stream chatbot. A popular open-source LLM [meta-llama/Llama-2-7b-chat-hf](https://huggingface.co/meta-llama/Llama-2-7b-chat-hf) is used as an example.
 
@@ -80,7 +80,7 @@ model_in_8bit_gpu = model_in_8bit.to('xpu')
 ```
 
 > **Note**
-> * Currently, BigDL-LLM on Intel GPUs has supported `load_in_low_bit` to be `sym_int4` and `sym_int8`
+> * Currently, BigDL-LLM on Intel GPUs has supports options `'sym_int4'`, `'asym_int4'`, `'sym_int5'`, `'asym_int5'` or `'sym_int8'`, in which 'sym' and 'asym' differentiate between symmetric and asymmetric quantization. Option `'nf4'` is also supported, referring to 4-bit NormalFloat.
 >
 > * `load_in_4bit=True` is equivalent to `load_in_low_bit='sym_int4'`.
 
