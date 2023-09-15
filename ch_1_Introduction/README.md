@@ -9,7 +9,7 @@ You can use BigDL-LLM to run _any pytorch model_ (e.g. [HuggingFace transformer]
 
 Using BigDL-LLM is easy. For example, for HuggingFace transformers-based models, you can immediately observe significant speedup [^1] with just 1-line of code change. 
 
-### Load Model Using AutoClasses
+#### Load Model Using AutoClasses
 
 ```python
 # change import, specify precision when loading the model
@@ -19,7 +19,7 @@ model = AutoModelForCausalLM.from_pretrained('/path/to/model/', load_in_4bit=Tru
 ...
 ```
 
-### Load Model Using ModelClasses
+#### Load Model Using ModelClasses
 ```python
 # original model loading load using official transformers lib
 model = BertModel.from_pretrained('path/to/model')
