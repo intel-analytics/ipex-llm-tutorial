@@ -29,7 +29,7 @@ model = optimize_model(model)
 ...
 ```
 
-BigDL-LLM provides a variety of low-bit optimizations (e.g., INT3/NF3/INT4/NF4/INT5/INT8), and allows you to run LLMs on PCs with limited resources, on PCs with GPU, or on cloud. 
+BigDL-LLM provides a variety of low-bit optimizations (e.g., INT3/NF3/INT4/NF4/INT5/INT8), and allows you to run LLMs on low-cost PCs (CPU-only), on PCs with GPU, or on cloud. 
 
 The demos below shows the experiences of running 7B and 13B model on a 16G memory laptop.  
 
