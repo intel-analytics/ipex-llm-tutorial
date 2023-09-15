@@ -12,7 +12,7 @@ Using BigDL-LLM is easy. For example, for HuggingFace transformers-based models,
 #### Load Model Using AutoClasses
 
 ```python
-# change import, specify precision when loading the model
+# change import, specify which low-bit option to load the model
 from bigdl.llm.transformers import AutoModelForCausalLM
 model = AutoModelForCausalLM.from_pretrained('/path/to/model/', load_in_4bit=True)
 # no code change needed in model inference
@@ -29,7 +29,7 @@ model = optimize_model(model)
 ...
 ```
 
-BigDL-LLM provides a variety of low-precision optimizations (e.g., INT3/NF3/INT4/NF4/INT5/INT8), and allows you to run LLMs on PCs with limited resources, PCs with GPU, or cloud. For example, you will be able to run a 7B or 13B model on a 16G memory laptop with very low latency [^1].  
+BigDL-LLM provides a variety of low-bit optimizations (e.g., INT3/NF3/INT4/NF4/INT5/INT8), and allows you to run LLMs on PCs with limited resources, PCs with GPU, or cloud. For example, you will be able to run a 7B or 13B model on a 16G memory laptop with very low latency [^1].  
 
 #### 6B model running on an Intel 12-Gen Core PC (real-time screen capture):
 
