@@ -1,23 +1,37 @@
 # Chapter 1 Introduction
 
 ## What is BigDL-LLM
-[BigDL-LLM](https://github.com/intel-analytics/BigDL/tree/main/python/llm) is a library that makes LLMs (large language models) run fast [^1] on low-cost PCs (without the need of discrete GPU). It is released as part of the open source [BigDL](https://github.com/intel-analytics/bigdl) project under Apache 2.0 License. 
+[BigDL-LLM](https://github.com/intel-analytics/BigDL/tree/main/python/llm) is a low-bit LLM library on Intel XPU (Xeon/Core/Flex/Arc/PVC). It can make LLMs (large language models) run extremely fast [^1] and consume much less memory on Intel platforms. It is released as part of the open source [BigDL](https://github.com/intel-analytics/bigdl) project under Apache 2.0 License. 
 
 
 ## What can you do with BigDL-LLM
-You can use BigDL-LLM to run _any [HuggingFace transformer](https://huggingface.co/docs/transformers/index) model_. It automatically optimizes and accelerates LLMs using low-precision techniques, modern hardware accelerations and latest software optimizations. 
+You can use BigDL-LLM to run _any pytorch model_ (e.g. [HuggingFace transformer](https://huggingface.co/docs/transformers/index) models). It automatically optimizes and accelerates LLMs using low-bit optimizations, modern hardware accelerations and latest software optimizations. 
 
-HuggingFace transformers-based applications can run on BigDL-LLM with one-line code change, and you'll immediately observe significant speedup [^1]. 
+Using BigDL-LLM is easy. For example, for HuggingFace transformers-based models, you can immediately observe significant speedup [^1] with just 1-line of code change. 
+
+#### Load Model Using AutoClasses
 
 ```python
-# change import, specify precision when loading the model
+# change import, specify which low-bit option to load the model
 from bigdl.llm.transformers import AutoModelForCausalLM
 model = AutoModelForCausalLM.from_pretrained('/path/to/model/', load_in_4bit=True)
 # no code change needed in model inference
 ...
 ```
 
-BigDL-LLM provides a variety of low-precision optimizations (e.g., INT4/INT5/INT8), and allows you to run LLMs on PCs with limited resources. For example, you will be able to run a 7B or 13B model on a 16G memory laptop with very low latency [^1].  
+#### Load Model Using ModelClasses
+```python
+# original model loading load using official transformers lib
+model = BertModel.from_pretrained('path/to/model')
+# apply low-bit optimization
+from bigdl.llm import optimize_model
+model = optimize_model(model)
+...
+```
+
+BigDL-LLM provides a variety of low-bit optimizations (e.g., INT3/NF3/INT4/NF4/INT5/INT8), and allows you to run LLMs on low-cost PCs (CPU-only), on PCs with GPU, or on cloud. 
+
+The demos below shows the experiences of running 7B and 13B model on a 16G memory laptop.  
 
 #### 6B model running on an Intel 12-Gen Core PC (real-time screen capture):
 
