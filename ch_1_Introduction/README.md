@@ -1,7 +1,7 @@
 # Chapter 1 Introduction
 
 ## What is BigDL-LLM
-[BigDL-LLM](https://github.com/intel-analytics/BigDL/tree/main/python/llm) is a low-bit LLM library on Intel XPU(Xeon/Core/Flex/Arc/PVC). It can make LLMs (large language models) run extremely fast [^1] and consumes much less memory on Intel platforms. It is released as part of the open source [BigDL](https://github.com/intel-analytics/bigdl) project under Apache 2.0 License. 
+[BigDL-LLM](https://github.com/intel-analytics/BigDL/tree/main/python/llm) is a low-bit LLM library on Intel XPU (Xeon/Core/Flex/Arc/PVC). It can make LLMs (large language models) run extremely fast [^1] and consumes much less memory on Intel platforms. It is released as part of the open source [BigDL](https://github.com/intel-analytics/bigdl) project under Apache 2.0 License. 
 
 
 ## What can you do with BigDL-LLM
