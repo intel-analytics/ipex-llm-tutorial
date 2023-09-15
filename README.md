@@ -1,6 +1,6 @@
 # BigDL-LLM Tutorial
 
-[_BigDL-LLM_](https://github.com/intel-analytics/BigDL/tree/main/python/llm) is a library to make LLMs (large language models) run fast[^1] on your low-cost Intel PC. This repository contains tutorials to help you understand what is _BigDL-LLM_, what you can do with _BigDL-LLM_, and how to use it.
+[_BigDL-LLM_](https://github.com/intel-analytics/BigDL/tree/main/python/llm) is a low-bit LLM library on Intel XPU (Xeon/Core/Flex/Arc/PVC). This repository contains tutorials to help you understand what is _BigDL-LLM_, what you can do with _BigDL-LLM_, and how to use it.
 
 The tutorials are organized as follows:
 - Chapter 1 servers as a general introduction of _BigDL-LLM_. 
