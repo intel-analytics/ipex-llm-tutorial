@@ -49,7 +49,7 @@ One common use case is to load a Hugging Face *transformers* model in low precis
 
 For Llama 2 (7B), you could simply import `bigdl.llm.transformers.AutoModelForCausalLM` instead of `transformers.AutoModelForCausalLM`, and specify `load_in_4bit=True` or `load_in_low_bit` parameter accordingly in the `from_pretrained` function.
 
-For Intel GPUs, you should **specifically set `optimize_model=False`** in the `from_pretrained` frunction. **Once you have the model in low precision, set it to `to('xpu')`.**
+For Intel GPUs, **once you have the model in low precision, set it to `to('xpu')`.**
 
 **For INT4 Optimizations (with `load_in_4bit=True`):**
 
@@ -57,8 +57,7 @@ For Intel GPUs, you should **specifically set `optimize_model=False`** in the `f
 from bigdl.llm.transformers import AutoModelForCausalLM
 
 model_in_4bit = AutoModelForCausalLM.from_pretrained(pretrained_model_name_or_path="meta-llama/Llama-2-7b-chat-hf",
-                                                     load_in_4bit=True,
-                                                     optimize_model=False)
+                                                     load_in_4bit=True)
 model_in_4bit_gpu = model_in_4bit.to('xpu')
 ```
 
@@ -73,8 +72,7 @@ model_in_4bit_gpu = model_in_4bit.to('xpu')
 # note that the AutoModelForCausalLM here is imported from bigdl.llm.transformers
 model_in_8bit = AutoModelForCausalLM.from_pretrained(
     pretrained_model_name_or_path="meta-llama/Llama-2-7b-chat-hf",
-    load_in_low_bit="sym_int8",
-    optimize_model=False
+    load_in_low_bit="sym_int8"
 )
 model_in_8bit_gpu = model_in_8bit.to('xpu')
 ```
