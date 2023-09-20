@@ -1,4 +1,4 @@
-# Chapter 6 Multi-Language Support
+# Chapter 4 Chinese Support
 
 This chapter explores the capability of large languange models in handling multiple languages. Being able to support multiple languages is crucial for these models due to their wide-ranging use cases and real-world applications. 
 
