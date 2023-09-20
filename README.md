@@ -3,7 +3,7 @@
 <h4 align="center">
     <p>
         <b>English</b> |
-        <a href="./README_cn.md">中文</a>
+        <a href="./Chinese_Version/README.md">中文</a>
     <p>
 </h4>
 
