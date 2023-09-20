@@ -7,25 +7,19 @@
 ## What can you do with BigDL-LLM
 You can use BigDL-LLM to run _any pytorch model_ (e.g. [HuggingFace transformer](https://huggingface.co/docs/transformers/index) models). It automatically optimizes and accelerates LLMs using low-bit optimizations, modern hardware accelerations and latest software optimizations. 
 
-Using BigDL-LLM is easy. For example, for HuggingFace transformers-based models, you can immediately observe significant speedup [^1] with just 1-line of code change. 
+Using BigDL-LLM is easy. With just 1-line of code change, you can immediately observe significant speedup [^1] . 
 
-#### Load Model Using AutoClasses
 
+#### Example: Optimize LLaMA model with `optimize_model`
 ```python
-# change import, specify which low-bit option to load the model
-from bigdl.llm.transformers import AutoModelForCausalLM
-model = AutoModelForCausalLM.from_pretrained('/path/to/model/', load_in_4bit=True)
-# no code change needed in model inference
-...
-```
-
-#### Load Model Using ModelClasses
-```python
-# original model loading load using official transformers lib
-model = BertModel.from_pretrained('path/to/model')
-# apply low-bit optimization
 from bigdl.llm import optimize_model
+
+from transformers import LlamaForCausalLM, LlamaTokenizer
+model = LlamaForCausalLM.from_pretrained(model_path,...)
+
+# apply bigdl-llm low-bit optimization, by default uses INT4
 model = optimize_model(model)
+
 ...
 ```
 
