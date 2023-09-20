@@ -1,4 +1,4 @@
-# Chapter 4 Run Models
+# Chapter 5 Application Development: Intermediate
 
 You can use BigDL-LLM to load any Hugging Face *transformers* model and accelerate it on your laptop. With BigDL-LLM, PyTorch models (in FP16/BF16/FP32) hosted on Hugging Face can be loaded and optimized automatically with low-bit quantizations (supported precisions include INT4/INT5/INT8).
 
