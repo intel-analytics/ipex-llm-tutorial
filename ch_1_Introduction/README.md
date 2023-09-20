@@ -1,14 +1,13 @@
 # Chapter 1 Introduction
 
 ## What is BigDL-LLM
-[BigDL-LLM](https://github.com/intel-analytics/BigDL/tree/main/python/llm) is a low-bit LLM library on Intel XPU (Xeon/Core/Flex/Arc/PVC). It can make LLMs (large language models) run extremely fast [^1] and consume much less memory on Intel platforms. It is released as part of the open source [BigDL](https://github.com/intel-analytics/bigdl) project under Apache 2.0 License. 
+[BigDL-LLM](https://github.com/intel-analytics/BigDL/tree/main/python/llm) is a low-bit LLM library on Intel XPU (Xeon/Core/Flex/Arc/PVC), featuring broadest model support, lowest latency and smallest memory footprint. It is released as part of the open source [BigDL](https://github.com/intel-analytics/bigdl) project under Apache 2.0 License. 
 
 
-## What can you do with BigDL-LLM
+## What can you do with _BigDL-LLM_
 You can use BigDL-LLM to run _any pytorch model_ (e.g. [HuggingFace transformer](https://huggingface.co/docs/transformers/index) models). It automatically optimizes and accelerates LLMs using low-bit optimizations, modern hardware accelerations and latest software optimizations. 
 
 Using BigDL-LLM is easy. With just 1-line of code change, you can immediately observe significant speedup [^1] . 
-
 
 #### Example: Optimize LLaMA model with `optimize_model`
 ```python
