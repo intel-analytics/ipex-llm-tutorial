@@ -41,7 +41,6 @@ The demos below shows the experiences of running 7B and 13B model on a 16G memor
 </p>
 
 
-Installation is also super easy with just 1-line `pip install`. [Chapter 2: Enviroment Setup](../ch_2_Environment_Setup/README.md) talks about best practices for preparing your environment.
 
 ## What's Next
 
