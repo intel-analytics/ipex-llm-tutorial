@@ -88,4 +88,28 @@ export OMP_NUM_THREADS=48
 numactl -C 0-47 -m 0 jupyter notebook
 ```
 
-祝贺您！现在您可以使用浏览器来访问 jupyter 服务 url 并运行本教程提供的笔记本。
+祝贺您！现在您可以使用浏览器来访问 jupyter 服务 url 并运行本教程提供的notebooks。
+
+
+## 2.4 关于使用LLM的一些你可能想要了解的事项
+
+如果您在LLM和LLM应用程序开发方面是新手，本节可能包含了一些您想要了解的内容。
+
+### 2.4.1 去哪里找模型
+
+首先，您需要获取一个模型。社区中有许多开源的LLM可供选择。如果您没有特定的目标，可以考虑选择在LLM排行榜上排名较高的模型。这些排行榜评估和比较了各种LLM的能力。一些比较有名的排行榜包括：
+
+- [Open LLM LeaderBoard](https://huggingface.co/spaces/HuggingFaceH4/open_llm_leaderboard) hosted by Huggingface. 
+- [Chatbot Arena Leaderboard](https://huggingface.co/spaces/lmsys/chatbot-arena-leaderboard) hosted by llmsys.
+
+这些排行榜大多包含了列出的模型的参考链接。如果一个模型是开源的，您可以直接从提供的链接中轻松下载并尝试使用。
+
+
+2.4.2 从Huggingface下载模型
+
+截止到目前为止，许多热门的LLM模型都托管在Huggingface上。Huggingface托管的一个示例模型主页如下所示。
+![image](https://github.com/shane-huang/bigdl-llm-tutorial/assets/1995599/a04df95f-5590-4bf1-968c-32cf494ece92)
+
+要从Huggingface下载模型，您可以使用git或Huggingface提供的API。有关如何下载模型的详细信息，请参阅[从Huggingface下载模型](https://huggingface.co/docs/hub/models-downloading) 。
+
+通常从Huggingface下载的模型可以使用[Huggingface Transformers库](https://huggingface.co/docs/transformers/index)加载。BigDL-LLM提供了API，可以轻松地与这些模型一起使用。请阅读本教程后续章节了解更多信息。
