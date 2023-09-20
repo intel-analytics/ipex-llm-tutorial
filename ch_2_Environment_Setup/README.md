@@ -110,7 +110,7 @@ An example model homepage hosted on huggingface looks like this.
 
 To download models from huggingface, you can either use git or huggingface provided APIs. Refer to [Download Model from Huggingface](https://huggingface.co/docs/hub/models-downloading) for details about how to download models. 
 
-Usually the models downloaded from Huggingface can be loaded using [Huggingface Transformers library API](https://huggingface.co/docs/transformers/index). BigDL-LLM provideS APIs to easily work with models that can be loaded using Tranformers API. Read the following chapters to to find out more. 
+Usually, the models downloaded from Huggingface can be loaded using [Huggingface Transformers library API](https://huggingface.co/docs/transformers/index). BigDL-LLM provideS APIs to easily work with such models. Read the following chapters to to find out more. 
  
 
 
