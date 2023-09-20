@@ -1,4 +1,4 @@
-# Chapter 7 GPU Support
+# Chapter 6 GPU Support
 
 Apart from the significant acceleration capabilites on Intel CPUs, BigDL-LLM also supports optimizations and acceleration for running LLMs (large language models) on Intel GPUs.
 
@@ -22,11 +22,11 @@ In Chapter 7, you will learn how to run LLMs, as well as implement stream chat f
 
 + [Llama2-7B](./7_1_GPU_Llama2-7B.md)
 
-## 7.0 Environment Setup
+## 6.0 Environment Setup
 
 Here are some best practices for setting up your environment. It is strongly recommended that you follow the corresponding steps below to configure your environment properly.
 
-### 7.0.1 System Recommendation
+### 6.0.1 System Recommendation
 
 For a smooth experience with the notebooks in Chatper 7, please ensure your hardware and OS meet the following requirements:
 
@@ -40,7 +40,7 @@ For a smooth experience with the notebooks in Chatper 7, please ensure your hard
     > **Note**
     > Please note that only Linux OS has been supported for BigDL-LLM optimizations on Intel GPUs.
 
-### 7.0.2 Driver and Toolkit Installation
+### 6.0.2 Driver and Toolkit Installation
 
 Before benifiting from BigDL-LLM on Intel GPUs, there’re several steps for tools installation:
 
@@ -124,11 +124,11 @@ sudo apt install intel-basekit
 ```
 </details>
 
-### 7.0.3 Python Environment Setup
+### 6.0.3 Python Environment Setup
 
 Next, use a python environment management tool (we recommend using [Conda](https://docs.conda.io/projects/conda/en/stable/)) to create a python enviroment and install necessary libs.
 
-#### 7.0.3.1 Install Conda
+#### 6.0.3.1 Install Conda
 
 For Linux users, open a terminal and run below commands:
 
@@ -141,7 +141,7 @@ conda init
 > **Note**
 > Follow the instructions popped up on the console until conda initialization finished successfully.
 
-#### 7.0.3.2 Create Environment
+#### 6.0.3.2 Create Environment
 
 > **Note**
 > Python 3.9 is recommended for running BigDL-LLM.
@@ -158,7 +158,7 @@ Then activate the environment `llm-tutorial-gpu`:
 conda activate llm-tutorial-gpu
 ```
 
-### 7.0.4 Best Known Configuration on Linux
+### 6.0.4 Best Known Configuration on Linux
 
 For optimal performance on Intel GPUs, it is recommended to set several environment variables:
 
