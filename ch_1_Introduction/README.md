@@ -41,16 +41,11 @@ The demos below shows the experiences of running 7B and 13B model on a 16G memor
 </p>
 
 
-## Quick Installation
-
-```bash
-pip install --pre --upgrade bigdl-llm[all]
-```
-Python 3.9 and conda are recommended before installing BigDL-LLM. Read [Chapter 2: Enviroment Setup](../ch_2_Environment_Setup/README.md) to learn more about the best practices for preparing your environment.
+Installation is also super easy with just 1-line `pip install`. [Chapter 2: Enviroment Setup](../ch_2_Environment_Setup/README.md) talks about best practices for preparing your environment.
 
 ## What's Next
 
-The following chapters in this tutorial will explain in more details about how to use BigDL-LLM to build LLM applications, e.g. transformers API, langchain APIs, multi-language support, etc. Each chapter will provide runnable notebooks using popular open source models. Read along to learn more and run the code on your laptop.
+The following chapters in this tutorial will explain in more details about how to use BigDL-LLM to build LLM applications, e.g. APIs, Chinese support, GPU, application development guides with case studies. Each chapter will provide runnable notebooks using popular open source models. Read along to learn more and run the code on your laptop.
 
 
 Also, you can check out our [GitHub repo](https://github.com/intel-analytics/BigDL/tree/main/python/llm) for more information and latest news.
