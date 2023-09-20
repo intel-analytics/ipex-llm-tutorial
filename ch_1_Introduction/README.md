@@ -51,7 +51,7 @@ The demos below shows the experiences of running 7B and 13B model on a 16G memor
 ## Quick Installation
 
 ```bash
-pip install --pre --upgrade bigdl-llm[all]
+pip install bigdl-llm[all]
 ```
 Python 3.9 and conda are recommended before installing BigDL-LLM. Read [Chapter 2: Enviroment Setup](../ch_2_Environment_Setup/README.md) to learn more about the best practices for preparing your environment.
 
