@@ -88,3 +88,29 @@ numactl -C 0-47 -m 0 jupyter notebook
 ```
 
 Congratulations! Now you can use a web browser to access the jupyter service url and execute the notebooks provided in this tutorial. 
+
+
+## 2.4 Things you may want to know about working with LLMs
+If you're new to LLMs and LLM applicaiton development, there's something you might want to know. 
+
+### 2.4.1 Where to find the models
+To start, you'll need to obtain a model. There are numerous open-source LLMs available in the community. If you don't have a specific target in mind, consider selecting one that ranks higher on LLM leaderboards. These leaderboards evaluate and compare the capabilities of various LLMs. For instance,
+
+- [Open LLM LeaderBoard](https://huggingface.co/spaces/HuggingFaceH4/open_llm_leaderboard) hosted by Huggingface. 
+- [Chatbot Arena Leaderboard](https://huggingface.co/spaces/lmsys/chatbot-arena-leaderboard) hosted by llmsys.
+
+Most of these leaderboards include reference links to the models listed. If a model is open source, you can easily download it directly from the provided link and give it a try.
+
+### 2.4.2 Download Models from Huggingface
+As of writing, many popular LLMs are hosted on [Huggingface](huggingface.co). 
+An example model homepage hosted on huggingface looks like this.
+
+![image](https://github.com/shane-huang/bigdl-llm-tutorial/assets/1995599/a04df95f-5590-4bf1-968c-32cf494ece92)
+
+
+To download models from huggingface, you can either use git or huggingface provided APIs. Refer to [Download Model from Huggingface](https://huggingface.co/docs/hub/models-downloading) for details about how to download models. 
+
+Usually, the models downloaded from Huggingface can be loaded using [Huggingface Transformers library API](https://huggingface.co/docs/transformers/index). BigDL-LLM provideS APIs to easily work with such models. Read the following chapters to to find out more. 
+ 
+
+

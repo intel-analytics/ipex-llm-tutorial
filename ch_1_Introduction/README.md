@@ -1,31 +1,24 @@
 # Chapter 1 Introduction
 
 ## What is BigDL-LLM
-[BigDL-LLM](https://github.com/intel-analytics/BigDL/tree/main/python/llm) is a low-bit LLM library on Intel XPU (Xeon/Core/Flex/Arc/PVC). It can make LLMs (large language models) run extremely fast [^1] and consume much less memory on Intel platforms. It is released as part of the open source [BigDL](https://github.com/intel-analytics/bigdl) project under Apache 2.0 License. 
+[BigDL-LLM](https://github.com/intel-analytics/BigDL/tree/main/python/llm) is a low-bit LLM library on Intel XPU (Xeon/Core/Flex/Arc/PVC), featuring broadest model support, lowest latency and smallest memory footprint. It is released as part of the open source [BigDL](https://github.com/intel-analytics/bigdl) project under Apache 2.0 License. 
 
 
-## What can you do with BigDL-LLM
+## What can you do with _BigDL-LLM_
 You can use BigDL-LLM to run _any pytorch model_ (e.g. [HuggingFace transformer](https://huggingface.co/docs/transformers/index) models). It automatically optimizes and accelerates LLMs using low-bit optimizations, modern hardware accelerations and latest software optimizations. 
 
-Using BigDL-LLM is easy. For example, for HuggingFace transformers-based models, you can immediately observe significant speedup [^1] with just 1-line of code change. 
+Using BigDL-LLM is easy. With just 1-line of code change, you can immediately observe significant speedup [^1] . 
 
-#### Load Model Using AutoClasses
-
+#### Example: Optimize LLaMA model with `optimize_model`
 ```python
-# change import, specify which low-bit option to load the model
-from bigdl.llm.transformers import AutoModelForCausalLM
-model = AutoModelForCausalLM.from_pretrained('/path/to/model/', load_in_4bit=True)
-# no code change needed in model inference
-...
-```
-
-#### Load Model Using ModelClasses
-```python
-# original model loading load using official transformers lib
-model = BertModel.from_pretrained('path/to/model')
-# apply low-bit optimization
 from bigdl.llm import optimize_model
+
+from transformers import LlamaForCausalLM, LlamaTokenizer
+model = LlamaForCausalLM.from_pretrained(model_path,...)
+
+# apply bigdl-llm low-bit optimization, by default uses INT4
 model = optimize_model(model)
+
 ...
 ```
 
@@ -48,16 +41,10 @@ The demos below shows the experiences of running 7B and 13B model on a 16G memor
 </p>
 
 
-## Quick Installation
-
-```bash
-pip install bigdl-llm[all]
-```
-Python 3.9 and conda are recommended before installing BigDL-LLM. Read [Chapter 2: Enviroment Setup](../ch_2_Environment_Setup/README.md) to learn more about the best practices for preparing your environment.
 
 ## What's Next
 
-The following chapters in this tutorial will explain in more details about how to use BigDL-LLM to build LLM applications, e.g. transformers API, langchain APIs, multi-language support, etc. Each chapter will provide runnable notebooks using popular open source models. Read along to learn more and run the code on your laptop.
+The following chapters in this tutorial will explain in more details about how to use BigDL-LLM to build LLM applications, e.g. best practices for setting up your environment, APIs, Chinese support, GPU, application development guides with case studies, etc. Most chapters provide runnable notebooks using popular open source models. Read along to learn more and run the code on your laptop.
 
 
 Also, you can check out our [GitHub repo](https://github.com/intel-analytics/BigDL/tree/main/python/llm) for more information and latest news.
