@@ -1,4 +1,4 @@
-# 第四章 运行模型
+# 第五章 中级应用开发
 
 您可以使用 BigDL-LLM 加载任何 Hugging Face *transformers* 模型，并在笔记本电脑上对其进行加速。有了 BigDL-LLM，托管在 Hugging Face 上的 PyTorch 模型（FP16/BF16/FP32 格式）可以通过低位量化（支持的精度包括 INT4/INT5/INT8）自动加载和优化。
 
