@@ -44,7 +44,7 @@ The demos below shows the experiences of running 7B and 13B model on a 16G memor
 
 ## What's Next
 
-The following chapters in this tutorial will explain in more details about how to use BigDL-LLM to build LLM applications, e.g. APIs, Chinese support, GPU, application development guides with case studies. Each chapter will provide runnable notebooks using popular open source models. Read along to learn more and run the code on your laptop.
+The following chapters in this tutorial will explain in more details about how to use BigDL-LLM to build LLM applications, e.g. best practices for setting up your environment, APIs, Chinese support, GPU, application development guides with case studies, etc. Most chapters provide runnable notebooks using popular open source models. Read along to learn more and run the code on your laptop.
 
 
 Also, you can check out our [GitHub repo](https://github.com/intel-analytics/BigDL/tree/main/python/llm) for more information and latest news.
