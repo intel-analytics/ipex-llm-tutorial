@@ -1,4 +1,11 @@
-# BigDL-LLM Tutorial
+<p align="center"><h1>BigDL-LLM Tutorial</h1><p>
+  
+<h4 align="center">
+    <p>
+        <b>English</b> |
+        <a href="https://github.com/modelscope/modelscope/blob/master/README_zh.md">中文</a>
+    <p>
+</h4>
 
 [_BigDL-LLM_](https://github.com/intel-analytics/BigDL/tree/main/python/llm) is a low-bit LLM library on Intel XPU (Xeon/Core/Flex/Arc/PVC). This repository contains tutorials to help you understand what is _BigDL-LLM_ and how to use _BigDL-LLM_ to build LLM applications.
 
