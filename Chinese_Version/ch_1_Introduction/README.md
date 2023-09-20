@@ -1,23 +1,32 @@
-# 第一章 简介
+# 第一章 概览
 
 ## 什么是 BigDL-LLM
-[BigDL-LLM](https://github.com/intel-analytics/BigDL/tree/main/python/llm) 是一个库，可使 LLM（大型语言模型）在低成本 PC 上快速[^1]运行（无需独立显卡）。它作为开源项目 [BigDL](https://github.com/intel-analytics/bigdl) 的一部分发布，采用 Apache 2.0 许可。
+[BigDL-LLM](https://github.com/intel-analytics/BigDL/tree/main/python/llm) 是一个为Intel XPU(Xeon/Core/Flex/Arc/PVC)打造的低精度轻量级大语言模型库，在Intel平台上具有广泛的模型支持、最低的延迟和最小的内存占用。BigDL-LLM是开源项目 [BigDL](https://github.com/intel-analytics/bigdl) 的一部分，采用 Apache 2.0 许可证发布。
 
 
-## 您能用 BigDL-LLM 做些什么
-您可以使用 BigDL-LLM 运行 _任何 [HuggingFace transformer](https://huggingface.co/docs/transformers/index) 模型_。它使用低精度技术、现代硬件加速和最新软件优化自动优化和加速 LLM。
+## 能用 BigDL-LLM 做什么
+您可以使用 BigDL-LLM 运行任何 PyTorch 模型（例如  [HuggingFace transformer](https://huggingface.co/docs/transformers/index) 模型）。在运行过程中，BigDL-LLM利用了低精度技术、现代硬件加速技术，和一系列软件优化技术来自动加速LLM。
 
-只需修改一行代码，基于 HuggingFace transformer 的应用程序就能在 BigDL-LLM 上运行，而且您会立即观察到显著的速度提升[^1]。
+使用 BigDL-LLM 非常简单。只需更改一行代码，您就可以立即观察到显著的加速效果[^1]。
 
+### 案例：使用一行`optimize_model`来优化加速LLaMA模型
 ```python
-# 修改 import，在加载模型的时候指定精度
-from bigdl.llm.transformers import AutoModelForCausalLM
-model = AutoModelForCausalLM.from_pretrained('/path/to/model/', load_in_4bit=True)
-# 模型推理部分的代码无需修改
+# 按常规流程加载LLaMA模型
+from bigdl.llm import optimize_model
+
+from transformers import LlamaForCausalLM, LlamaTokenizer
+model = LlamaForCausalLM.from_pretrained(model_path,...)
+
+# 应用BigDL-LLM 的低精度优化。默认使用 INT4
+model = optimize_model(model)
+
+# 后续模型推理部分的代码无需修改
 ...
 ```
 
-BigDL-LLM 提供各种低精度优化（如 INT4/INT5/INT8），允许您在资源有限的 PC 上运行 LLM。例如，您可以在 16G 内存的笔记本电脑上运行 7B 或 13B 模型，而且延迟非常低[^1]。
+BigDL-LLM 提供多种低精度优化（例如，INT3/NF3/INT4/NF4/INT5/INT8），并允许您使用多种平台运行LLM，包括低端笔记本（仅使用CPU）、装载Intel独立显卡的高端电脑，服务器，或者云平台。
+
+以下演示展示了在一台16GB内存的笔记本电脑上仅使用CPU运行7B和13B模型的体验。
 
 #### 在英特尔 12 代酷睿电脑上运行 6B 模型（实时屏幕画面）:
 
@@ -34,14 +43,8 @@ BigDL-LLM 提供各种低精度优化（如 INT4/INT5/INT8），允许您在资�
 </p>
 
 
-## 快速安装
 
-```bash
-pip install bigdl-llm[all]
-```
-在安装 BigDL-LLM 之前，建议先安装 Python 3.9 和 conda。阅读 [第二章：环境配置](../ch_2_Environment_Setup/README.md) 了解准备环境的最佳做法。
-
-## 接下来
+## 接下来做什么
 
 本教程以下各章将详细介绍如何使用 BigDL-LLM 构建 LLM 应用程序，例如 transformers API、langchain API、多语言支持等。每一章都将使用流行的开源模型提供可运行的笔记本。您可以继续阅读以了解更多信息，同时也可以在您的笔记本电脑上运行提供的代码。
 
