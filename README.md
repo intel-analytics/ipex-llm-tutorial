@@ -3,7 +3,7 @@
 <h4 align="center">
     <p>
         <b>English</b> |
-        <a href="https://github.com/modelscope/modelscope/blob/master/README_zh.md">中文</a>
+        <a href="./README_cn.md">中文</a>
     <p>
 </h4>
 
