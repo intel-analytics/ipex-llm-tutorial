@@ -24,7 +24,7 @@ model = optimize_model(model)
 ...
 ```
 
-BigDL-LLM 提供多种低精度优化（例如，INT3/NF3/INT4/NF4/INT5/INT8），并允许您使用多种平台运行LLM，包括低端笔记本（仅使用CPU）、装载Intel独立显卡的高端电脑，服务器，或者云平台。
+BigDL-LLM 提供多种低精度优化选择（例如，INT3/NF3/INT4/NF4/INT5/INT8），并允许您使用多种Intel平台运行LLM，包括低端笔记本（仅使用CPU）、装载Intel独立显卡的高端电脑，服务器，或者云平台。
 
 以下演示展示了在一台16GB内存的笔记本电脑上仅使用CPU运行7B和13B模型的体验。
 
