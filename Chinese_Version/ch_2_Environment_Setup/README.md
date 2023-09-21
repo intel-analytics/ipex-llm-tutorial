@@ -66,7 +66,7 @@ conda activate llm-tutorial
 ## 2.3 安装 Jupyter 服务
 
 ### 2.3.1 安装 Jupyter
-运行教程提供的笔记本 (即 `.ipynb` 文件) 需要 `jupyter` 库。在激活的 Python 3.9 环境下运行：
+运行教程提供的 Notebook (即 `.ipynb` 文件) 需要 `jupyter` 库。在激活的 Python 3.9 环境下运行：
 ```
 pip install jupyter
 ```
