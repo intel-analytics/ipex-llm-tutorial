@@ -12,7 +12,7 @@
 教程组织如下：
 
 - [第1章 **`概览`**](./ch_1_Introduction) 介绍了什么是 BigDL-LLM 以及您可以如何使用它。
-- [第2章 **`环境设置`**](./ch_2_Environment_Setup) 提供了一组最佳实践，用于设置您的环境。
+- [第2章 **`环境准备`**](./ch_2_Environment_Setup) 提供了一组最佳实践，用于设置您的环境。
 - [第3章 **`应用开发基础`**](./ch_3_AppDev_Basic) 介绍了 BigDL-LLM 的基本用法，以及如何构建一个非常简单的聊天应用程序。
 - [第4章 **`中文支持`**](./ch_4_Chinese_Support) 展示了一些支持中文输入/输出的LLM的用法，例如ChatGLM2、Baichuan。
 - [第5章 **`中级应用开发`**](./ch_5_AppDev_Intermediate) 介绍了使用 BigDL-LLM 进行应用开发的中级知识，例如如何构建更复杂的聊天机器人、如何做语音识别等。
