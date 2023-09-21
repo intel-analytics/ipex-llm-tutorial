@@ -1,10 +1,10 @@
-# 7.1 Run Llama 2 (7B) on Intel GPUs
+# 6.1 Run Llama 2 (7B) on Intel GPUs
 
 You can use BigDL-LLM to load any Hugging Face *transformers* model for acceleration on Intel GPUs. With BigDL-LLM, PyTorch models (in FP16/BF16/FP32) hosted on Hugging Face can be loaded and optimized automatically on Intel GPUs with low-bit quantizations (supported precisions include INT4/NF4/INT5/INT8).
 
 In this tutorial, you will learn how to run LLMs on Intel GPUs with BigDL-LLM optimizations, and based on that build a stream chatbot. A popular open-source LLM [meta-llama/Llama-2-7b-chat-hf](https://huggingface.co/meta-llama/Llama-2-7b-chat-hf) is used as an example.
 
-## 7.1.1 Install BigDL-LLM on Intel GPUs
+## 6.1.1 Install BigDL-LLM on Intel GPUs
 
 First of all, install BigDL-LLM in your prepared environment. For best practices of environment setup on Intel GPUs, refer to the [README](./README.md#70-environment-setup) in this chapter.
 
@@ -17,7 +17,7 @@ pip install bigdl-llm[xpu] -f https://developer.intel.com/ipex-whl-stable-xpu
 > **Note**
 > The above command will install `intel_extension_for_pytorch==2.0.110+xpu` as default
 
-## 7.1.2 Import `intel_extension_for_pytorch`
+## 6.1.2 Import `intel_extension_for_pytorch`
 
 After installation, let's move to the Python scripts of this tutorial.
 
@@ -27,7 +27,7 @@ To enable BigDL-LLM optimizations on Intel GPUs, you need to import `intel_exten
 import intel_extension_for_pytorch as ipex
 ```
 
-## 7.1.3 (Optional) Download Llama 2 (7B)
+## 6.1.3 (Optional) Download Llama 2 (7B)
 
 To download the [meta-llama/Llama-2-7b-chat-hf](https://huggingface.co/meta-llama/Llama-2-7b-chat-hf) model from Hugging Face, you will need to obtain access granted by Meta. Please follow the instructions provided [here](https://huggingface.co/meta-llama/Llama-2-7b-chat-hf/tree/main) to request access to the model.
 
@@ -43,7 +43,7 @@ model_path = snapshot_download(repo_id='/meta-llama/Llama-2-7b-chat-hf',
 > **Note**
 > The model will by default be downloaded to `HF_HOME='~/.cache/huggingface'`.
 
-## 7.1.4 Load Model in Low Precision
+## 6.1.4 Load Model in Low Precision
 
 One common use case is to load a Hugging Face *transformers* model in low precision, i.e. conduct **implicit** quantization while loading.
 
@@ -95,7 +95,7 @@ tokenizer = LlamaTokenizer.from_pretrained(pretrained_model_name_or_path="meta-l
 > **Note**
 > If you have already downloaded the Llama 2 (7B) model and skipped step [7.1.2.2](#712-optional-download-llama-2-7b), you could specify `pretrained_model_name_or_path` to the model path.
 
-## 7.1.6 Run Model
+## 6.1.6 Run Model
 
 You can then do model inference with BigDL-LLM optimizations on Intel GPUs almostly the same way as using official `transformers` API. **The only difference is to set `to('xpu')` for token ids**. A Q&A dialog template is created for the model to complete.
 
@@ -125,7 +125,7 @@ with torch.inference_mode():
 >
 > For the next section of stream chat, we could treat this time of generation in section 7.1.6 as a warm-up.
 
-## 7.1.7 Stream Chat
+## 6.1.7 Stream Chat
 
 Now, let's build a stream chatbot that runs on Intel GPUs, allowing LLMs to engage in interactive conversations. Chatbot interaction is no magic - it still relies on the prediction and generation of next tokens by LLMs. To make LLMs chat, we need to properly format the prompts into a converation format, for example:
 

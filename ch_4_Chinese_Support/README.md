@@ -7,5 +7,5 @@ Many popular models have support for multiple languages, such as: [ChatGPT](http
 
 We provide two notebooks showing the usage of two popular multi-language models, using Chinese capabilities for illustration.
 
-+ [ChatGLM2-6B](6_1_ChatGLM2-6B.ipynb)
-+ [Baichuan-13B](6_2_Baichuan-13B.ipynb)
++ [ChatGLM2-6B](4_1_ChatGLM2-6B.ipynb)
++ [Baichuan-13B](4_2_Baichuan-13B.ipynb)

@@ -6,6 +6,6 @@ This chapter is a deeper dive of the BigDL-LLM `transformers`-style API, which i
 
 Two notebooks are included in this chapter. 
 
-In the notebook [4_1_Run_Transformer_Models](./4_1_Run_Transformer_Models.ipynb), you'll first learn how to use `transformers`-style API in different scenarios (e.g. save/load, precision choices, etc.), then proceed to build a chatbot application with streaming and multi-turn chat capabilities.
+In the notebook [5_1_ChatBot](./5_1_ChatBot.ipynb), you'll first learn how to use `transformers`-style API in different scenarios (e.g. save/load, precision choices, etc.), then proceed to build a chatbot application with streaming and multi-turn chat capabilities.
 
-In the notebook [4_2_Speech_Recognition](./4_2_Speech_Recognition.ipynb), you'll learn how to use BigDL-LLM to load a Transformer-based speech recognition model [Whisper](https://openai.com/research/whisper), and then use it to transcribe and translate audio files.
+In the notebook [5_2_Speech_Recognition](./5_2_Speech_Recognition.ipynb), you'll learn how to use BigDL-LLM to load a Transformer-based speech recognition model [Whisper](https://openai.com/research/whisper), and then use it to transcribe and translate audio files.
