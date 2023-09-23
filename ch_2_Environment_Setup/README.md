@@ -62,24 +62,32 @@ Then activate the environment `llm-tutorial`:
 ```
 conda activate llm-tutorial
 ```
-## 2.3 Setup Jupyter Service
 
-### 2.3.1 Install Jupyter
+## 2.3 Install BigDL-LLM
+
+The one-line command below will install the latest `bigdl-llm` with all the dependencies for common LLM application development.
+```
+pip install --pre --upgrade bigdl-llm[all]
+```
+
+## 2.4 Setup Jupyter Service
+
+### 2.4.1 Install Jupyter
 The `jupyter` library is required for running the tutorial notebooks (i.e. the `.ipynb` files). Under your activated Python 3.9 environment, run:
 ```
 pip install jupyter
 ```
 
-### 2.3.2 Start Jupyter Service
+### 2.4.2 Start Jupyter Service
 The recommended command to start jupyter service is slightly different on PC and server. 
 
-#### 2.3.2.1 On PC
+#### 2.4.2.1 On PC
 On PC, just run the command in shell:
 ```
 jupyter notebook
 ```
 
-#### 2.3.2.2 On Server
+#### 2.4.2.2 On Server
 On server, it is recommended to use all physical cores of a single socket for better performance. So run below command instead:
 ```bash
 # e.g. for a server with 48 cores per socket
@@ -90,10 +98,10 @@ numactl -C 0-47 -m 0 jupyter notebook
 Congratulations! Now you can use a web browser to access the jupyter service url and execute the notebooks provided in this tutorial. 
 
 
-## 2.4 Things you may want to know about working with LLMs
+## 2.5 Things you may want to know about working with LLMs
 If you're new to LLMs and LLM applicaiton development, there's something you might want to know. 
 
-### 2.4.1 Where to find the models
+### 2.5.1 Where to find the models
 To start, you'll need to obtain a model. There are numerous open-source LLMs available in the community. If you don't have a specific target in mind, consider selecting one that ranks higher on LLM leaderboards. These leaderboards evaluate and compare the capabilities of various LLMs. For instance,
 
 - [Open LLM LeaderBoard](https://huggingface.co/spaces/HuggingFaceH4/open_llm_leaderboard) hosted by Huggingface. 
@@ -101,7 +109,7 @@ To start, you'll need to obtain a model. There are numerous open-source LLMs ava
 
 Most of these leaderboards include reference links to the models listed. If a model is open source, you can easily download it directly from the provided link and give it a try.
 
-### 2.4.2 Download Models from Huggingface
+### 2.5.2 Download Models from Huggingface
 As of writing, many popular LLMs are hosted on [Huggingface](huggingface.co). 
 An example model homepage hosted on huggingface looks like this.
 

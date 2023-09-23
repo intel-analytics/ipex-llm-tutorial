@@ -63,24 +63,32 @@ conda create -n llm-tutorial python=3.9
 ```
 conda activate llm-tutorial
 ```
-## 2.3 安装 Jupyter 服务
 
-### 2.3.1 安装 Jupyter
+## 2.3 安装 BigDL-LLM
+
+下面这一行命令将安装最新版本的`bigdl-llm`以及所有常见LLM应用程序开发所需的依赖项。
+```
+pip install --pre --upgrade bigdl-llm[all]
+```
+
+## 2.4 安装 Jupyter 服务
+
+### 2.4.1 安装 Jupyter
 运行教程提供的 Notebook (即 `.ipynb` 文件) 需要 `jupyter` 库。在激活的 Python 3.9 环境下运行：
 ```
 pip install jupyter
 ```
 
-### 2.3.2 启动 Jupyter 服务
+### 2.4.2 启动 Jupyter 服务
 启动 jupyter 服务的推荐指令在个人电脑和服务器上略有不同。
 
-#### 2.3.2.1 在个人电脑上
+#### 2.4.2.1 在个人电脑上
 在个人电脑上，只需在 shell 中运行以下命令：
 ```
 jupyter notebook
 ```
 
-#### 2.3.2.2 在服务器上
+#### 2.4.2.2 在服务器上
 在服务器上，建议使用单个插槽的所有物理核心以获得更好的性能。因此，请运行以下命令：
 ```bash
 # 以每个插槽有48个核心的服务器为例
@@ -91,11 +99,11 @@ numactl -C 0-47 -m 0 jupyter notebook
 祝贺您！现在您可以使用浏览器来访问 jupyter 服务 url 并运行本教程提供的notebooks。
 
 
-## 2.4 关于使用LLM的一些你可能想要了解的事项
+## 2.5 关于使用LLM的一些你可能想要了解的事项
 
 如果您在LLM和LLM应用程序开发方面是新手，本节可能包含了一些您想要了解的内容。
 
-### 2.4.1 去哪里找模型
+### 2.5.1 去哪里找模型
 
 首先，您需要获取一个模型。社区中有许多开源的LLM可供选择。如果您没有特定的目标，可以考虑选择在LLM排行榜上排名较高的模型。这些排行榜评估和比较了各种LLM的能力。一些比较有名的排行榜包括：
 
@@ -105,7 +113,7 @@ numactl -C 0-47 -m 0 jupyter notebook
 这些排行榜大多包含了列出的模型的参考链接。如果一个模型是开源的，您可以直接从提供的链接中轻松下载并尝试使用。
 
 
-2.4.2 从Huggingface下载模型
+2.5.2 从Huggingface下载模型
 
 截止到目前为止，许多热门的LLM模型都托管在Huggingface上。Huggingface托管的一个示例模型主页如下所示。
 ![image](https://github.com/shane-huang/bigdl-llm-tutorial/assets/1995599/a04df95f-5590-4bf1-968c-32cf494ece92)
