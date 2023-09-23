@@ -1,5 +1,6 @@
 # 第三章 应用开发基础
 
-本章提供了 BigDL-LLM 的基本用法以进行基础的大语言模型应用开发。
+这一章将帮助您迅速入门BigDL-LLM，并指导您构建您的第一个LLM应用程序。
 
-在 [3_Quick_Start.ipynb](./3_Quick_Start.ipynb) 中，您将学习如何一行代码加速任意 Pytorch 大语言模型并实现最基础的对话应用。
+本章附带的notebook [3_Quick_Start.ipynb](./3_Quick_Start.ipynb) 介绍了BigDL-LLM的一些基本使用方法，并指导您完成构建一个基础聊天应用程序的过程。
+
