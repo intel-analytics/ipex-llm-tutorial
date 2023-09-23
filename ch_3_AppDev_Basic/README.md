@@ -1,5 +1,9 @@
-# Chatper 3 Basic Application Develop
+# Chatper 3 Application Developmenent: Basics
 
-This notebook will get you started to build a basic chat application with BigDL-LLM. 
+This chapter will get you started quickly with BigDL-LLM, and you'll learn how to build your very first LLM application. 
 
-In the notebook [3_Quick_Start](./3_Quick_Start.ipynb), you'll learn how to install BigDL-LLM, load a model, and get a response from the model.
+The accompanying notebook  [3_BasicApp.ipynb](./3_BasicApp.ipynb) in this chapter introduces some essential APIs of BigDL-LLM and walks you through the process of building a basic chat application.
+
+## What's Next
+
+In [Chapter 4: Chinese Support](../ch_4_Chinese_Support/) You will learn how to use models with Chinese support for application development. In [Chapter 5: Application Development: Intermediate](../ch_5_AppDev_Intermediate/), you will learn some sophisticated skills to build a better chatbot and how to do speech recognition.  
