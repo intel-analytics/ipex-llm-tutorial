@@ -1,4 +1,4 @@
-# Chatper 3 Basic Application Develop
+# Chatper 3 Application Developmenent: Basics
 
 This chapter will get you started quickly with BigDL-LLM, and you'll learn how to build your very first LLM application. 
 
