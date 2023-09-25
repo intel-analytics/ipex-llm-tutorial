@@ -113,7 +113,7 @@ numactl -C 0-47 -m 0 jupyter notebook
 这些排行榜大多包含了列出的模型的参考链接。如果一个模型是开源的，您可以直接从提供的链接中轻松下载并尝试使用。
 
 
-2.5.2 从Huggingface下载模型
+### 2.5.2 从Huggingface下载模型
 
 截止到目前为止，许多热门的LLM模型都托管在Huggingface上。Huggingface托管的一个示例模型主页如下所示。
 ![image](https://github.com/shane-huang/bigdl-llm-tutorial/assets/1995599/a04df95f-5590-4bf1-968c-32cf494ece92)
