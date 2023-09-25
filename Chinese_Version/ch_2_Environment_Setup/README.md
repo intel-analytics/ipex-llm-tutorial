@@ -45,7 +45,7 @@ conda init
 
 #### 2.2.1.3 适用于 Linux 的 Windows 子系统 (WSL):
 
-对于 WSL 用户，请确保已经安装了 WSL2. 如果没有，请参阅[此处](https://bigdl.readthedocs.io/en/latest/doc/UserGuide/win.html#install-wsl2l)了解安装方法。
+对于 WSL 用户，请确保已经安装了 WSL2。如果没有，请参阅[此处](https://bigdl.readthedocs.io/en/latest/doc/UserGuide/win.html#install-wsl2l)了解安装方法。
 
 打开 WSL2 shell 并运行与 [2.2.1.1 Linux](#2211-linux) 相同的命令。
 
@@ -105,10 +105,10 @@ numactl -C 0-47 -m 0 jupyter notebook
 
 ### 2.5.1 去哪里找模型
 
-首先，您需要获取一个模型。社区中有许多开源的LLM可供选择。如果您没有特定的目标，可以考虑选择在LLM排行榜上排名较高的模型。这些排行榜评估和比较了各种LLM的能力。一些比较有名的排行榜包括：
+首先，您需要获取一个模型。社区中有许多开源的LLM可供选择。如果您没有特定的目标，可以考虑从社区公开的LLM排行榜上排名较高的模型中选择。这些公开的LLM排行榜一般采用多种评测手段评估和比较多个LLM的能力。一些比较有名的排行榜包括：
 
-- [Open LLM LeaderBoard](https://huggingface.co/spaces/HuggingFaceH4/open_llm_leaderboard) hosted by Huggingface. 
-- [Chatbot Arena Leaderboard](https://huggingface.co/spaces/lmsys/chatbot-arena-leaderboard) hosted by llmsys.
+- [Open LLM LeaderBoard](https://huggingface.co/spaces/HuggingFaceH4/open_llm_leaderboard) 由 Huggingface 维护 
+- [Chatbot Arena Leaderboard](https://huggingface.co/spaces/lmsys/chatbot-arena-leaderboard) 由 llmsys 维护
 
 这些排行榜大多包含了列出的模型的参考链接。如果一个模型是开源的，您可以直接从提供的链接中轻松下载并尝试使用。
 
