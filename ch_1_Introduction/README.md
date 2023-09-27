@@ -5,7 +5,7 @@
 
 
 ## What can you do with _BigDL-LLM_
-You can use BigDL-LLM to run _any pytorch model_ (e.g. [HuggingFace transformer](https://huggingface.co/docs/transformers/index) models). It automatically optimizes and accelerates LLMs using low-bit optimizations, modern hardware accelerations and latest software optimizations. 
+You can use BigDL-LLM to run _any pytorch model_ (e.g. [HuggingFace transformers](https://huggingface.co/docs/transformers/index) models). It automatically optimizes and accelerates LLMs using low-bit optimizations, modern hardware accelerations and latest software optimizations. 
 
 Using BigDL-LLM is easy. With just 1-line of code change, you can immediately observe significant speedup [^1] . 
 

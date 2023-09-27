@@ -4,7 +4,7 @@
 [BigDL-LLM](https://github.com/intel-analytics/BigDL/tree/main/python/llm) 是一个为Intel XPU (包括CPU和GPU) 打造的轻量级大语言模型加速库，在Intel平台上具有广泛的模型支持、最低的延迟和最小的内存占用。BigDL-LLM是开源项目 [BigDL](https://github.com/intel-analytics/bigdl) 的一部分，采用 Apache 2.0 许可证发布。
 
 ## 能用 BigDL-LLM 做什么
-您可以使用 BigDL-LLM 运行任何 PyTorch 模型（例如  [HuggingFace transformer](https://huggingface.co/docs/transformers/index) 模型）。在运行过程中，BigDL-LLM利用了低比特优化技术、现代硬件加速技术，和一系列软件优化技术来自动加速LLM。
+您可以使用 BigDL-LLM 运行任何 PyTorch 模型（例如  [HuggingFace transformers](https://huggingface.co/docs/transformers/index) 模型）。在运行过程中，BigDL-LLM利用了低比特优化技术、现代硬件加速技术，和一系列软件优化技术来自动加速LLM。
 
 使用 BigDL-LLM 非常简单。只需更改一行代码，您就可以立即观察到显著的加速效果[^1]。
 
