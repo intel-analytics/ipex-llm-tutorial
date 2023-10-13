@@ -10,7 +10,7 @@ https://docs.conda.io/en/latest/miniconda.html#windows-installers
  conda create -n llm python=3.9
  conda activate llm
  pip install --pre --upgrade bigdl-llm[all]
- pip install gradio mdtex2html
+ pip install gradio==3.41.1 mdtex2html
 ```
 或者用指定版本的方式安装
 ```
