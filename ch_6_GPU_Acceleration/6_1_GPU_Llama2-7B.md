@@ -36,7 +36,7 @@ After receiving the access, download the model with your Hugging Face token:
 ```python
 from huggingface_hub import snapshot_download
 
-model_path = snapshot_download(repo_id='/meta-llama/Llama-2-7b-chat-hf',
+model_path = snapshot_download(repo_id='meta-llama/Llama-2-7b-chat-hf',
                                token='hf_XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX') # change it to your own Hugging Face access token
 ```
 
@@ -82,7 +82,7 @@ model_in_8bit_gpu = model_in_8bit.to('xpu')
 >
 > * `load_in_4bit=True` is equivalent to `load_in_low_bit='sym_int4'`.
 
-## 7.1.5 Load Tokenizer 
+## 6.1.5 Load Tokenizer 
 
 A tokenizer is also needed for LLM inference. You can use [Huggingface transformers](https://huggingface.co/docs/transformers/index) API to load the tokenizer directly. It can be used seamlessly with models loaded by BigDL-LLM. For Llama 2, the corresponding tokenizer class is `LlamaTokenizer`.
 

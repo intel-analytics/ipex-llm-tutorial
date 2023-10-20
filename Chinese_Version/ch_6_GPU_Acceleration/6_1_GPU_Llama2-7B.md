@@ -36,7 +36,7 @@ import intel_extension_for_pytorch as ipex
 ```python
 from huggingface_hub import snapshot_download
 
-model_path = snapshot_download(repo_id='/meta-llama/Llama-2-7b-chat-hf',
+model_path = snapshot_download(repo_id='meta-llama/Llama-2-7b-chat-hf',
                                token='hf_XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX') # 将此处改为您自己的 Hugging Face access token
 ```
 
