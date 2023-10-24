@@ -135,12 +135,12 @@ elif model_name == "llama2-13b" or model_name == "StarCoder":
 打开Anaconda PowerShell Prompt
 ```
  conda activate llm
-ChatGLM2: 
- llm-cli -t 20 -x chatglm -m "ggml-chatglm2-6b-q4_0.bin" -p "Once upon a time, there existed a little girl who liked to have adventures. She wanted to go to places and meet new people, and have fun" --no-mmap -v -n 32
-Llama2: 
- llm-cli -t 20 -x llama -m "bigdl_llm_llama2_13b_q4_0.bin" -p "Once upon a time, there existed a little girl who liked to have adventures. She wanted to go to places and meet new people, and have fun" --no-mmap -n 32
-Starcoder: 
- llm-cli -t 20 -x starcoder -m "bigdl_llm_starcoder_q4_0.bin" -p "Once upon a time, there existed a little girl who liked to have adventures. She wanted to go to places and meet new people, and have fun" --no-mmap -n 32
+#ChatGLM2: 
+$ llm-cli -t 20 -x chatglm -m "ggml-chatglm2-6b-q4_0.bin" -p "Once upon a time, there existed a little girl who liked to have adventures. She wanted to go to places and meet new people, and have fun" --no-mmap -v -n 32
+#Llama2: 
+$ llm-cli -t 20 -x llama -m "bigdl_llm_llama2_13b_q4_0.bin" -p "Once upon a time, there existed a little girl who liked to have adventures. She wanted to go to places and meet new people, and have fun" --no-mmap -n 32
+#Starcoder: 
+$ llm-cli -t 20 -x starcoder -m "bigdl_llm_starcoder_q4_0.bin" -p "Once upon a time, there existed a little girl who liked to have adventures. She wanted to go to places and meet new people, and have fun" --no-mmap -n 32
 ```
 参数解释：-n 32限制输出32 tokens。
 
