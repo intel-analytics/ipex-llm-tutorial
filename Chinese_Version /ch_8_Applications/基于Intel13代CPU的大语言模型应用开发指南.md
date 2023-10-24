@@ -226,9 +226,6 @@ with torch.inference_mode():
     timeCost = time.time() - timeStart
     token_count_input = len(tokenizer.tokenize(prompt))
 
-    token_count_output = int(out[0,2])+1
-    ms_first_token = float(out[0,0])
-    ms_after_token = float(out[0,1]) ## Tensor out的定义在benchmark_util.py L2476
 ```
 
 ## 5 添加history多轮对话功能
