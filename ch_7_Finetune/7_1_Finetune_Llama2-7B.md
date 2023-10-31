@@ -313,8 +313,7 @@ Here are more results with same prompts input for pretrained and fine-tuned mode
 |         -----          |       -----         |
 |   **There are two things that matter:** Einzelnes and the individual. Everyone has heard of the "individual," but few have heard of the "individuum," or "   |  **There are two things that matter:** the quality of our relationships and the legacy we leave.
 And I think that all of us as human beings are searching for it, no matter where |
-|   Pretrained Model   |  Fine-tuned Model  |
+|   **In the quiet embrace of the night,** I felt the earth move. Unterscheidung von Wörtern und Ausdrücken.  |  **In the quiet embrace of the night,** the world is still and the stars are bright. My eyes are closed, my heart is at peace, my mind is at rest. I am ready for  |
 
-## 7.1.5 Others in all
-Fine-tuning leverages transfer learning to efficiently inject niche expertise into a foundation model like LLaMA2.
+
 
