@@ -1,6 +1,6 @@
 # 7.1 Finetuning Llama 2 (7B) using QLoRA
 
-To help you better understand the finetuning process, in this tutorial, we provide a practical guide leveraging BigDL-LLM to tune a large language model to a specific task.  [Llama-2-7b-hf](https://huggingface.co/meta-llama/Llama-2-7b-hf) is used as an examvple here to adapt the text generation implementation.
+To help you better understand the finetuning process, in this tutorial, we provide a practical guide leveraging BigDL-LLM to tune a large language model to a specific task.  [Llama-2-7b-hf](https://huggingface.co/meta-llama/Llama-2-7b-hf) is used as an example here to adapt the text generation implementation.
 
 ## 7.1.1 Enable BigDL-LLM on Intel GPUs
 
@@ -159,7 +159,7 @@ We can get the following outputs showcasing our training loss:
 100%|██████████████████████████████████████████████████████████████████████████████| 200/200 [04:45<00:00,  1.43s/it]
 TrainOutput(global_step=200, training_loss=1.1155566596984863, metrics={'train_runtime': 285.5368, 'train_samples_per_second': 2.802, 'train_steps_per_second': 0.7, 'train_loss': 1.1155566596984863, 'epoch': 0.32})
 ```
-The final LoRA weights and configurations have been saved to `${output_dir}/checkpoint-{max_steps}`, which can be used for mering.
+The final LoRA weights and configurations have been saved to `${output_dir}/checkpoint-{max_steps}`, which can be used for merging.
 
 ## 7.1.3 Merge the Model
 After finetuning the model, you could merge the QLoRA weights back into the base model for export to Hugging Face format.
@@ -249,7 +249,7 @@ tokenizer.save_pretrained(output_path)
 ## 7.1.4 Inference with Fine-tuned model
 After merging and deploying the models, we can test the performance of the fine-tuned model. 
 The detailed instructions of running
-LLM inference with BigDL-LLM optimizations could be found in [Chapter 6](./ch_6_GPU_Acceleration/6_1_GPU_Llama2-7B.md) #XXX, here we quickly go through the preparation of model inference.
+LLM inference with BigDL-LLM optimizations could be found in [Chapter 6](../ch_6_GPU_Acceleration/6_1_GPU_Llama2-7B.md), here we quickly go through the preparation of model inference.
 
 ### 7.1.4.1 Inference with the Fine-tuned Model
 ```python
@@ -275,7 +275,7 @@ Here are the inference results:
 The paradox of time and eternity is that, on the one hand, we experience time as linear and progressive, and on the other hand, we experience time as cyclical. And the
 ```
 
-### 7.1.4.2 Inference with the pre-trained Model
+### 7.1.4.2 Inference with the Pre-trained Model
 
 We just repeat the process with the pre-trained model by replacing the `model_path` argument to verify the improvement after finetuning process.
 
@@ -295,7 +295,7 @@ with torch.inference_mode():
 
 Now we can compare the answer of the pre-trained Model with the fine-tuned one:
 
-> **Pretrained Model**
+> **Pre-trained Model**
 ```
 The paradox of time and eternity is that time is not eternal, but eternity is. nobody knows how long time is.
 The paradox of time and eternity is
@@ -309,7 +309,7 @@ We can see the result shares the same style and context with the samples contain
 
 Here are more results with same prompts input for pretrained and fine-tuned models:
 
-|   ♣ Pretrained Model   | ♣ Fine-tuned Model  |
+|   ♣ Pre-trained Model   | ♣ Fine-tuned Model  |
 |         -----          |       -----         |
 |   **There are two things that matter:** Einzelnes and the individual. Everyone has heard of the "individual," but few have heard of the "individuum," or "   |  **There are two things that matter:** the quality of our relationships and the legacy we leave.
 And I think that all of us as human beings are searching for it, no matter where |
