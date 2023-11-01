@@ -7,7 +7,7 @@ To help you better understand the finetuning process, in this tutorial, we provi
 
 ### 7.1.1.1 Install BigDL-LLM on Intel GPUs
 
-After following the steps in [Readme](./README.md#70-environment-setup) # XXX to set up the environment, you can install BigDL-LLM in terminal with the command below:
+After following the steps in [Readme](./README.md#70-environment-setup)  to set up the environment, you can install BigDL-LLM in terminal with the command below:
 ```bash
 pip install bigdl-llm[xpu] -f https://developer.intel.com/ipex-whl-stable-xpu
 ```
@@ -131,7 +131,7 @@ trainer = transformers.Trainer(
         save_steps=100,
         fp16=True,
         logging_steps=20,
-        output_dir="outputs", # specify your own output path here to #XXX
+        output_dir="outputs", # specify your own output path here
         optim="adamw_hf", # paged_adamw_8bit is not supported yet
         # gradient_checkpointing=True, # can further reduce memory but slower
     ),
@@ -255,6 +255,7 @@ LLM inference with BigDL-LLM optimizations could be found in [Chapter 6](../ch_6
 ```python
 model_path = "./outputs/checkpoint-200-merged"
 model = AutoModelForCausalLM.from_pretrained(pretrained_model_name_or_path = model_path,load_in_4bit=True)
+model.config.use_cache = True
 model = model.to('xpu')
 tokenizer = LlamaTokenizer.from_pretrained(pretrained_model_name_or_path = model_path)
 ```
@@ -282,6 +283,7 @@ We just repeat the process with the pre-trained model by replacing the `model_pa
 ```python
 model_path = "meta-llama/Llama-2-7b-hf"
 model = AutoModelForCausalLM.from_pretrained(pretrained_model_name_or_path = model_path,load_in_4bit=True)
+model.config.use_cache = True
 model = model.to('xpu')
 tokenizer = LlamaTokenizer.from_pretrained(pretrained_model_name_or_path = model_path)
 
