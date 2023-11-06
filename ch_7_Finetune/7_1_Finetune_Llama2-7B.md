@@ -1,15 +1,18 @@
+
 # 7.1 Finetuning Llama 2 (7B) using QLoRA
 
-To help you better understand the finetuning process, in this tutorial, we provide a practical guide leveraging BigDL-LLM to tune a large language model to a specific task.  [Llama-2-7b-hf](https://huggingface.co/meta-llama/Llama-2-7b-hf) is used as an example here to adapt the text generation implementation.
+To help you better understand the process of QLoRA Finetuning, in this tutorial, we provide a practical guide leveraging BigDL-LLM to tune a large language model to a specific task.  [Llama-2-7b-hf](https://huggingface.co/meta-llama/Llama-2-7b-hf) is used as an example here to adapt the text generation implementation.
 
 ## 7.1.1 Enable BigDL-LLM on Intel GPUs
-
 
 ### 7.1.1.1 Install BigDL-LLM on Intel GPUs
 
 After following the steps in [Readme](./README.md#70-environment-setup)  to set up the environment, you can install BigDL-LLM in terminal with the command below:
 ```bash
 pip install bigdl-llm[xpu] -f https://developer.intel.com/ipex-whl-stable-xpu
+pip install transformers==4.34.0
+pip install peft==0.5.0
+pip install accelerate==0.23.0
 ```
 
 > **Note**
@@ -28,7 +31,7 @@ import intel_extension_for_pytorch as ipex
 ### 7.1.2.1 Load Model in Low Precision
 
 
-A popular open-source LLM [meta-llama/Llama-2-7b-hf](https://huggingface.co/meta-llama/Llama-2-7b-hf) is chosen to illustrate the process of model finetuning.
+A popular open-source LLM [meta-llama/Llama-2-7b-hf](https://huggingface.co/meta-llama/Llama-2-7b-hf) is chosen to illustrate the process of QLoRA Finetuning.
 
 > **Note**
 >
@@ -68,11 +71,11 @@ Next, we can obtain a PEFT model from the optimized model and a configuration ob
 from bigdl.llm.transformers.qlora import get_peft_model
 from peft import LoraConfig
 
-config = LoraConfig(r=8, # defines how many parameters will be trained
-                    lora_alpha=32, # adjusts the magnitude of the weight matrix
-                    target_modules=["q_proj", "k_proj", "v_proj"], 
-                    lora_dropout=0.05, # used to avoid overfitting
-                    bias="none", 
+config = LoraConfig(r=8, # the rank of the update matrices
+                    lora_alpha=32, # LoRA scaling factor
+                    target_modules=["q_proj", "k_proj", "v_proj"], # the modules to apply the LoRA update matrices
+                    lora_dropout=0.05, # sets to avoid over-fitting
+                    bias="none", # specifies if the bias parameters should be trained.(can be 'none', 'all' or 'lora_only')
                     task_type="CAUSAL_LM")
 model = get_peft_model(model, config)
 
@@ -81,11 +84,6 @@ model = get_peft_model(model, config)
 >
 > Instead of `from peft import prepare_model_for_kbit_training, get_peft_model` as we did for regular QLoRA using bitandbytes and cuda, we import them from `bigdl.llm.transformers.qlora` here to get a BigDL-LLM compatible PEFT model. And the rest is just the same as regular LoRA finetuning process using `peft`.
 >
-
-> **Note**
->
-> For Llama 2 (7B) model, the `target_modules` is set as `["q_proj", "k_proj", "v_proj"]`.
-> You can find a list of **target_modules available** on the [Hugging Face Documentation](https://github.com/huggingface/peft/blob/39ef2546d5d9b8f5f8a7016ec10657887a867041/src/peft/utils/other.py#L220).
 
 ### 7.1.2.3 Load Dataset
 
@@ -102,7 +100,7 @@ data = data.map(lambda samples: tokenizer(samples["quote"]), batched=True)
 > If you have already downloaded the `.jsonl` file from [Abirate/english_quotes](https://huggingface.co/datasets/Abirate/english_quotes/blob/main/quotes.jsonl), you could use `data = load_dataset("json", data_files= "path/to/your/.jsonl/file")` to specify the local path instead of `data = load_dataset("Abirate/english_quotes")`.
 
 ### 7.1.2.4 Load Tokenizer
-A tokenizer is also needed for LLM inference. You can use [Huggingface transformers](https://huggingface.co/docs/transformers/index) API to load the tokenizer directly. It can be used seamlessly with models loaded by BigDL-LLM. For Llama 2, the corresponding tokenizer class is `LlamaTokenizer`.
+A tokenizer enables encoding and decoding process in LLM inference. You can use [Huggingface transformers](https://huggingface.co/docs/transformers/index) API to load the tokenizer directly. It can be used seamlessly with models loaded by BigDL-LLM. For Llama 2, the corresponding tokenizer class is `LlamaTokenizer`.
 
 ```python
 from transformers import LlamaTokenizer
@@ -155,19 +153,19 @@ We can get the following outputs showcasing our training loss:
 {'loss': 0.8593, 'learning_rate': 4.4444444444444447e-05, 'epoch': 0.26}                                             
 {'loss': 1.0055, 'learning_rate': 2.2222222222222223e-05, 'epoch': 0.29}                                             
 {'loss': 1.0081, 'learning_rate': 0.0, 'epoch': 0.32}                                                                
-{'train_runtime': 285.5368, 'train_samples_per_second': 2.802, 'train_steps_per_second': 0.7, 'train_loss': 1.1155566596984863, 'epoch': 0.32}
+{'train_runtime': xxx, 'train_samples_per_second': xxx, 'train_steps_per_second': xxx, 'train_loss': 1.1155566596984863, 'epoch': 0.32}
 100%|██████████████████████████████████████████████████████████████████████████████| 200/200 [04:45<00:00,  1.43s/it]
 TrainOutput(global_step=200, training_loss=1.1155566596984863, metrics={'train_runtime': 285.5368, 'train_samples_per_second': 2.802, 'train_steps_per_second': 0.7, 'train_loss': 1.1155566596984863, 'epoch': 0.32})
 ```
-The final LoRA weights and configurations have been saved to `${output_dir}/checkpoint-{max_steps}`, which can be used for merging.
+The final LoRA weights and configurations have been saved to `${output_dir}/checkpoint-{max_steps}/adapter_model.bin` and `${output_dir}/checkpoint-{max_steps}/adapter_config.json`, which can be used for merging.
 
 ## 7.1.3 Merge the Model
+
 After finetuning the model, you could merge the QLoRA weights back into the base model for export to Hugging Face format.
 
 > **Note**
 >
 > Make sure your accelerate version is 0.23.0 to enable the merging process on CPU.
-
 
 ### 7.1.3.1 Load Pre-trained Model
 
@@ -205,7 +203,7 @@ lora_model = PeftModel.from_pretrained(
 ```
 > **Note**
 >
-> Instead of from peft import PeftModel, we import PeftModel from bigdl.llm.transformers.qlora as a BigDL-LLM compatible model. 
+> Instead of `from peft import PeftModel`, we `import PeftModel from bigdl.llm.transformers.qlora` as a BigDL-LLM compatible model.
 > 
 > **Note**
 > The adapter path is the local path you save the fine-tuned model, in our case is `./outputs/checkpoint-200`.
@@ -247,15 +245,15 @@ tokenizer.save_pretrained(output_path)
 
 
 ## 7.1.4 Inference with Fine-tuned model
+
 After merging and deploying the models, we can test the performance of the fine-tuned model. 
-The detailed instructions of running
-LLM inference with BigDL-LLM optimizations could be found in [Chapter 6](../ch_6_GPU_Acceleration/6_1_GPU_Llama2-7B.md), here we quickly go through the preparation of model inference.
+The detailed instructions of running LLM inference with BigDL-LLM optimizations could be found in [Chapter 6](../ch_6_GPU_Acceleration/6_1_GPU_Llama2-7B.md), here we quickly go through the preparation of model inference.
 
 ### 7.1.4.1 Inference with the Fine-tuned Model
+
 ```python
 model_path = "./outputs/checkpoint-200-merged"
 model = AutoModelForCausalLM.from_pretrained(pretrained_model_name_or_path = model_path,load_in_4bit=True)
-model.config.use_cache = True
 model = model.to('xpu')
 tokenizer = LlamaTokenizer.from_pretrained(pretrained_model_name_or_path = model_path)
 ```
@@ -271,10 +269,6 @@ with torch.inference_mode():
     output_str = tokenizer.decode(output[0], skip_special_tokens=True)
     print(output_str)
 ```
-Here are the inference results: 
-```
-The paradox of time and eternity is that, on the one hand, we experience time as linear and progressive, and on the other hand, we experience time as cyclical. And the
-```
 
 ### 7.1.4.2 Inference with the Pre-trained Model
 
@@ -283,7 +277,6 @@ We just repeat the process with the pre-trained model by replacing the `model_pa
 ```python
 model_path = "meta-llama/Llama-2-7b-hf"
 model = AutoModelForCausalLM.from_pretrained(pretrained_model_name_or_path = model_path,load_in_4bit=True)
-model.config.use_cache = True
 model = model.to('xpu')
 tokenizer = LlamaTokenizer.from_pretrained(pretrained_model_name_or_path = model_path)
 
@@ -313,8 +306,7 @@ Here are more results with same prompts input for pretrained and fine-tuned mode
 
 |   ♣ Pre-trained Model   | ♣ Fine-tuned Model  |
 |         -----          |       -----         |
-|   **There are two things that matter:** Einzelnes and the individual. Everyone has heard of the "individual," but few have heard of the "individuum," or "   |  **There are two things that matter:** the quality of our relationships and the legacy we leave.
-And I think that all of us as human beings are searching for it, no matter where |
+|   **There are two things that matter:** Einzelnes and the individual. Everyone has heard of the "individual," but few have heard of the "individuum," or "   |  **There are two things that matter:** the quality of our relationships and the legacy we leave. And I think that all of us as human beings are searching for it, no matter where |
 |   **In the quiet embrace of the night,** I felt the earth move. Unterscheidung von Wörtern und Ausdrücken.  |  **In the quiet embrace of the night,** the world is still and the stars are bright. My eyes are closed, my heart is at peace, my mind is at rest. I am ready for  |
 
 

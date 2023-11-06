@@ -1,10 +1,11 @@
+
 ## Chapter 7 Finetune
 
 As one of the advanced parameter-efficient fine-tuning(PEFT) techniques, QLoRA enables light-weight infusion of specialty knowledge into a large language model with minimal overhead. BigDL-LLM also supports finetuning LLMs(large language models) using QLora with 4bit optimizations on Intel GPUs.
 
 > **Note**
 >
-> Currently, only Hugging Face Transformers models are supported running QLoRA finetuning, and BigDL-LLM supports optimizations of any [*HuggingFace transformers*](https://huggingface.co/docs/transformers/index) model on Intel GPUs .
+> Currently, BigDL-LLM only supports QLoRA finetuning on any [Hugging Face `transformers` models](https://huggingface.co/docs/transformers/index).
 
 
 In Chapter 7, you will go through how to fine-tune a large language model to a text generation task using BigDL-LLM optimizations. BigDL-LLM has a comprehensive tool-set to help you fine-tune the model, merge the LoRA weights and inference with the fine-tuned model.
@@ -20,6 +21,7 @@ You could follow the detailed instructions in [Chapter 6](../ch_6_GPU_Accelerati
 > ⚠️Hardware
   - Intel Arc™ A-Series Graphics
   - Intel Data Center GPU Flex Series
+  - Intel Data Center GPU Max Series
 
 > ⚠️Operating System
   - Linux system, Ubuntu 22.04 is preferred
@@ -40,13 +42,13 @@ Supoosed that you have already installed [Conda](https://docs.conda.io/projects/
 
 ```bash
 # Python 3.9 is recommended for running BigDL-LLM
-conda create -n <your/python/environment> python=3.9 
-conda activate <your/python/environment> 
+conda create -n llm-finetune python=3.9 
+conda activate llm-finetune 
 ```
 
-### 7.0.4 Best Known Configuration on Linux
+### 7.0.4 (Optional) Configuration for Inference on Intel GPUs
 
-For optimal performance on Intel GPUs, it is recommended to set several environment variables:
+If you want to use Intel GPUs to do inference on the fine-tuned model, it is recommended to set several environment variables to reach optimal performance:
 
 ```bash
 # configure OneAPI environment variables
