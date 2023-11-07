@@ -114,6 +114,7 @@ with torch.inference_mode():
                             max_new_tokens=32)
 
     # decode the predicted token ids to output string
+    output = output.cpu()
     output_str = tokenizer.decode(output[0], skip_special_tokens=True)
     
     print('-'*20, 'Output', '-'*20)
