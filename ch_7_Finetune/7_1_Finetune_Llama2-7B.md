@@ -20,7 +20,7 @@ pip install accelerate==0.23.0
 
 ### 7.1.1.2 Import `intel_extension_for_pytorch`
 
-After installation, let's move to the **Python scripts** of this tutorial. First of all you need to import `intel_extension_for_pytorch` first for BigDL-LLM optimizations:
+After installation, let's move to the **Python scripts** of this tutorial. First of all you need to import `intel_extension_for_pytorch` first for using xpu device:
 
 ```python
 import intel_extension_for_pytorch as ipex
@@ -71,11 +71,11 @@ Next, we can obtain a PEFT model from the optimized model and a configuration ob
 from bigdl.llm.transformers.qlora import get_peft_model
 from peft import LoraConfig
 
-config = LoraConfig(r=8, # the rank of the update matrices
-                    lora_alpha=32, # LoRA scaling factor
-                    target_modules=["q_proj", "k_proj", "v_proj"], # the modules to apply the LoRA update matrices
-                    lora_dropout=0.05, # sets to avoid over-fitting
-                    bias="none", # specifies if the bias parameters should be trained.(can be 'none', 'all' or 'lora_only')
+config = LoraConfig(r=8, 
+                    lora_alpha=32, 
+                    target_modules=["q_proj", "k_proj", "v_proj"], 
+                    lora_dropout=0.05, 
+                    bias="none", 
                     task_type="CAUSAL_LM")
 model = get_peft_model(model, config)
 
@@ -83,6 +83,10 @@ model = get_peft_model(model, config)
 > **Note**
 >
 > Instead of `from peft import prepare_model_for_kbit_training, get_peft_model` as we did for regular QLoRA using bitandbytes and cuda, we import them from `bigdl.llm.transformers.qlora` here to get a BigDL-LLM compatible PEFT model. And the rest is just the same as regular LoRA finetuning process using `peft`.
+>
+> **Note**
+>
+> More explanation about `LoraConfig` parameters can be found in [Transformer LoRA Guides](https://huggingface.co/docs/peft/conceptual_guides/lora#common-lora-parameters-in-peft).
 >
 
 ### 7.1.2.3 Load Dataset
@@ -100,7 +104,7 @@ data = data.map(lambda samples: tokenizer(samples["quote"]), batched=True)
 > If you have already downloaded the `.jsonl` file from [Abirate/english_quotes](https://huggingface.co/datasets/Abirate/english_quotes/blob/main/quotes.jsonl), you could use `data = load_dataset("json", data_files= "path/to/your/.jsonl/file")` to specify the local path instead of `data = load_dataset("Abirate/english_quotes")`.
 
 ### 7.1.2.4 Load Tokenizer
-A tokenizer enables encoding and decoding process in LLM inference. You can use [Huggingface transformers](https://huggingface.co/docs/transformers/index) API to load the tokenizer directly. It can be used seamlessly with models loaded by BigDL-LLM. For Llama 2, the corresponding tokenizer class is `LlamaTokenizer`.
+A tokenizer enables tokenizing and detokenizing process in LLM training and inference. You can use [Huggingface transformers](https://huggingface.co/docs/transformers/index) API to load the tokenizer directly. It can be used seamlessly with models loaded by BigDL-LLM. For Llama 2, the corresponding tokenizer class is `LlamaTokenizer`.
 
 ```python
 from transformers import LlamaTokenizer
@@ -154,8 +158,8 @@ We can get the following outputs showcasing our training loss:
 {'loss': 1.0055, 'learning_rate': 2.2222222222222223e-05, 'epoch': 0.29}                                             
 {'loss': 1.0081, 'learning_rate': 0.0, 'epoch': 0.32}                                                                
 {'train_runtime': xxx, 'train_samples_per_second': xxx, 'train_steps_per_second': xxx, 'train_loss': 1.1155566596984863, 'epoch': 0.32}
-100%|██████████████████████████████████████████████████████████████████████████████| 200/200 [04:45<00:00,  1.43s/it]
-TrainOutput(global_step=200, training_loss=1.1155566596984863, metrics={'train_runtime': 285.5368, 'train_samples_per_second': 2.802, 'train_steps_per_second': 0.7, 'train_loss': 1.1155566596984863, 'epoch': 0.32})
+100%|██████████████████████████████████████████████████████████████████████████████| 200/200 [xx:xx<xx:xx,  xxxs/it]
+TrainOutput(global_step=200, training_loss=1.1155566596984863, metrics={'train_runtime': xxx, 'train_samples_per_second': 2.802, 'train_steps_per_second': 0.7, 'train_loss': 1.1155566596984863, 'epoch': 0.32})
 ```
 The final LoRA weights and configurations have been saved to `${output_dir}/checkpoint-{max_steps}/adapter_model.bin` and `${output_dir}/checkpoint-{max_steps}/adapter_config.json`, which can be used for merging.
 
@@ -266,29 +270,12 @@ with torch.inference_mode():
     input_ids = tokenizer.encode('The paradox of time and eternity is', 
     return_tensors="pt").to('xpu')
     output = model.generate(input_ids, max_new_tokens=32)
+    output = output.cpu()
     output_str = tokenizer.decode(output[0], skip_special_tokens=True)
     print(output_str)
 ```
 
-### 7.1.4.2 Inference with the Pre-trained Model
-
-We just repeat the process with the pre-trained model by replacing the `model_path` argument to verify the improvement after finetuning process.
-
-```python
-model_path = "meta-llama/Llama-2-7b-hf"
-model = AutoModelForCausalLM.from_pretrained(pretrained_model_name_or_path = model_path,load_in_4bit=True)
-model = model.to('xpu')
-tokenizer = LlamaTokenizer.from_pretrained(pretrained_model_name_or_path = model_path)
-
-with torch.inference_mode():
-    input_ids = tokenizer.encode("The paradox of time and eternity is", 
-    return_tensors="pt").to('xpu')
-    output = model.generate(input_ids, max_new_tokens=32)
-    output_str = tokenizer.decode(output[0], skip_special_tokens=True)
-    print(output_str)
-```
-
-Now we can compare the answer of the pre-trained Model with the fine-tuned one:
+We can repeat the process with the pre-trained model by replacing the `model_path` argument to verify the improvement after finetuning process. Now we can compare the answer of the pre-trained Model with the fine-tuned one:
 
 > **Pre-trained Model**
 ```

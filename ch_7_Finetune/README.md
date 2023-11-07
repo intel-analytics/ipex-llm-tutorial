@@ -1,7 +1,7 @@
 
 ## Chapter 7 Finetune
 
-As one of the advanced parameter-efficient fine-tuning(PEFT) techniques, QLoRA enables light-weight infusion of specialty knowledge into a large language model with minimal overhead. BigDL-LLM also supports finetuning LLMs(large language models) using QLora with 4bit optimizations on Intel GPUs.
+As one of the advanced parameter-efficient fine-tuning (PEFT) techniques, QLoRA enables light-weight infusion of specialty knowledge into a large language model with minimal overhead. BigDL-LLM also supports finetuning LLM (large language models) using QLora with 4bit optimizations on Intel GPUs.
 
 > **Note**
 >
@@ -46,14 +46,20 @@ conda create -n llm-finetune python=3.9
 conda activate llm-finetune 
 ```
 
-### 7.0.4 (Optional) Configuration for Inference on Intel GPUs
+### 7.0.4 Set OneAPI Environment Variables
 
-If you want to use Intel GPUs to do inference on the fine-tuned model, it is recommended to set several environment variables to reach optimal performance:
+The following line can help you set OneAPI environment variables.
 
 ```bash
 # configure OneAPI environment variables
 source /opt/intel/oneapi/setvars.sh
+```
 
+### 7.0.5 (Optional) Configuration for Inference on Intel GPUs
+
+If you want to use Intel GPUs to do inference on the fine-tuned model, it is recommended to set more environment variables to reach optimal performance:
+
+```bash
 export USE_XETLA=OFF
 export SYCL_PI_LEVEL_ZERO_USE_IMMEDIATE_COMMANDLISTS=1
 ```
