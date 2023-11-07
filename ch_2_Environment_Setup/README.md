@@ -110,7 +110,7 @@ To start, you'll need to obtain a model. There are numerous open-source LLMs ava
 Most of these leaderboards include reference links to the models listed. If a model is open source, you can easily download it directly from the provided link and give it a try.
 
 ### 2.5.2 Download Models from Huggingface
-As of writing, many popular LLMs are hosted on [Huggingface](huggingface.co). 
+As of writing, many popular LLMs are hosted on [Huggingface](https://huggingface.co/). 
 An example model homepage hosted on huggingface looks like this.
 
 ![image](https://github.com/shane-huang/bigdl-llm-tutorial/assets/1995599/a04df95f-5590-4bf1-968c-32cf494ece92)
