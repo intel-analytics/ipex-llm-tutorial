@@ -48,7 +48,7 @@ conda activate llm-finetune
 
 ### 7.0.4 Set OneAPI Environment Variables
 
-The following line can help you set OneAPI environment variables.
+You need to set OneAPI environment variables for BigDL-LLM on Intel GPUs.
 
 ```bash
 # configure OneAPI environment variables
