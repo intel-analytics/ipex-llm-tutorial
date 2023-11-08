@@ -116,6 +116,7 @@ with torch.inference_mode():
                             max_new_tokens=32)
 
     # 将预测的 token id 解码为输出字符串
+    output = output.cpu()
     output_str = tokenizer.decode(output[0], skip_special_tokens=True)
     
     print('-'*20, 'Output', '-'*20)
