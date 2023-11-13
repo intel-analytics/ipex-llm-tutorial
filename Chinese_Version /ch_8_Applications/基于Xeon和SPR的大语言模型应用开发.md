@@ -4,6 +4,10 @@
 UI跑在windows11 x86 CPU上或者Ubuntu CPU上，实现在6根16GB内存以上运行优化的Native INT4 大语言模型。
 以三个大语言模型为例，ChatGLM2 (6B)中英，LLaMA2 (13B)英。
 
+Note: 通常客户服务器出货系统，CPU的内存槽位不会插满，这种情况下必须要根据实际条数插到特定的槽位，否则会影响到系统稳定性与性能。以下是Eagle Stream内存插法示意图。
+![image](https://github.com/KiwiHana/bigdl-llm-tutorial/assets/102839943/a54c74cc-6581-4f9e-b2b4-3780bbcfe2a6)
+
+
 ## 1 安装环境
 （1）Windows11安装Miniconda3-py39_23.5.2-0-Windows-x86_64.exe，下载链接：
 https://docs.conda.io/en/latest/miniconda.html#windows-installers 
@@ -158,6 +162,8 @@ Output token: 32 tokens (31 runs = 32 tokens – 1st token)
 2nd+ token avg latency (ms/token) = 125.62 ms per token
 
 图1：llm-cli的输出
+![image](https://github.com/KiwiHana/bigdl-llm-tutorial/assets/102839943/5adf144a-5fc5-432f-b476-f26d341fbced)
+
 
 ## 4 用吐字的方式输出文本
 ### 4.1（推荐运行在CPU）：Native int4 for chatglm2，llama2和starcoder。
