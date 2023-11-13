@@ -48,34 +48,6 @@ n_threads=CPU大核数*2+小核数 -2
 
 不同设备可以尝试这3个参数，选择一个最优参数。
 
-对于Xeon，OMP_NUM_THREADS 和 n_threads是第一个socket的物理核数量。
-对于有2个socket的SPR，需要指定用第一个socket所有物理核进行推理。
-
-对于Ubuntu平台，假设SPR第一个socket有48个物理核。numactl -C 0-47 -m 0 $command
-```
-sudo apt install numactl
-conda create -n llm python=3.9
-conda activate llm
-pip install bigdl-llm[all]
-pip install bigdl-nano
-source bigdl-nano-init -c
-export OMP_NUM_THREADS=48
-$ numactl -C 0-47 -m 0 llm-cli -t 48 -x chatglm -m "./checkpoint/bigdl_llm_chatglm_q4_0.bin" -p "Once upon
-a time, there existed a little girl who liked to have adventures. She wanted to go to places and meet new
-people, and have fun" --no-mmap -v -n 32
-```
-
-对于windows平台，假设SPR第一个socket有48个物理核。start /node 0 $command
-```
-conda create -n llm python=3.9
-conda activate llm
-pip install bigdl-llm[all]
-pip install bigdl-nano
-> start /node 0 llm-cli -t 48 -x chatglm -m "./checkpoint/bigdl_llm_chatglm_q4_0.bin" -p "Once upon
-a time, there existed a little girl who liked to have adventures. She wanted to go to places and meet new
-people, and have fun" --no-mmap -v -n 32
-```
-
 （2）n_ctx=4096表示模型最长的输入+输出文本等于4096 tokens
 ```
 from bigdl.llm.ggml.model.chatglm.chatglm import ChatGLM
