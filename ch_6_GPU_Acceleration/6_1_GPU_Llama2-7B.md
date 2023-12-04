@@ -17,6 +17,13 @@ pip install bigdl-llm[xpu] -f https://developer.intel.com/ipex-whl-stable-xpu
 > **Note**
 > The above command will install `intel_extension_for_pytorch==2.0.110+xpu` as default
 
+It is also necessary to set OneAPI environment variables for BigDL-LLM on Intel GPUs.
+
+```bash
+# configure OneAPI environment variables
+source /opt/intel/oneapi/setvars.sh
+```
+
 ## 6.1.2 Import `intel_extension_for_pytorch`
 
 After installation, let's move to the Python scripts of this tutorial.

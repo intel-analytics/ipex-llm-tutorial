@@ -18,9 +18,18 @@ pip install accelerate==0.23.0
 > **Note**
 > The above command will install `intel_extension_for_pytorch==2.0.110+xpu` as default
 
-### 7.1.1.2 Import `intel_extension_for_pytorch`
+### 7.1.1.2 Set OneAPI Environment Variables
 
-After installation, let's move to the **Python scripts** of this tutorial. First of all you need to import `intel_extension_for_pytorch` first for using xpu device:
+It is also necessary to set OneAPI environment variables for BigDL-LLM on Intel GPUs.
+
+```bash
+# configure OneAPI environment variables
+source /opt/intel/oneapi/setvars.sh
+```
+
+### 7.1.1.3 Import `intel_extension_for_pytorch`
+
+After installation and environment setup, let's move to the **Python scripts** of this tutorial. First of all you need to import `intel_extension_for_pytorch` first for using xpu device:
 
 ```python
 import intel_extension_for_pytorch as ipex
