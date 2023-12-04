@@ -78,7 +78,7 @@ model_in_8bit_gpu = model_in_8bit.to('xpu')
 ```
 
 > **Note**
-> * Currently, BigDL-LLM on Intel GPUs has supports options `'sym_int4'`, `'asym_int4'`, `'sym_int5'`, `'asym_int5'` or `'sym_int8'`, in which 'sym' and 'asym' differentiate between symmetric and asymmetric quantization. Option `'nf4'` is also supported, referring to 4-bit NormalFloat.
+> * Currently, `load_in_low_bit` supports options `'sym_int4'`, `'asym_int4'`, `'sym_int5'`, `'asym_int5'` or `'sym_int8'`, in which 'sym' and 'asym' differentiate between symmetric and asymmetric quantization. `'nf3'` and `'nf4'` stand for normalFloat quantizations . Floating point precision `'fp4'`, `'fp8'`, `'fp16'`, `'mixed_fp4'` and `'mixed_fp8'` are also supported.
 >
 > * `load_in_4bit=True` is equivalent to `load_in_low_bit='sym_int4'`.
 
