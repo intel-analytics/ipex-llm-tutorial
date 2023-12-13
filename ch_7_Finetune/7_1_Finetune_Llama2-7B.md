@@ -141,7 +141,6 @@ trainer = transformers.Trainer(
 )
 model.config.use_cache = False  # silence the warnings, and we should re-enable it for inference
 result = trainer.train()
-print(result)
 ```
 We can get the following outputs showcasing our training loss:
 ```
@@ -159,7 +158,6 @@ We can get the following outputs showcasing our training loss:
 {'loss': 1.0081, 'learning_rate': 0.0, 'epoch': 0.32}                                                                
 {'train_runtime': xxx, 'train_samples_per_second': xxx, 'train_steps_per_second': xxx, 'train_loss': 1.1155566596984863, 'epoch': 0.32}
 100%|██████████████████████████████████████████████████████████████████████████████| 200/200 [xx:xx<xx:xx,  xxxs/it]
-TrainOutput(global_step=200, training_loss=1.1155566596984863, metrics={'train_runtime': xxx, 'train_samples_per_second': 2.802, 'train_steps_per_second': 0.7, 'train_loss': 1.1155566596984863, 'epoch': 0.32})
 ```
 The final LoRA weights and configurations have been saved to `${output_dir}/checkpoint-{max_steps}/adapter_model.bin` and `${output_dir}/checkpoint-{max_steps}/adapter_config.json`, which can be used for merging.
 
