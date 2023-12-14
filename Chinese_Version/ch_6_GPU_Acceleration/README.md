@@ -50,7 +50,7 @@ BigDL-LLM 借助低精度技术、现代硬件加速和最新的软件优化，�
 
 - 您还需要下载并安装[英特尔® oneAPI Base Toolkit](https://www.intel.com/content/www/us/en/developer/tools/oneapi/base-toolkit-download.html)。OneMKL 和 DPC++ 编译器是必选项，其他为可选项。
   > **注意**
-  > 使用默认 IPEX 版本（IPEX 2.0.110+xpu）的 BigDL-LLM 需要英特尔® oneAPI Base Toolkit 的版本 >= 2023.2.0。
+  > 使用默认 IPEX 版本（IPEX 2.0.110+xpu）的 BigDL-LLM 需要英特尔® oneAPI Base Toolkit 的版本 == 2023.2.0。
 
 <details><summary>对于在 Ubuntu 22.04 上使用英特尔锐炫™ A 系列显卡的客户端用户，也可参考以下命令安装驱动程序和 oneAPI Base Toolkit。详细命令：</summary>
 <br/>
