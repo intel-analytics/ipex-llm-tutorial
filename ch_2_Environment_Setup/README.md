@@ -6,7 +6,7 @@ This chapter presents a set of best practices for setting up your environment. T
 First of all, choose a proper system. Here's a list of recommended hardware and OS.
 >⚠️**Hardware**
 
-- PCs equipped with 12th Gen Intel® Core™ processor or higher, and at least 16GB RAM
+- Intel PCs, at least 16GB RAM.
 - Servers equipped with Intel® Xeon® processors, at least 32G RAM.
 
 >⚠️**Operating System**

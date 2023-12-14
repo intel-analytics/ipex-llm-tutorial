@@ -33,6 +33,7 @@ For a smooth experience with the notebooks in Chatper 7, please ensure your hard
 > ⚠️Hardware
   - Intel Arc™ A-Series Graphics
   - Intel Data Center GPU Flex Series
+  - Intel Data Center GPU Max Series
 
 > ⚠️Operating System
   - Linux system, Ubuntu 22.04 is preferred
@@ -50,7 +51,7 @@ Before benifiting from BigDL-LLM on Intel GPUs, there’re several steps for too
 
 - You also need to download and install [Intel® oneAPI Base Toolkit](https://www.intel.com/content/www/us/en/developer/tools/oneapi/base-toolkit-download.html). OneMKL and DPC++ compiler are needed, others are optional.
   > **Note**
-  > BigDL-LLM with default IPEX version (IPEX 2.0.110+xpu) requires Intel® oneAPI Base Toolkit's version >= 2023.2.0.
+  > BigDL-LLM with default IPEX version (IPEX 2.0.110+xpu) requires Intel® oneAPI Base Toolkit's version == 2023.2.0.
 
 <details><summary>For client users with Intel Arc™ A-Series Graphics on Unbuntu 22.04, you could also refer to the commands below for driver and oneAPI Base Toolkit installation. Show detailed commands:</summary>
 <br/>
