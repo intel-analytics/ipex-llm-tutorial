@@ -31,7 +31,7 @@ import intel_extension_for_pytorch as ipex
 
 ### 7.1.2.1 以低精度加载模型
 
-本教程选择流行的开源 LLM 模型 [meta-llama/Llama-2-7b-hf](https://huggingface.co/meta-llama/Llama-2-7b-hf)来说明模型微调的过程。
+本教程选择流行的开源 LLM 模型 [meta-llama/Llama-2-7b-hf](https://huggingface.co/meta-llama/Llama-2-7b-hf)来说明 QLoRA 模型微调的过程。
 
 > **注意**
 >
