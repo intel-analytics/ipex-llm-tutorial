@@ -33,6 +33,7 @@ For a smooth experience with the notebooks in Chatper 7, please ensure your hard
 > ⚠️Hardware
   - Intel Arc™ A-Series Graphics
   - Intel Data Center GPU Flex Series
+  - Intel Data Center GPU Max Series
 
 > ⚠️Operating System
   - Linux system, Ubuntu 22.04 is preferred
