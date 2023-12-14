@@ -141,7 +141,6 @@ trainer = transformers.Trainer(
 )
 model.config.use_cache = False  # 消除警告，进行推理时应重新启用
 result = trainer.train()
-print(result)
 ```
 我们可以获得以下输出来展示我们的训练损失：
 ```
@@ -159,7 +158,6 @@ print(result)
 {'loss': 1.0081, 'learning_rate': 0.0, 'epoch': 0.32}                                                                
 {'train_runtime': xxx, 'train_samples_per_second': xxx, 'train_steps_per_second': xxx, 'train_loss': 1.1155566596984863, 'epoch': 0.32}
 100%|██████████████████████████████████████████████████████████████████████████████| 200/200 [xx:xx<xx:xx,  xxxs/it]
-TrainOutput(global_step=200, training_loss=1.1155566596984863, metrics={'train_runtime': xxx, 'train_samples_per_second': 2.802, 'train_steps_per_second': 0.7, 'train_loss': 1.1155566596984863, 'epoch': 0.32})
 ```
 
 最终的 LoRA 模型权重和配置文件会保存到`${output_dir}/checkpoint-{max_steps}/adapter_model.bin`和`${output_dir}/checkpoint-{max_steps}/adapter_config.json`。
