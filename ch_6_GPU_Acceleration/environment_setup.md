@@ -16,7 +16,7 @@ sudo reboot
 # As 5.19's kernel doesn't has any arc graphic driver. The machine may not start the desktop correctly, but we can use the ssh to login. 
 # Or you can select 5.19's recovery mode in the grub, then choose resume to resume the normal boot directly.
 ```
-**Notice:  As 5.19's kernel doesn't has any arc graphic driver. The machine may not start the desktop correctly, but we can use the ssh to login. Or you can select 5.19's recovery mode in the grub, then choose resume to resume the normal boot directly.**  
+**Notice:  As 5.19's kernel doesn't has any arc graphic driver. The machine may not start the desktop correctly, but you can use the ssh to login. Or you can select 5.19's recovery mode in the grub, then choose resume to resume the normal boot directly.**  
 You can remove the 6.2.0 kernel if you don't need it. It's an optional step.
 ```bash 
 # remove latest kernel (optional)
