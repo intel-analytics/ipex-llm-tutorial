@@ -53,77 +53,7 @@ Before benifiting from BigDL-LLM on Intel GPUs, there’re several steps for too
   > **Note**
   > BigDL-LLM with default IPEX version (IPEX 2.0.110+xpu) requires Intel® oneAPI Base Toolkit's version == 2023.2.0.
 
-<details><summary>For client users with Intel Arc™ A-Series Graphics on Unbuntu 22.04, you could also refer to the commands below for driver and oneAPI Base Toolkit installation. Show detailed commands:</summary>
-<br/>
-
-```bash
-# Install Arc driver 
-sudo apt-get install -y gpg-agent wget
-
-wget -qO - https://repositories.intel.com/graphics/intel-graphics.key | \
-  sudo gpg --dearmor --output /usr/share/keyrings/intel-graphics.gpg
-
-echo 'deb [arch=amd64,i386 signed-by=/usr/share/keyrings/intel-graphics.gpg] https://repositories.intel.com/graphics/ubuntu jammy arc' | \
-  sudo tee  /etc/apt/sources.list.d/intel.gpu.jammy.list
-
-
-# Downgrade kernel
-sudo apt-get update && sudo apt-get install  -y --install-suggests  linux-image-5.19.0-41-generic
-
-sudo sed -i "s/GRUB_DEFAULT=.*/GRUB_DEFAULT=\"1> $(echo $(($(awk -F\' '/menuentry / {print $2}' /boot/grub/grub.cfg \
-| grep -no '5.19.0-41' | sed 's/:/\n/g' | head -n 1)-2)))\"/" /etc/default/grub
-
-sudo  update-grub
-
-sudo reboot
-
-# Remove latest kernel
-sudo apt purge linux-image-6.2.0-26-generic
-
-sudo apt autoremove
-
-sudo reboot
-
-# Install drivers
-sudo apt-get update
-
-sudo apt-get -y install \
-    gawk \
-    dkms \
-    linux-headers-$(uname -r) \
-    libc6-dev
-	
-sudo apt-get install -y intel-platform-vsec-dkms intel-platform-cse-dkms intel-i915-dkms intel-fw-gpu
-
-sudo apt-get install -y gawk libc6-dev udev\
-  intel-opencl-icd intel-level-zero-gpu level-zero \
-  intel-media-va-driver-non-free libmfx1 libmfxgen1 libvpl2 \
-  libegl-mesa0 libegl1-mesa libegl1-mesa-dev libgbm1 libgl1-mesa-dev libgl1-mesa-dri \
-  libglapi-mesa libgles2-mesa-dev libglx-mesa0 libigdgmm12 libxatracker2 mesa-va-drivers \
-  mesa-vdpau-drivers mesa-vulkan-drivers va-driver-all vainfo
-  
-sudo reboot
-
-# Configuring permissions
-sudo gpasswd -a ${USER} render
-
-newgrp render
-
-# Verify the device is working with i915 driver
-sudo apt-get install -y hwinfo
-hwinfo --display
-
-
-# Install one api
-wget -O- https://apt.repos.intel.com/intel-gpg-keys/GPG-PUB-KEY-INTEL-SW-PRODUCTS.PUB | gpg --dearmor | sudo tee /usr/share/keyrings/oneapi-archive-keyring.gpg > /dev/null
-
-echo "deb [signed-by=/usr/share/keyrings/oneapi-archive-keyring.gpg] https://apt.repos.intel.com/oneapi all main" | sudo tee /etc/apt/sources.list.d/oneAPI.list
-
-sudo apt update
-
-sudo apt install intel-basekit
-```
-</details>
+For client users with Intel Arc™ A-Series Graphics on Unbuntu 22.04, you could also refer to the commands below for driver and oneAPI Base Toolkit installation. See [environment setup page](environment_setup.md) for detailed commands:
 
 ### 6.0.3 Python Environment Setup
 
