@@ -17,6 +17,13 @@ pip install bigdl-llm[xpu] -f https://developer.intel.com/ipex-whl-stable-xpu
 > **Note**
 > The above command will install `intel_extension_for_pytorch==2.0.110+xpu` as default
 
+It is also required to set oneAPI environment variables for BigDL-LLM on Intel GPUs.
+
+```bash
+# configure oneAPI environment variables
+source /opt/intel/oneapi/setvars.sh
+```
+
 ## 6.1.2 Import `intel_extension_for_pytorch`
 
 After installation, let's move to the Python scripts of this tutorial.
@@ -78,7 +85,7 @@ model_in_8bit_gpu = model_in_8bit.to('xpu')
 ```
 
 > **Note**
-> * Currently, BigDL-LLM on Intel GPUs has supports options `'sym_int4'`, `'asym_int4'`, `'sym_int5'`, `'asym_int5'` or `'sym_int8'`, in which 'sym' and 'asym' differentiate between symmetric and asymmetric quantization. Option `'nf4'` is also supported, referring to 4-bit NormalFloat.
+> * Currently, `load_in_low_bit` supports options `'sym_int4'`, `'asym_int4'`, `'sym_int5'`, `'asym_int5'` or `'sym_int8'`, in which 'sym' and 'asym' differentiate between symmetric and asymmetric quantization. Option `'nf4'` is also supported, referring to 4-bit NormalFloat. Floating point precisions `'fp4'`, `'fp8'`, `'fp16'` and mixed precisions including `'mixed_fp4'` and `'mixed_fp8'` are also supported.
 >
 > * `load_in_4bit=True` is equivalent to `load_in_low_bit='sym_int4'`.
 

@@ -94,7 +94,7 @@ conda activate llm-tutorial-gpu
 For optimal performance on Intel GPUs, it is recommended to set several environment variables:
 
 ```bash
-# configure OneAPI environment variables
+# configure oneAPI environment variables
 source /opt/intel/oneapi/setvars.sh
 
 export USE_XETLA=OFF
