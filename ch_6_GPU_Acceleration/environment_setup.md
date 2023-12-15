@@ -72,16 +72,16 @@ wget -O- https://apt.repos.intel.com/intel-gpg-keys/GPG-PUB-KEY-INTEL-SW-PRODUCT
 echo "deb [signed-by=/usr/share/keyrings/oneapi-archive-keyring.gpg] https://apt.repos.intel.com/oneapi all main" | sudo tee /etc/apt/sources.list.d/oneAPI.list
 sudo apt update
 ```
-Torch 2.0 and Torch 2.1 need different oneapi version, so we need to install different OneAPI.  
-**Torch 2.1** wants the latest oneapi, you can install like this:
+Before you install OneAPI, please make sure with PyTorch version you want. PyTorch 2.0 and PyTorch 2.1 need different oneapi version, so we need to install different OneAPI for them.  
+**PyTorch 2.1** wants the latest oneapi, you can install like this:
 ```bash
 sudo apt install -y intel-basekit # for torch 2.1 and ipex 2.1
-# install bigdl
+# How to install bigdl-llm, please install conda first.
 conda create -n llm python=3.9
 conda activate llm
 pip install --pre --upgrade bigdl-llm[xpu_2.1] -f https://developer.intel.com/ipex-whl-stable-xpu
 ```
-**Torch 2.0** wants the latest oneapi, you can install like this:
+**PyTorch 2.0** wants the latest oneapi, you can install like this:
 ```
 sudo apt install -y intel-oneapi-common-vars=2023.2.0-49462 \
     intel-oneapi-compiler-cpp-eclipse-cfg=2023.2.0-49495 intel-oneapi-compiler-dpcpp-eclipse-cfg=2023.2.0-49495 \
@@ -92,7 +92,7 @@ sudo apt install -y intel-oneapi-common-vars=2023.2.0-49462 \
     intel-oneapi-tbb=2021.10.0-49541 intel-oneapi-tbb-devel=2021.10.0-49541\
     intel-oneapi-ccl=2021.10.0-49084 intel-oneapi-ccl-devel=2021.10.0-49084\
     intel-oneapi-dnnl-devel=2023.2.0-49516 intel-oneapi-dnnl=2023.2.0-49516
-# install bigdl
+# How to install bigdl-llm, please install conda first.
 conda create -n llm python=3.9
 conda activate llm
 pip install --pre --upgrade bigdl-llm[xpu] -f https://developer.intel.com/ipex-whl-stable-xpu
