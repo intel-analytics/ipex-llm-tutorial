@@ -19,11 +19,8 @@ sudo reboot
 You can remove the 6.2.0 kernel if you don't need it. It's an optional step.
 ```bash 
 # remove latest kernel (optional)
-
 sudo apt purge linux-image-6.2.0-*
-
 sudo apt autoremove
-
 sudo reboot
 ```
 
