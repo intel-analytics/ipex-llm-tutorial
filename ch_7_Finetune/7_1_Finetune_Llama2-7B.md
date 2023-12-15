@@ -9,7 +9,7 @@ To help you better understand the process of QLoRA Finetuning, in this tutorial,
 
 After following the steps in [Readme](./README.md#70-environment-setup)  to set up the environment, you can install BigDL-LLM in terminal with the command below:
 ```bash
-pip install bigdl-llm[xpu] -f https://developer.intel.com/ipex-whl-stable-xpu
+pip install --pre --upgrade bigdl-llm[xpu] -f https://developer.intel.com/ipex-whl-stable-xpu
 pip install transformers==4.34.0
 pip install peft==0.5.0
 pip install accelerate==0.23.0
@@ -44,10 +44,10 @@ For Intel GPUs, once you have the model in low precision, **set it to `to('xpu')
 
 ```python
 model = AutoModelForCausalLM.from_pretrained(pretrained_model_name_or_path = "meta-llama/Llama-2-7b-hf",
-                                            load_in_low_bit="nf4",
-                                            optimize_model=False,
-                                            torch_dtype=torch.float16,
-                                            modules_to_not_convert=["lm_head"])
+                                             load_in_low_bit="nf4",
+                                             optimize_model=False,
+                                             torch_dtype=torch.float16,
+                                             modules_to_not_convert=["lm_head"])
 model = model.to('xpu')
 
 ```
@@ -61,7 +61,7 @@ Then we apply `prepare_model_for_kbit_training` from `bigdl.llm.transformers.qlo
 
 ```python
 from bigdl.llm.transformers.qlora import prepare_model_for_kbit_training
-model.gradient_checkpointing_enable()
+model.gradient_checkpointing_enable() # can further reduce memory but slower
 model = prepare_model_for_kbit_training(model)
 ```
 
@@ -266,7 +266,7 @@ Then we can verify if the fine-tuned model can produce reasonable and philosophi
 ```python
 with torch.inference_mode():
     input_ids = tokenizer.encode('The paradox of time and eternity is', 
-    return_tensors="pt").to('xpu')
+                                  return_tensors="pt").to('xpu')
     output = model.generate(input_ids, max_new_tokens=32)
     output = output.cpu()
     output_str = tokenizer.decode(output[0], skip_special_tokens=True)
