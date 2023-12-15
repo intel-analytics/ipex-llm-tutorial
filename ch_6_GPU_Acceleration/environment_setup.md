@@ -71,7 +71,7 @@ wget -O- https://apt.repos.intel.com/intel-gpg-keys/GPG-PUB-KEY-INTEL-SW-PRODUCT
 echo "deb [signed-by=/usr/share/keyrings/oneapi-archive-keyring.gpg] https://apt.repos.intel.com/oneapi all main" | sudo tee /etc/apt/sources.list.d/oneAPI.list
 sudo apt update
 ```
-Torch 2.0 and Torch 2.1 need different oneapi version, so we need to install different OneAPI.
+Torch 2.0 and Torch 2.1 need different oneapi version, so we need to install different OneAPI.  
 **Torch 2.1** wants the latest oneapi, you can install like this:
 ```bash
 sudo apt install -y intel-basekit # for torch 2.1 and ipex 2.1
