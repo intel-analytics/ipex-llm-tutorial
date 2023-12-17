@@ -1,5 +1,6 @@
 ## Environment setup for Intel Arc GPU
 For Linux users, Ubuntu 22.04 and Linux kernel 5.19.0 is prefered. Ubuntu 22.04 and Linux kernel 5.19.0-41-generic is mostly used in our test environment. But default linux kernel of ubuntu 22.04.3 is 6.2.0-35-generic, so we recommonded you to downgrade kernel to 5.19.0-41-generic to archive the best performance. 
+
 ### 1. Downgrade kernels
 Here are the steps to downgrade your kernel:
 ```bash
@@ -16,7 +17,7 @@ sudo reboot
 # As 5.19's kernel doesn't has any arc graphic driver. The machine may not start the desktop correctly, but we can use the ssh to login. 
 # Or you can select 5.19's recovery mode in the grub, then choose resume to resume the normal boot directly.
 ```
-**Notice:  As 5.19's kernel doesn't has right Arc graphic driver. The machine may not start the desktop correctly, but you can use the ssh to login. Or you can select 5.19's recovery mode in the grub, then choose resume to resume the normal boot directly.**  
+**Notice:  As 5.19's kernel doesn't have right Arc graphic driver. The machine may not start the desktop correctly, but you can use the ssh to login. Or you can select 5.19's recovery mode in the grub, then choose resume to resume the normal boot directly.**  
 You can remove the 6.2.0 kernel if you don't need it. It's an optional step.
 ```bash 
 # remove latest kernel (optional)
@@ -65,15 +66,16 @@ sudo apt-get install -y hwinfo
 hwinfo --display
 ```
 
-### 3. Install OneAPI and BigDL
+### 3. Install oneAPI and BigDL
 ```
-# config OneAPI repository
+# config oneAPI repository
 wget -O- https://apt.repos.intel.com/intel-gpg-keys/GPG-PUB-KEY-INTEL-SW-PRODUCTS.PUB | gpg --dearmor | sudo tee /usr/share/keyrings/oneapi-archive-keyring.gpg > /dev/null
 echo "deb [signed-by=/usr/share/keyrings/oneapi-archive-keyring.gpg] https://apt.repos.intel.com/oneapi all main" | sudo tee /etc/apt/sources.list.d/oneAPI.list
 sudo apt update
 ```
-Before you install OneAPI, please make sure with PyTorch version you want. PyTorch 2.0 and PyTorch 2.1 need different oneapi version, so we need to install different OneAPI for them.  
-**PyTorch 2.1** wants the latest oneapi, you can install like this:
+Before you install oneAPI, please make sure which PyTorch version you use. PyTorch 2.0 and PyTorch 2.1 need different oneAPI versions, so we need to install different oneAPI for them.  
+
+**PyTorch 2.1** requires oneAPI=2024.0, you can install as follows:
 ```bash
 sudo apt install -y intel-basekit # for torch 2.1 and ipex 2.1
 # How to install bigdl-llm, please install conda first.
@@ -81,7 +83,8 @@ conda create -n llm python=3.9
 conda activate llm
 pip install --pre --upgrade bigdl-llm[xpu_2.1] -f https://developer.intel.com/ipex-whl-stable-xpu
 ```
-**PyTorch 2.0** wants the latest oneapi, you can install like this:
+
+**PyTorch 2.0** requires oneAPI=2023.2, you can install as follows:
 ```
 sudo apt install -y intel-oneapi-common-vars=2023.2.0-49462 \
     intel-oneapi-compiler-cpp-eclipse-cfg=2023.2.0-49495 intel-oneapi-compiler-dpcpp-eclipse-cfg=2023.2.0-49495 \
@@ -95,5 +98,7 @@ sudo apt install -y intel-oneapi-common-vars=2023.2.0-49462 \
 # How to install bigdl-llm, please install conda first.
 conda create -n llm python=3.9
 conda activate llm
-pip install --pre --upgrade bigdl-llm[xpu] -f https://developer.intel.com/ipex-whl-stable-xpu
+pip install --pre --upgrade bigdl-llm[xpu_2.0] -f https://developer.intel.com/ipex-whl-stable-xpu
 ```
+
+See the [GPU installation guide](https://bigdl.readthedocs.io/en/latest/doc/LLM/Overview/install_gpu.html) for mode details.
