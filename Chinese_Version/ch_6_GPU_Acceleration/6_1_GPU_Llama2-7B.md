@@ -24,7 +24,7 @@ pip install --pre --upgrade bigdl-llm[xpu] -f https://developer.intel.com/ipex-w
 source /opt/intel/oneapi/setvars.sh
 ```
 
-安装以及环境配置完成后，让我们进入本教程的 **Python 脚本**：
+安装以及环境配置完成后，让我们进入本教程的 **Python 脚本**。
 
 ## 6.1.2 (可选) 下载 Llama 2 (7B)
 

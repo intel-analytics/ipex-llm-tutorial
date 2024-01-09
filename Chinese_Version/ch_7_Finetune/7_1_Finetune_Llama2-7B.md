@@ -27,7 +27,7 @@ pip install accelerate==0.23.0
 source /opt/intel/oneapi/setvars.sh
 ```
 
-安装以及环境配置完成后，让我们进入本教程的 **Python 脚本**：
+安装以及环境配置完成后，让我们进入本教程的 **Python 脚本**。
 
 ## 7.1.2 QLoRA 微调
 
