@@ -11,11 +11,11 @@ First of all, install BigDL-LLM in your prepared environment. For best practices
 In terminal, run:
 
 ```bash
-pip install bigdl-llm[xpu] -f https://developer.intel.com/ipex-whl-stable-xpu
+pip install --pre --upgrade bigdl-llm[xpu] -f https://developer.intel.com/ipex-whl-stable-xpu
 ```
 
 > **Note**
-> If you didn't follow the installation guide above and are using an older version of `bigdl-llm` (specifically, older than `2.5.0b20240104`), you need to manually add `import intel_extension_for_pytorch as ipex` at the beginning of your code.
+> If you are using an older version of `bigdl-llm` (specifically, older than `2.5.0b20240104`), you need to manually add `import intel_extension_for_pytorch as ipex` at the beginning of your code.
 
 It is also required to set oneAPI environment variables for BigDL-LLM on Intel GPUs.
 
@@ -23,6 +23,8 @@ It is also required to set oneAPI environment variables for BigDL-LLM on Intel G
 # configure oneAPI environment variables
 source /opt/intel/oneapi/setvars.sh
 ```
+
+After installation and environment setup, let's move to the **Python scripts** of this tutorial.
 
 ## 6.1.2 (Optional) Download Llama 2 (7B)
 

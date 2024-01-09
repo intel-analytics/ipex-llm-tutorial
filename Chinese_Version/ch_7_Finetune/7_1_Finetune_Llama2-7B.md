@@ -16,7 +16,7 @@ pip install accelerate==0.23.0
 ```
 
 > **注意**
-> 如果您没有使用上面的安装方式，而是使用了旧版本的`bigdl-llm`(早于`2.5.0b20240104`版本)，您需要在代码开头手动导入`import intel_extension_for_pytorch as ipex`。
+> 如果您使用了旧版本的`bigdl-llm`(早于`2.5.0b20240104`版本)，您需要在代码开头手动导入`import intel_extension_for_pytorch as ipex`。
 
 ### 7.1.1.2 配置 oneAPI 环境变量
 
@@ -26,6 +26,8 @@ pip install accelerate==0.23.0
 # 配置 oneAPI 环境变量
 source /opt/intel/oneapi/setvars.sh
 ```
+
+安装以及环境配置完成后，让我们进入本教程的 **Python 脚本**：
 
 ## 7.1.2 QLoRA 微调
 

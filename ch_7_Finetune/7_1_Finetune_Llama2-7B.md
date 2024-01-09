@@ -7,7 +7,7 @@ To help you better understand the process of QLoRA Finetuning, in this tutorial,
 
 ### 7.1.1.1 Install BigDL-LLM on Intel GPUs
 
-After following the steps in [Readme](./README.md#70-environment-setup)  to set up the environment, you can install BigDL-LLM in terminal with the command below:
+After following the steps in [Readme](./README.md#70-environment-setup) to set up the environment, you can install BigDL-LLM in terminal with the command below:
 ```bash
 pip install --pre --upgrade bigdl-llm[xpu] -f https://developer.intel.com/ipex-whl-stable-xpu
 pip install transformers==4.34.0
@@ -16,7 +16,7 @@ pip install accelerate==0.23.0
 ```
 
 > **Note**
-> If you didn't follow the installation guide above and are using an older version of `bigdl-llm` (specifically, older than `2.5.0b20240104`), you need to manually add `import intel_extension_for_pytorch as ipex` at the beginning of your code.
+> If you are using an older version of `bigdl-llm` (specifically, older than `2.5.0b20240104`), you need to manually add `import intel_extension_for_pytorch as ipex` at the beginning of your code.
 
 ### 7.1.1.2 Set OneAPI Environment Variables
 
@@ -26,6 +26,8 @@ It is also necessary to set OneAPI environment variables for BigDL-LLM on Intel 
 # configure OneAPI environment variables
 source /opt/intel/oneapi/setvars.sh
 ```
+
+After installation and environment setup, let's move to the **Python scripts** of this tutorial.
 
 ## 7.1.2 QLoRA Finetuning
 
