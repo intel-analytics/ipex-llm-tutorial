@@ -14,7 +14,6 @@ We are going to train with a popular open source model [Llama-2-7b-hf](https://h
 
 ## 7.0 System Support
 
-### Linux: 
 **Hardware**:
 - Intel Arc™ A-Series Graphics
 - Intel Data Center GPU Flex Series

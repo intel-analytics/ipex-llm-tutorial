@@ -34,7 +34,7 @@ In Chapter 6, you will learn how to run LLMs, as well as implement stream chat f
 - Ubuntu 20.04 or later (Ubuntu 22.04 is preferred)
 
 ### 2. Windows
-For Windows, BigDL-LLM is verified for [HF-Transformers-AutoModels]([./HF-Transformers-AutoModels/](https://github.com/intel-analytics/BigDL/tree/1ba8d99956eace6f506037375f45b11f64dde7a6/python/llm/example/GPU/HF-Transformers-AutoModels)) and [PyTorch-Models]([./PyTorch-Models/](https://github.com/intel-analytics/BigDL/blob/1ba8d99956eace6f506037375f45b11f64dde7a6/python/llm/example/GPU/PyTorch-Models)) on Intel iGPU and dGPU.
+For Windows, BigDL-LLM is verified to accelerate models with both `AutoModel` APIs and `optimize_model` API on Intel iGPU and dGPU.
 
 **Hardware**:
 - Intel iGPU and dGPU
