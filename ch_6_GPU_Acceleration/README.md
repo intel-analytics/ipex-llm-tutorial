@@ -23,20 +23,24 @@ In Chapter 6, you will learn how to run LLMs, as well as implement stream chat f
 + [Llama2-7B](./6_1_GPU_Llama2-7B.md)
 
 
-## 6.0 System Recommendation
+## 6.0 System Support
+### 1. Linux: 
+**Hardware**:
+- Intel Arc™ A-Series Graphics
+- Intel Data Center GPU Flex Series
+- Intel Data Center GPU Max Series
 
-For a smooth experience with the notebooks in Chapter 7, please ensure your hardware and OS meet the following requirements:
+**Operating System**:
+- Ubuntu 20.04 or later (Ubuntu 22.04 is preferred)
 
-> ⚠️Hardware
-  - Intel Arc™ A-Series Graphics
-  - Intel Data Center GPU Flex Series
-  - Intel Data Center GPU Max Series
+### 2. Windows
+For Windows, BigDL-LLM is verified for [HF-Transformers-AutoModels]([./HF-Transformers-AutoModels/](https://github.com/intel-analytics/BigDL/tree/1ba8d99956eace6f506037375f45b11f64dde7a6/python/llm/example/GPU/HF-Transformers-AutoModels)) and [PyTorch-Models]([./PyTorch-Models/](https://github.com/intel-analytics/BigDL/blob/1ba8d99956eace6f506037375f45b11f64dde7a6/python/llm/example/GPU/PyTorch-Models)) on Intel iGPU and dGPU.
 
-> ⚠️Operating System
-  - Linux system, Ubuntu 22.04 is preferred
+**Hardware**:
+- Intel iGPU and dGPU
 
-    > **Note**
-    > Please note that only Linux OS has been supported for BigDL-LLM optimizations on Intel GPUs.
+**Operating System**:
+- Windows 10/11, with or without WSL 
 
 
 ## 6.1 Environment Setup

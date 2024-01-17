@@ -12,15 +12,16 @@ In Chapter 7, you will go through how to fine-tune a large language model to a t
 We are going to train with a popular open source model [Llama-2-7b-hf](https://huggingface.co/meta-llama/Llama-2-7b-hf) as an example.
 
 
-## 7.0 System Recommendation
+## 7.0 System Support
 
-> ⚠️Hardware
-  - Intel Arc™ A-Series Graphics
-  - Intel Data Center GPU Flex Series
-  - Intel Data Center GPU Max Series
+### Linux: 
+**Hardware**:
+- Intel Arc™ A-Series Graphics
+- Intel Data Center GPU Flex Series
+- Intel Data Center GPU Max Series
 
-> ⚠️Operating System
-  - Linux system, Ubuntu 22.04 is preferred
+**Operating System**:
+- Ubuntu 20.04 or later (Ubuntu 22.04 is preferred)
 
 
 ## 7.1 Environment Setup
