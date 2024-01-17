@@ -22,13 +22,10 @@ In Chapter 6, you will learn how to run LLMs, as well as implement stream chat f
 
 + [Llama2-7B](./6_1_GPU_Llama2-7B.md)
 
-## 6.0 Environment Setup
 
-Here are some best practices for setting up your environment. It is strongly recommended that you follow the corresponding steps below to configure your environment properly.
+## 6.0 System Recommendation
 
-### 6.0.1 System Recommendation
-
-For a smooth experience with the notebooks in Chatper 7, please ensure your hardware and OS meet the following requirements:
+For a smooth experience with the notebooks in Chapter 7, please ensure your hardware and OS meet the following requirements:
 
 > ⚠️Hardware
   - Intel Arc™ A-Series Graphics
@@ -41,62 +38,7 @@ For a smooth experience with the notebooks in Chatper 7, please ensure your hard
     > **Note**
     > Please note that only Linux OS has been supported for BigDL-LLM optimizations on Intel GPUs.
 
-### 6.0.2 Driver and Toolkit Installation
 
-Before benifiting from BigDL-LLM on Intel GPUs, there’re several steps for tools installation:
+## 6.1 Environment Setup
 
-- First you need to install Intel GPU driver. Please refer to our [driver installation](https://dgpu-docs.intel.com/driver/installation.html) for general purpose GPU capabilities.
-  > **Note**
-  > For BigDL-LLM with default IPEX version (IPEX 2.0.110+xpu), Intel GPU Driver version [Stable 647.21](https://dgpu-docs.intel.com/releases/stable_647_21_20230714.html) is required.
-
-- You also need to download and install [Intel® oneAPI Base Toolkit](https://www.intel.com/content/www/us/en/developer/tools/oneapi/base-toolkit-download.html). OneMKL and DPC++ compiler are needed, others are optional.
-  > **Note**
-  > BigDL-LLM with default IPEX version (IPEX 2.0.110+xpu) requires Intel® oneAPI Base Toolkit's version == 2023.2.0.
-
-For client users with Intel Arc™ A-Series Graphics on Unbuntu 22.04, you could also refer to the commands below for driver and oneAPI Base Toolkit installation. See [environment setup page](environment_setup.md) for detailed commands.
-
-### 6.0.3 Python Environment Setup
-
-Next, use a python environment management tool (we recommend using [Conda](https://docs.conda.io/projects/conda/en/stable/)) to create a python enviroment and install necessary libs.
-
-#### 6.0.3.1 Install Conda
-
-For Linux users, open a terminal and run below commands:
-
-```bash
-wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
-bash ./Miniconda3-latest-Linux-x86_64.sh
-conda init
-```
-
-> **Note**
-> Follow the instructions popped up on the console until conda initialization finished successfully.
-
-#### 6.0.3.2 Create Environment
-
-> **Note**
-> Python 3.9 is recommended for running BigDL-LLM.
-
-Create a Python 3.9 environment with the name you choose, for example `llm-tutorial-gpu`:
-
-```bash
-conda create -n llm-tutorial-gpu python=3.9
-```
-
-Then activate the environment `llm-tutorial-gpu`:
-
-```bash
-conda activate llm-tutorial-gpu
-```
-
-### 6.0.4 Best Known Configuration on Linux
-
-For optimal performance on Intel GPUs, it is recommended to set several environment variables:
-
-```bash
-# configure oneAPI environment variables
-source /opt/intel/oneapi/setvars.sh
-
-export USE_XETLA=OFF
-export SYCL_PI_LEVEL_ZERO_USE_IMMEDIATE_COMMANDLISTS=1
-```
+Please refer to the [GPU installation guide](https://bigdl.readthedocs.io/en/latest/doc/LLM/Overview/install_gpu.html) for mode details. It is strongly recommended that you follow the corresponding steps below to configure your environment properly.
