@@ -34,7 +34,6 @@ In Chapter 6, you will learn how to run LLMs, as well as implement stream chat f
 - Ubuntu 20.04 or later (Ubuntu 22.04 is preferred)
 
 ### 2. Windows
-For Windows, BigDL-LLM is verified to accelerate models with both `AutoModel` APIs and `optimize_model` API on Intel iGPU and dGPU.
 
 **Hardware**:
 - Intel iGPU and dGPU
