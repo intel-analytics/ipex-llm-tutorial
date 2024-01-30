@@ -1,5 +1,6 @@
 ## Environment setup for Intel Arc GPU
-For Linux users, Ubuntu 22.04 and Linux kernel 5.19.0 is prefered. Ubuntu 22.04 and Linux kernel 5.19.0-41-generic is mostly used in our test environment. But default linux kernel of ubuntu 22.04.3 is 6.2.0-35-generic, so we recommonded you to downgrade kernel to 5.19.0-41-generic to archive the best performance. 
+For Linux users, Ubuntu 22.04 and Linux kernel 5.19.0 are preferred. Ubuntu 22.04 and Linux kernel 5.19.0-41-generic are mostly used in our test environment. But the default Linux kernel of Ubuntu 22.04.3 is 6.2.0-35-generic, so we recommend you downgrade the kernel to 5.19.0-41-generic to achieve the best performance. Here is an introduction to several important steps, please refer to the [GPU installation guide](https://bigdl.readthedocs.io/en/latest/doc/LLM/Overview/install_gpu.html) for full instructions on environment setup.
+
 
 ### 1. Downgrade kernels
 Here are the steps to downgrade your kernel:
@@ -100,5 +101,3 @@ conda create -n llm python=3.9
 conda activate llm
 pip install --pre --upgrade bigdl-llm[xpu_2.0] -f https://developer.intel.com/ipex-whl-stable-xpu
 ```
-
-See the [GPU installation guide](https://bigdl.readthedocs.io/en/latest/doc/LLM/Overview/install_gpu.html) for mode details.

@@ -1,6 +1,6 @@
 # 6.1 Run Llama 2 (7B) on Intel GPUs
 
-You can use BigDL-LLM to load any Hugging Face *transformers* model for acceleration on Intel GPUs. With BigDL-LLM, PyTorch models (in FP16/BF16/FP32) hosted on Hugging Face can be loaded and optimized automatically on Intel GPUs with low-bit quantizations (supported precisions include INT4/NF4/INT5/INT8).
+You can use BigDL-LLM to load any Hugging Face *transformers* model for acceleration on Intel GPUs. With BigDL-LLM, PyTorch models (in FP16/BF16/FP32) hosted on Hugging Face can be loaded and optimized automatically on Intel GPUs with low-bit quantization (supported precisions include INT4/NF4/INT5/INT8).
 
 In this tutorial, you will learn how to run LLMs on Intel GPUs with BigDL-LLM optimizations, and based on that build a stream chatbot. A popular open-source LLM [meta-llama/Llama-2-7b-chat-hf](https://huggingface.co/meta-llama/Llama-2-7b-chat-hf) is used as an example.
 
@@ -55,6 +55,8 @@ For Intel GPUs, **once you have the model in low precision, set it to `to('xpu')
 ```python
 from bigdl.llm.transformers import AutoModelForCausalLM
 
+# When running LLMs on Intel iGPUs for Windows users, we recommend setting `cpu_embedding=True` in the from_pretrained function.
+# This will allow the memory-intensive embedding layer to utilize the CPU instead of iGPU.
 model_in_4bit = AutoModelForCausalLM.from_pretrained(pretrained_model_name_or_path="meta-llama/Llama-2-7b-chat-hf",
                                                      load_in_4bit=True)
 model_in_4bit_gpu = model_in_4bit.to('xpu')
@@ -68,7 +70,10 @@ model_in_4bit_gpu = model_in_4bit.to('xpu')
 **(Optional) For INT8 Optimizations (with `load_in_low_bit="sym_int8"`):**
 
 ```python
-# note that the AutoModelForCausalLM here is imported from bigdl.llm.transformers
+from bigdl.llm.transformers import AutoModelForCausalLM
+
+# When running LLMs on Intel iGPUs for Windows users, we recommend setting `cpu_embedding=True` in the from_pretrained function.
+# This will allow the memory-intensive embedding layer to utilize the CPU instead of iGPU.
 model_in_8bit = AutoModelForCausalLM.from_pretrained(
     pretrained_model_name_or_path="meta-llama/Llama-2-7b-chat-hf",
     load_in_low_bit="sym_int8"
@@ -127,7 +132,7 @@ with torch.inference_mode():
 
 ## 6.1.6 Stream Chat
 
-Now, let's build a stream chatbot that runs on Intel GPUs, allowing LLMs to engage in interactive conversations. Chatbot interaction is no magic - it still relies on the prediction and generation of next tokens by LLMs. To make LLMs chat, we need to properly format the prompts into a converation format, for example:
+Now, let's build a stream chatbot that runs on Intel GPUs, allowing LLMs to engage in interactive conversations. Chatbot interaction is no magic - it still relies on the prediction and generation of next tokens by LLMs. To make LLMs chat, we need to properly format the prompts into a conversation format, for example:
 
 ```
 <s>[INST] <<SYS>>
