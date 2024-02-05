@@ -5,7 +5,7 @@ As one of the advanced parameter-efficient fine-tuning (PEFT) techniques, QLoRA 
 
 > **Note**
 >
-> Currently, BigDL-LLM supports LoRA, QLoRA, ReLoRA, QA-LoRA finetuning on any [Hugging Face `transformers` models](https://huggingface.co/docs/transformers/index).
+> Currently, BigDL-LLM supports LoRA, QLoRA, ReLoRA, QA-LoRA and DPO finetuning.
 
 In Chapter 7, you will go through how to fine-tune a large language model to a text generation task using BigDL-LLM optimizations. BigDL-LLM has a comprehensive tool-set to help you fine-tune the model, merge the LoRA weights and inference with the fine-tuned model.
 

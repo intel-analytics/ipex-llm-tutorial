@@ -10,7 +10,7 @@ To help you better understand the process of QLoRA Finetuning, in this tutorial,
 After following the steps in [Readme](./README.md#70-environment-setup) to set up the environment, you can install BigDL-LLM in terminal with the command below:
 ```bash
 pip install --pre --upgrade bigdl-llm[xpu] -f https://developer.intel.com/ipex-whl-stable-xpu
-pip install transformers==4.34.0
+pip install transformers==4.34.0 datasets
 pip install peft==0.5.0
 pip install accelerate==0.23.0
 ```
@@ -46,6 +46,7 @@ With BigDL-LLM optimization, you can load the model with `bigdl.llm.transformers
 For Intel GPUs, once you have the model in low precision, **set it to `to('xpu')`**.
 
 ```python
+from bigdl.llm.transformers import AutoModelForCausalLM
 model = AutoModelForCausalLM.from_pretrained(pretrained_model_name_or_path = "meta-llama/Llama-2-7b-hf",
                                              load_in_low_bit="nf4",
                                              optimize_model=False,
@@ -64,7 +65,7 @@ Then we apply `prepare_model_for_kbit_training` from `bigdl.llm.transformers.qlo
 
 ```python
 from bigdl.llm.transformers.qlora import prepare_model_for_kbit_training
-model.gradient_checkpointing_enable() # can further reduce memory but slower
+# model.gradient_checkpointing_enable() # can further reduce memory but slower
 model = prepare_model_for_kbit_training(model)
 ```
 
@@ -175,6 +176,7 @@ After finetuning the model, you could merge the QLoRA weights back into the base
 ### 7.1.3.1 Load Pre-trained Model
 
 ```python
+from bigdl.llm.transformers import AutoModelForCausalLM
 base_model = AutoModelForCausalLM.from_pretrained(
         base_model,
         torch_dtype=torch.float16,
