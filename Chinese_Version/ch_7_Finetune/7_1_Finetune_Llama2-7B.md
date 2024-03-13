@@ -234,7 +234,7 @@ Using pad_token, but it is not set yet.
 最后，我们可以将合并的模型保存在指定的本地路径中（在我们的例子中是`./outputs/checkpoint-200-merged`）。
 
 ```python
-output_path = ./outputs/checkpoint-200-merged
+output_path = "./outputs/checkpoint-200-merged"
 lora_model_sd = lora_model.state_dict()
 deloreanized_sd = {
         k.replace("base_model.model.", ""): v
