@@ -45,6 +45,7 @@ source /opt/intel/oneapi/setvars.sh
 对于英特尔 GPU，您应在`from_pretrained`函数中特别设置 `optimize_model=False`。一旦获得低精度模型，请将其设置为`to('xpu')`。
 
 ```python
+import torch
 model = AutoModelForCausalLM.from_pretrained(pretrained_model_name_or_path = "meta-llama/Llama-2-7b-hf",
                                              load_in_low_bit="nf4",
                                              optimize_model=False,
@@ -89,21 +90,7 @@ model = get_peft_model(model, config)
 >
 > 有关 LoraConfig 参数的更多说明可以在 [Transformer LoRA 指南](https://huggingface.co/docs/peft/conceptual_guides/lora#common-lora-parameters-in-peft)中查看。
 
-### 7.1.2.3 加载数据集
-
-我们加载通用数据集 [english quotes](https://huggingface.co/datasets/Abirate/english_quotes) 来根据英语名言来微调我们的模型。
-
-```python
-from datasets import load_dataset
-data = load_dataset("Abirate/english_quotes")
-data = data.map(lambda samples: tokenizer(samples["quote"]), batched=True)
-```
-
-> **注意**
->
-> 如果您已经从 [Abirate/english_quotes](https://huggingface.co/datasets/Abirate/english_quotes/blob/main/quotes.jsonl) 下载了 `.jsonl` 文件，您可以使用 `data = load_dataset( "json", data_files= "path/to/your/.jsonl/file")` 指定本地路径，以替代从 huggingface repo id 的加载方法 `data = load_dataset("Abirate/english_quotes")`。
-
-### 7.1.2.4 加载Tokenizer
+### 7.1.2.3 加载Tokenizer
 
 分词器可以在 LLM 训练和推理中实现分词和去分词过程。您可以使用 [Huggingface Transformers](https://huggingface.co/docs/transformers/index) API来加载 LLM 推理需要的分词器，它可以与 BigDL-LLM 加载的模型无缝配合使用。对于Llama 2，对应的tokenizer类为`LlamaTokenizer`。
 
@@ -117,6 +104,20 @@ tokenizer.padding_side = "left"
 > **注意**
 >
 > 如果您已经下载了 Llama 2 (7B) 模型，您可以将 `pretrained_model_name_or_path` 指定为本地模型路径。
+
+### 7.1.2.4 加载数据集
+
+我们加载通用数据集 [english quotes](https://huggingface.co/datasets/Abirate/english_quotes) 来根据英语名言来微调我们的模型。
+
+```python
+from datasets import load_dataset
+data = load_dataset("Abirate/english_quotes")
+data = data.map(lambda samples: tokenizer(samples["quote"]), batched=True)
+```
+
+> **注意**
+>
+> 如果您已经从 [Abirate/english_quotes](https://huggingface.co/datasets/Abirate/english_quotes/blob/main/quotes.jsonl) 下载了 `.jsonl` 文件，您可以使用 `data = load_dataset( "json", data_files= "path/to/your/.jsonl/file")` 指定本地路径，以替代从 huggingface repo id 的加载方法 `data = load_dataset("Abirate/english_quotes")`。
 
 ### 7.1.2.5 进行训练
 
@@ -175,8 +176,10 @@ result = trainer.train()
 ### 7.1.3.1 加载预训练模型
 
 ```python
+from bigdl.llm.transformers import AutoModelForCausalLM
+base_model_path = "meta-llama/Llama-2-7b-hf"
 base_model = AutoModelForCausalLM.from_pretrained(
-        base_model,
+        base_model_path,
         torch_dtype=torch.float16,
         device_map={"": "cpu"},
     )
@@ -234,7 +237,7 @@ Using pad_token, but it is not set yet.
 最后，我们可以将合并的模型保存在指定的本地路径中（在我们的例子中是`./outputs/checkpoint-200-merged`）。
 
 ```python
-output_path = ./outputs/checkpoint-200-merged
+output_path = "./outputs/checkpoint-200-merged"
 lora_model_sd = lora_model.state_dict()
 deloreanized_sd = {
         k.replace("base_model.model.", ""): v
