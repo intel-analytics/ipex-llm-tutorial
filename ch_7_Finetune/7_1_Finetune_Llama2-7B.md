@@ -178,8 +178,9 @@ After finetuning the model, you could merge the QLoRA weights back into the base
 
 ```python
 from bigdl.llm.transformers import AutoModelForCausalLM
+base_model_path = "meta-llama/Llama-2-7b-hf"
 base_model = AutoModelForCausalLM.from_pretrained(
-        base_model,
+        base_model_path,
         torch_dtype=torch.float16,
         device_map={"": "cpu"},
     )
@@ -239,7 +240,7 @@ Using pad_token, but it is not set yet.
 ```
 Finally we can save the fine-tuned model in a specified local path (in our case is `./outputs/checkpoint-200-merged`).
 ```python
-output_path = ./outputs/checkpoint-200-merged
+output_path = "./outputs/checkpoint-200-merged"
 lora_model_sd = lora_model.state_dict()
 deloreanized_sd = {
         k.replace("base_model.model.", ""): v
