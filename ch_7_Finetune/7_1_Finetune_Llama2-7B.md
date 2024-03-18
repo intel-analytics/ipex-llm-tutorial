@@ -46,6 +46,7 @@ With BigDL-LLM optimization, you can load the model with `bigdl.llm.transformers
 For Intel GPUs, once you have the model in low precision, **set it to `to('xpu')`**.
 
 ```python
+import torch
 from bigdl.llm.transformers import AutoModelForCausalLM
 model = AutoModelForCausalLM.from_pretrained(pretrained_model_name_or_path = "meta-llama/Llama-2-7b-hf",
                                              load_in_low_bit="nf4",
@@ -93,7 +94,20 @@ model = get_peft_model(model, config)
 > More explanation about `LoraConfig` parameters can be found in [Transformer LoRA Guides](https://huggingface.co/docs/peft/conceptual_guides/lora#common-lora-parameters-in-peft).
 >
 
-### 7.1.2.3 Load Dataset
+### 7.1.2.3 Load Tokenizer
+A tokenizer enables tokenizing and detokenizing process in LLM training and inference. You can use [Huggingface transformers](https://huggingface.co/docs/transformers/index) API to load the tokenizer directly. It can be used seamlessly with models loaded by BigDL-LLM. For Llama 2, the corresponding tokenizer class is `LlamaTokenizer`.
+
+```python
+from transformers import LlamaTokenizer
+tokenizer = LlamaTokenizer.from_pretrained(pretrained_model_name_or_path="meta-llama/Llama-2-7b-chat-hf", trust_remote_code=True)
+tokenizer.pad_token_id = 0
+tokenizer.padding_side = "left"
+```
+> **Note**
+>
+> If you have already downloaded the Llama 2 (7B) model, you could specify `pretrained_model_name_or_path` to the local model path.
+
+### 7.1.2.4 Load Dataset
 
 A common dataset, [english quotes](https://huggingface.co/datasets/Abirate/english_quotes), is loaded to fine tune our model on famous quotes.
 ```python
@@ -106,19 +120,6 @@ data = data.map(lambda samples: tokenizer(samples["quote"]), batched=True)
 >
 > The dataset path here is default to be Huggingface repo id. 
 > If you have already downloaded the `.jsonl` file from [Abirate/english_quotes](https://huggingface.co/datasets/Abirate/english_quotes/blob/main/quotes.jsonl), you could use `data = load_dataset("json", data_files= "path/to/your/.jsonl/file")` to specify the local path instead of `data = load_dataset("Abirate/english_quotes")`.
-
-### 7.1.2.4 Load Tokenizer
-A tokenizer enables tokenizing and detokenizing process in LLM training and inference. You can use [Huggingface transformers](https://huggingface.co/docs/transformers/index) API to load the tokenizer directly. It can be used seamlessly with models loaded by BigDL-LLM. For Llama 2, the corresponding tokenizer class is `LlamaTokenizer`.
-
-```python
-from transformers import LlamaTokenizer
-tokenizer = LlamaTokenizer.from_pretrained(pretrained_model_name_or_path="meta-llama/Llama-2-7b-chat-hf", trust_remote_code=True)
-tokenizer.pad_token_id = 0
-tokenizer.padding_side = "left"
-```
-> **Note**
->
-> If you have already downloaded the Llama 2 (7B) model, you could specify `pretrained_model_name_or_path` to the local model path.
 
 ### 7.1.2.5 Run the Training
 
