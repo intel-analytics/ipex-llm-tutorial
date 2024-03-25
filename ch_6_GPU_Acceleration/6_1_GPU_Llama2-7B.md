@@ -1,23 +1,23 @@
 # 6.1 Run Llama 2 (7B) on Intel GPUs
 
-You can use BigDL-LLM to load any Hugging Face *transformers* model for acceleration on Intel GPUs. With BigDL-LLM, PyTorch models (in FP16/BF16/FP32) hosted on Hugging Face can be loaded and optimized automatically on Intel GPUs with low-bit quantization (supported precisions include INT4/NF4/INT5/INT8).
+You can use IPEX-LLM to load any Hugging Face *transformers* model for acceleration on Intel GPUs. With IPEX-LLM, PyTorch models (in FP16/BF16/FP32) hosted on Hugging Face can be loaded and optimized automatically on Intel GPUs with low-bit quantization (supported precisions include INT4/NF4/INT5/INT8).
 
-In this tutorial, you will learn how to run LLMs on Intel GPUs with BigDL-LLM optimizations, and based on that build a stream chatbot. A popular open-source LLM [meta-llama/Llama-2-7b-chat-hf](https://huggingface.co/meta-llama/Llama-2-7b-chat-hf) is used as an example.
+In this tutorial, you will learn how to run LLMs on Intel GPUs with IPEX-LLM optimizations, and based on that build a stream chatbot. A popular open-source LLM [meta-llama/Llama-2-7b-chat-hf](https://huggingface.co/meta-llama/Llama-2-7b-chat-hf) is used as an example.
 
-## 6.1.1 Install BigDL-LLM on Intel GPUs
+## 6.1.1 Install IPEX-LLM on Intel GPUs
 
-First of all, install BigDL-LLM in your prepared environment. For best practices of environment setup on Intel GPUs, refer to the [README](./README.md#70-environment-setup) in this chapter.
+First of all, install IPEX-LLM in your prepared environment. For best practices of environment setup on Intel GPUs, refer to the [README](./README.md#70-environment-setup) in this chapter.
 
 In terminal, run:
 
 ```bash
-pip install --pre --upgrade bigdl-llm[xpu] -f https://developer.intel.com/ipex-whl-stable-xpu
+pip install --pre --upgrade ipex-llm[xpu] -f https://developer.intel.com/ipex-whl-stable-xpu
 ```
 
 > **Note**
-> If you are using an older version of `bigdl-llm` (specifically, older than `2.5.0b20240104`), you need to manually add `import intel_extension_for_pytorch as ipex` at the beginning of your code.
+> If you are using an older version of `ipex-llm` (specifically, older than `2.5.0b20240104`), you need to manually add `import intel_extension_for_pytorch as ipex` at the beginning of your code.
 
-It is also required to set oneAPI environment variables for BigDL-LLM on Intel GPUs.
+It is also required to set oneAPI environment variables for IPEX-LLM on Intel GPUs.
 
 ```bash
 # configure oneAPI environment variables
@@ -46,14 +46,14 @@ model_path = snapshot_download(repo_id='meta-llama/Llama-2-7b-chat-hf',
 
 One common use case is to load a Hugging Face *transformers* model in low precision, i.e. conduct **implicit** quantization while loading.
 
-For Llama 2 (7B), you could simply import `bigdl.llm.transformers.AutoModelForCausalLM` instead of `transformers.AutoModelForCausalLM`, and specify `load_in_4bit=True` or `load_in_low_bit` parameter accordingly in the `from_pretrained` function.
+For Llama 2 (7B), you could simply import `ipex_llm.transformers.AutoModelForCausalLM` instead of `transformers.AutoModelForCausalLM`, and specify `load_in_4bit=True` or `load_in_low_bit` parameter accordingly in the `from_pretrained` function.
 
 For Intel GPUs, **once you have the model in low precision, set it to `to('xpu')`.**
 
 **For INT4 Optimizations (with `load_in_4bit=True`):**
 
 ```python
-from bigdl.llm.transformers import AutoModelForCausalLM
+from ipex_llm.transformers import AutoModelForCausalLM
 
 # When running LLMs on Intel iGPUs for Windows users, we recommend setting `cpu_embedding=True` in the from_pretrained function.
 # This will allow the memory-intensive embedding layer to utilize the CPU instead of iGPU.
@@ -63,14 +63,14 @@ model_in_4bit_gpu = model_in_4bit.to('xpu')
 ```
 
 > **Note**
-> BigDL-LLM has supported `AutoModel`, `AutoModelForCausalLM`, `AutoModelForSpeechSeq2Seq` and `AutoModelForSeq2SeqLM`.
+> IPEX-LLM has supported `AutoModel`, `AutoModelForCausalLM`, `AutoModelForSpeechSeq2Seq` and `AutoModelForSeq2SeqLM`.
 >
 > If you have already downloaded the Llama 2 (7B) model and skipped step [7.1.2.2](#712-optional-download-llama-2-7b), you could specify `pretrained_model_name_or_path` to the model path.
 
 **(Optional) For INT8 Optimizations (with `load_in_low_bit="sym_int8"`):**
 
 ```python
-from bigdl.llm.transformers import AutoModelForCausalLM
+from ipex_llm.transformers import AutoModelForCausalLM
 
 # When running LLMs on Intel iGPUs for Windows users, we recommend setting `cpu_embedding=True` in the from_pretrained function.
 # This will allow the memory-intensive embedding layer to utilize the CPU instead of iGPU.
@@ -88,7 +88,7 @@ model_in_8bit_gpu = model_in_8bit.to('xpu')
 
 ## 6.1.4 Load Tokenizer 
 
-A tokenizer is also needed for LLM inference. You can use [Huggingface transformers](https://huggingface.co/docs/transformers/index) API to load the tokenizer directly. It can be used seamlessly with models loaded by BigDL-LLM. For Llama 2, the corresponding tokenizer class is `LlamaTokenizer`.
+A tokenizer is also needed for LLM inference. You can use [Huggingface transformers](https://huggingface.co/docs/transformers/index) API to load the tokenizer directly. It can be used seamlessly with models loaded by IPEX-LLM. For Llama 2, the corresponding tokenizer class is `LlamaTokenizer`.
 
 ```python
 from transformers import LlamaTokenizer
@@ -101,7 +101,7 @@ tokenizer = LlamaTokenizer.from_pretrained(pretrained_model_name_or_path="meta-l
 
 ## 6.1.5 Run Model
 
-You can then do model inference with BigDL-LLM optimizations on Intel GPUs almostly the same way as using official `transformers` API. **The only difference is to set `to('xpu')` for token ids**. A Q&A dialog template is created for the model to complete.
+You can then do model inference with IPEX-LLM optimizations on Intel GPUs almostly the same way as using official `transformers` API. **The only difference is to set `to('xpu')` for token ids**. A Q&A dialog template is created for the model to complete.
 
 ```python
 import torch
@@ -152,7 +152,7 @@ You are a helpful, respectful and honest assistant, who always answers as helpfu
 What is AI? [/INST] AI is a term used to describe the development of computer systems that can perform tasks that typically require human intelligence, such as understanding natural language, recognizing images. </s><s> [INST] Is it dangerous? [INST]
 ```
 
-Here we show a multi-turn chat example with stream capability on BigDL-LLM optimized Llama 2 (7B) model. 
+Here we show a multi-turn chat example with stream capability on IPEX-LLM optimized Llama 2 (7B) model. 
 
 First, define the conversation context format[^1] for the model to complete:
 

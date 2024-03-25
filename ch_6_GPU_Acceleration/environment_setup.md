@@ -1,5 +1,5 @@
 ## Environment setup for Intel Arc GPU
-For Linux users, Ubuntu 22.04 and Linux kernel 5.19.0 are preferred. Ubuntu 22.04 and Linux kernel 5.19.0-41-generic are mostly used in our test environment. But the default Linux kernel of Ubuntu 22.04.3 is 6.2.0-35-generic, so we recommend you downgrade the kernel to 5.19.0-41-generic to achieve the best performance. Here is an introduction to several important steps, please refer to the [GPU installation guide](https://bigdl.readthedocs.io/en/latest/doc/LLM/Overview/install_gpu.html) for full instructions on environment setup.
+For Linux users, Ubuntu 22.04 and Linux kernel 5.19.0 are preferred. Ubuntu 22.04 and Linux kernel 5.19.0-41-generic are mostly used in our test environment. But the default Linux kernel of Ubuntu 22.04.3 is 6.2.0-35-generic, so we recommend you downgrade the kernel to 5.19.0-41-generic to achieve the best performance. Here is an introduction to several important steps, please refer to the [GPU installation guide](https://ipex-llm.readthedocs.io/en/latest/doc/LLM/Overview/install_gpu.html) for full instructions on environment setup.
 
 
 ### 1. Downgrade kernels
@@ -67,7 +67,7 @@ sudo apt-get install -y hwinfo
 hwinfo --display
 ```
 
-### 3. Install oneAPI and BigDL
+### 3. Install oneAPI and IPEX-LLM
 ```
 # config oneAPI repository
 wget -O- https://apt.repos.intel.com/intel-gpg-keys/GPG-PUB-KEY-INTEL-SW-PRODUCTS.PUB | gpg --dearmor | sudo tee /usr/share/keyrings/oneapi-archive-keyring.gpg > /dev/null
@@ -79,10 +79,10 @@ Before you install oneAPI, please make sure which PyTorch version you use. PyTor
 **PyTorch 2.1** requires oneAPI=2024.0, you can install as follows:
 ```bash
 sudo apt install -y intel-basekit # for torch 2.1 and ipex 2.1
-# How to install bigdl-llm, please install conda first.
+# How to install ipex-llm, please install conda first.
 conda create -n llm python=3.9
 conda activate llm
-pip install --pre --upgrade bigdl-llm[xpu_2.1] -f https://developer.intel.com/ipex-whl-stable-xpu
+pip install --pre --upgrade ipex-llm[xpu_2.1] -f https://developer.intel.com/ipex-whl-stable-xpu
 ```
 
 **PyTorch 2.0** requires oneAPI=2023.2, you can install as follows:
@@ -96,8 +96,8 @@ sudo apt install -y intel-oneapi-common-vars=2023.2.0-49462 \
     intel-oneapi-tbb=2021.10.0-49541 intel-oneapi-tbb-devel=2021.10.0-49541\
     intel-oneapi-ccl=2021.10.0-49084 intel-oneapi-ccl-devel=2021.10.0-49084\
     intel-oneapi-dnnl-devel=2023.2.0-49516 intel-oneapi-dnnl=2023.2.0-49516
-# How to install bigdl-llm, please install conda first.
+# How to install ipex-llm, please install conda first.
 conda create -n llm python=3.9
 conda activate llm
-pip install --pre --upgrade bigdl-llm[xpu_2.0] -f https://developer.intel.com/ipex-whl-stable-xpu
+pip install --pre --upgrade ipex-llm[xpu_2.0] -f https://developer.intel.com/ipex-whl-stable-xpu
 ```
