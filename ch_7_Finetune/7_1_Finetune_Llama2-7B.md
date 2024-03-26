@@ -1,26 +1,26 @@
 
 # 7.1 Finetuning Llama 2 (7B) using QLoRA
 
-To help you better understand the process of QLoRA Finetuning, in this tutorial, we provide a practical guide leveraging BigDL-LLM to tune a large language model to a specific task.  [Llama-2-7b-hf](https://huggingface.co/meta-llama/Llama-2-7b-hf) is used as an example here to adapt the text generation implementation.
+To help you better understand the process of QLoRA Finetuning, in this tutorial, we provide a practical guide leveraging IPEX-LLM to tune a large language model to a specific task.  [Llama-2-7b-hf](https://huggingface.co/meta-llama/Llama-2-7b-hf) is used as an example here to adapt the text generation implementation.
 
-## 7.1.1 Enable BigDL-LLM on Intel GPUs
+## 7.1.1 Enable IPEX-LLM on Intel GPUs
 
-### 7.1.1.1 Install BigDL-LLM on Intel GPUs
+### 7.1.1.1 Install IPEX-LLM on Intel GPUs
 
-After following the steps in [Readme](./README.md#70-environment-setup) to set up the environment, you can install BigDL-LLM in terminal with the command below:
+After following the steps in [Readme](./README.md#70-environment-setup) to set up the environment, you can install IPEX-LLM in terminal with the command below:
 ```bash
-pip install --pre --upgrade bigdl-llm[xpu] -f https://developer.intel.com/ipex-whl-stable-xpu
+pip install --pre --upgrade ipex-llm[xpu] -f https://developer.intel.com/ipex-whl-stable-xpu
 pip install transformers==4.34.0 datasets
 pip install peft==0.5.0
 pip install accelerate==0.23.0
 ```
 
 > **Note**
-> If you are using an older version of `bigdl-llm` (specifically, older than `2.5.0b20240104`), you need to manually add `import intel_extension_for_pytorch as ipex` at the beginning of your code.
+> If you are using an older version of `ipex-llm` (specifically, older than `2.5.0b20240104`), you need to manually add `import intel_extension_for_pytorch as ipex` at the beginning of your code.
 
 ### 7.1.1.2 Set OneAPI Environment Variables
 
-It is also necessary to set OneAPI environment variables for BigDL-LLM on Intel GPUs.
+It is also necessary to set OneAPI environment variables for IPEX-LLM on Intel GPUs.
 
 ```bash
 # configure OneAPI environment variables
@@ -41,12 +41,12 @@ A popular open-source LLM [meta-llama/Llama-2-7b-hf](https://huggingface.co/meta
 > You can specify the argument `pretrained_model_name_or_path` with both Huggingface repo id or local model path.
 > If you have already downloaded the Llama 2 (7B) model, you could specify `pretrained_model_name_or_path` to the local model path.
 
-With BigDL-LLM optimization, you can load the model with `bigdl.llm.transformers.AutoModelForCausalLM` instead of `transformers.AutoModelForCausalLM` to conduct implicit quantization.
+With IPEX-LLM optimization, you can load the model with `ipex_llm.transformers.AutoModelForCausalLM` instead of `transformers.AutoModelForCausalLM` to conduct implicit quantization.
 
 For Intel GPUs, once you have the model in low precision, **set it to `to('xpu')`**.
 
 ```python
-from bigdl.llm.transformers import AutoModelForCausalLM
+from ipex_llm.transformers import AutoModelForCausalLM
 model = AutoModelForCausalLM.from_pretrained(pretrained_model_name_or_path = "meta-llama/Llama-2-7b-hf",
                                              load_in_low_bit="nf4",
                                              optimize_model=False,
@@ -61,10 +61,10 @@ model = model.to('xpu')
 > We specify load_in_low_bit="nf4" here to apply 4-bit NormalFloat optimization. According to the [QLoRA paper](https://arxiv.org/pdf/2305.14314.pdf), using "nf4" could yield better model quality than "int4".
 
 ### 7.1.2.2 Prepare Model for Training
-Then we apply `prepare_model_for_kbit_training` from `bigdl.llm.transformers.qlora` to preprocess the model for training. 
+Then we apply `prepare_model_for_kbit_training` from `ipex_llm.transformers.qlora` to preprocess the model for training. 
 
 ```python
-from bigdl.llm.transformers.qlora import prepare_model_for_kbit_training
+from ipex_llm.transformers.qlora import prepare_model_for_kbit_training
 # model.gradient_checkpointing_enable() # can further reduce memory but slower
 model = prepare_model_for_kbit_training(model)
 ```
@@ -72,7 +72,7 @@ model = prepare_model_for_kbit_training(model)
 Next, we can obtain a PEFT model from the optimized model and a configuration object containing the parameters as follows:  
 
 ```python
-from bigdl.llm.transformers.qlora import get_peft_model
+from ipex_llm.transformers.qlora import get_peft_model
 from peft import LoraConfig
 
 config = LoraConfig(r=8, 
@@ -86,7 +86,7 @@ model = get_peft_model(model, config)
 ```
 > **Note**
 >
-> Instead of `from peft import prepare_model_for_kbit_training, get_peft_model` as we did for regular QLoRA using bitandbytes and cuda, we import them from `bigdl.llm.transformers.qlora` here to get a BigDL-LLM compatible PEFT model. And the rest is just the same as regular LoRA finetuning process using `peft`.
+> Instead of `from peft import prepare_model_for_kbit_training, get_peft_model` as we did for regular QLoRA using bitandbytes and cuda, we import them from `ipex_llm.transformers.qlora` here to get a IPEX-LLM compatible PEFT model. And the rest is just the same as regular LoRA finetuning process using `peft`.
 >
 > **Note**
 >
@@ -108,7 +108,7 @@ data = data.map(lambda samples: tokenizer(samples["quote"]), batched=True)
 > If you have already downloaded the `.jsonl` file from [Abirate/english_quotes](https://huggingface.co/datasets/Abirate/english_quotes/blob/main/quotes.jsonl), you could use `data = load_dataset("json", data_files= "path/to/your/.jsonl/file")` to specify the local path instead of `data = load_dataset("Abirate/english_quotes")`.
 
 ### 7.1.2.4 Load Tokenizer
-A tokenizer enables tokenizing and detokenizing process in LLM training and inference. You can use [Huggingface transformers](https://huggingface.co/docs/transformers/index) API to load the tokenizer directly. It can be used seamlessly with models loaded by BigDL-LLM. For Llama 2, the corresponding tokenizer class is `LlamaTokenizer`.
+A tokenizer enables tokenizing and detokenizing process in LLM training and inference. You can use [Huggingface transformers](https://huggingface.co/docs/transformers/index) API to load the tokenizer directly. It can be used seamlessly with models loaded by IPEX-LLM. For Llama 2, the corresponding tokenizer class is `LlamaTokenizer`.
 
 ```python
 from transformers import LlamaTokenizer
@@ -176,7 +176,7 @@ After finetuning the model, you could merge the QLoRA weights back into the base
 ### 7.1.3.1 Load Pre-trained Model
 
 ```python
-from bigdl.llm.transformers import AutoModelForCausalLM
+from ipex_llm.transformers import AutoModelForCausalLM
 base_model = AutoModelForCausalLM.from_pretrained(
         base_model,
         torch_dtype=torch.float16,
@@ -197,7 +197,7 @@ base_model = AutoModelForCausalLM.from_pretrained(
 Then we can load the QLoRA weights to enable the merging process.
 
 ```python
-from bigdl.llm.transformers.qlora import PeftModel
+from ipex_llm.transformers.qlora import PeftModel
 adapter_path = "./outputs/checkpoint-200"
 lora_model = PeftModel.from_pretrained(
         base_model,
@@ -210,7 +210,7 @@ lora_model = PeftModel.from_pretrained(
 ```
 > **Note**
 >
-> Instead of `from peft import PeftModel`, we `import PeftModel from bigdl.llm.transformers.qlora` as a BigDL-LLM compatible model.
+> Instead of `from peft import PeftModel`, we `import PeftModel from ipex_llm.transformers.qlora` as a IPEX-LLM compatible model.
 > 
 > **Note**
 > The adapter path is the local path you save the fine-tuned model, in our case is `./outputs/checkpoint-200`.
@@ -254,7 +254,7 @@ tokenizer.save_pretrained(output_path)
 ## 7.1.4 Inference with Fine-tuned model
 
 After merging and deploying the models, we can test the performance of the fine-tuned model. 
-The detailed instructions of running LLM inference with BigDL-LLM optimizations could be found in [Chapter 6](../ch_6_GPU_Acceleration/6_1_GPU_Llama2-7B.md), here we quickly go through the preparation of model inference.
+The detailed instructions of running LLM inference with IPEX-LLM optimizations could be found in [Chapter 6](../ch_6_GPU_Acceleration/6_1_GPU_Llama2-7B.md), here we quickly go through the preparation of model inference.
 
 ### 7.1.4.1 Inference with the Fine-tuned Model
 
@@ -290,7 +290,7 @@ The paradox of time and eternity is
 The paradox of time and eternity is that, on the one hand, we experience time as linear and progressive, and on the other hand, we experience time as cyclical. And the
 ```
 
-We can see the result shares the same style and context with the samples contained in the fine-tuned Dataset. And note that we only trained the Model for some epochs in a few minutes based on the optimization of BigDL-LLM.
+We can see the result shares the same style and context with the samples contained in the fine-tuned Dataset. And note that we only trained the Model for some epochs in a few minutes based on the optimization of IPEX-LLM.
 
 Here are more results with same prompts input for pretrained and fine-tuned models:
 

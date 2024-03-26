@@ -1,8 +1,8 @@
 # 第六章 GPU 加速
 
-BigDL-LLM 除了在英特尔 CPU 上具有显著的加速能力外，还支持在英特尔 GPU 上运行 LLM（大型语言模型）的优化和加速。
+IPEX-LLM 除了在英特尔 CPU 上具有显著的加速能力外，还支持在英特尔 GPU 上运行 LLM（大型语言模型）的优化和加速。
 
-BigDL-LLM 借助低精度技术、现代硬件加速和最新的软件优化，支持在英特尔 GPU 上优化任何 [*HuggingFace transformers*](https://huggingface.co/docs/transformers/index) 模型。
+IPEX-LLM 借助低精度技术、现代硬件加速和最新的软件优化，支持在英特尔 GPU 上优化任何 [*HuggingFace transformers*](https://huggingface.co/docs/transformers/index) 模型。
 
 #### 在英特尔锐炫 GPU 上运行 6B 模型（实时屏幕画面）:
 
@@ -18,7 +18,7 @@ BigDL-LLM 借助低精度技术、现代硬件加速和最新的软件优化，�
 
 </p>
 
-在第六章中，您将学习如何在英特尔 GPU 上使用 BigDL-LLM 优化来运行 LLM 以及实现流式对话功能。本章将使用流行的开源模型作为示例：
+在第六章中，您将学习如何在英特尔 GPU 上使用 IPEX-LLM 优化来运行 LLM 以及实现流式对话功能。本章将使用流行的开源模型作为示例：
 
 + [Llama2-7B](./6_1_GPU_Llama2-7B.md)
 
@@ -39,19 +39,19 @@ BigDL-LLM 借助低精度技术、现代硬件加速和最新的软件优化，�
   - Linux 系统, 推荐使用 Ubuntu 22.04
 
     > **注意**
-    > 请注意，英特尔 GPU 上的 BigDL-LLM 优化仅支持 Linux 操作系统。
+    > 请注意，英特尔 GPU 上的 IPEX-LLM 优化仅支持 Linux 操作系统。
 
 ### 6.0.2 安装驱动程序和工具包
 
-在英特尔 GPU 上使用 BigDL-LLM 之前，有几个安装工具的步骤：
+在英特尔 GPU 上使用 IPEX-LLM 之前，有几个安装工具的步骤：
 
 - 首先，您需要安装英特尔 GPU 驱动程序。请参阅我们的[驱动程序安装](https://dgpu-docs.intel.com/driver/installation.html)以了解更多关于通用 GPU 功能的事项。
   > **注意**
-  > 对于使用默认 IPEX 版本（IPEX 2.0.110+xpu）的 BigDL-LLM，需要英特尔 GPU 驱动程序版本 [Stable 647.21](https://dgpu-docs.intel.com/releases/stable_647_21_20230714.html)。
+  > 对于使用默认 IPEX 版本（IPEX 2.0.110+xpu）的 IPEX-LLM，需要英特尔 GPU 驱动程序版本 [Stable 647.21](https://dgpu-docs.intel.com/releases/stable_647_21_20230714.html)。
 
 - 您还需要下载并安装[英特尔® oneAPI Base Toolkit](https://www.intel.com/content/www/us/en/developer/tools/oneapi/base-toolkit-download.html)。OneMKL 和 DPC++ 编译器是必选项，其他为可选项。
   > **注意**
-  > 使用默认 IPEX 版本（IPEX 2.0.110+xpu）的 BigDL-LLM 需要英特尔® oneAPI Base Toolkit 的版本 == 2023.2.0。
+  > 使用默认 IPEX 版本（IPEX 2.0.110+xpu）的 IPEX-LLM 需要英特尔® oneAPI Base Toolkit 的版本 == 2023.2.0。
 
 <details><summary>对于在 Ubuntu 22.04 上使用英特尔锐炫™ A 系列显卡的客户端用户，也可参考以下命令安装驱动程序和 oneAPI Base Toolkit。详细命令：</summary>
 <br/>
@@ -145,7 +145,7 @@ conda init
 #### 6.0.3.2 创建环境
 
 > **注意**
-> 推荐使用 Python 3.9 运行 BigDL-LLM.
+> 推荐使用 Python 3.9 运行 IPEX-LLM.
 
 使用您选择的名称创建一个 Python 3.9 环境，例如 `llm-tutorial-gpu`：
 

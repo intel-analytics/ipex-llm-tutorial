@@ -1,21 +1,21 @@
 # 6.1 在英特尔 GPU 上运行 Llama 2 (7B)
 
-您可以使用 BigDL-LLM 加载任何 Hugging Face *transformers* 模型，以便在英特尔 GPU 上加速。有了 BigDL-LLM，Hugging Face 上托管的 PyTorch 模型（FP16/BF16/FP32）可以在英特尔 GPU 上以低位量化（支持的精度包括 INT4/NF4/INT5/INT8）的方式自动加载和优化。
+您可以使用 IPEX-LLM 加载任何 Hugging Face *transformers* 模型，以便在英特尔 GPU 上加速。有了 IPEX-LLM，Hugging Face 上托管的 PyTorch 模型（FP16/BF16/FP32）可以在英特尔 GPU 上以低位量化（支持的精度包括 INT4/NF4/INT5/INT8）的方式自动加载和优化。
 
-在本教程中，您将学习如何在英特尔 GPU 上运行经过 BigDL-LLM 优化的 LLM，并在此基础上构建一个流式对话机器人。本教程以一个流行的开源 LLM [meta-llama/Llama-2-7b-chat-hf](https://huggingface.co/meta-llama/Llama-2-7b-chat-hf)为例。
+在本教程中，您将学习如何在英特尔 GPU 上运行经过 IPEX-LLM 优化的 LLM，并在此基础上构建一个流式对话机器人。本教程以一个流行的开源 LLM [meta-llama/Llama-2-7b-chat-hf](https://huggingface.co/meta-llama/Llama-2-7b-chat-hf)为例。
 
-## 6.1.1 在英特尔 GPU 上安装 BigDL-LLM
+## 6.1.1 在英特尔 GPU 上安装 IPEX-LLM
 
-首先，在准备好的环境中安装 BigDL-LLM。有关英特尔 GPU 环境设置的最佳做法，请参阅本章的 [README](./README.md#70-environment-setup)。
+首先，在准备好的环境中安装 IPEX-LLM。有关英特尔 GPU 环境设置的最佳做法，请参阅本章的 [README](./README.md#70-environment-setup)。
 
 在终端中运行：
 
 ```bash
-pip install --pre --upgrade bigdl-llm[xpu] -f https://developer.intel.com/ipex-whl-stable-xpu
+pip install --pre --upgrade ipex-llm[xpu] -f https://developer.intel.com/ipex-whl-stable-xpu
 ```
 
 > **注意**
-> 如果您使用了旧版本的`bigdl-llm`(早于`2.5.0b20240104`版本)，您需要在代码开头手动导入`import intel_extension_for_pytorch as ipex`。
+> 如果您使用了旧版本的`ipex-llm`(早于`2.5.0b20240104`版本)，您需要在代码开头手动导入`import intel_extension_for_pytorch as ipex`。
 
 完成安装后，您需要为英特尔 GPU 配置 oneAPI 环境变量。
 
@@ -46,14 +46,14 @@ model_path = snapshot_download(repo_id='meta-llama/Llama-2-7b-chat-hf',
 
 一个常见的用例是以低精度加载 Hugging Face *transformers* 模型，即在加载时进行**隐式**量化。
 
-对于 Llama 2 (7B)，您可以简单地导入 `bigdl.llm.transformers.AutoModelForCausalLM` 而不是 `transformers.AutoModelForCausalLM`，并在 `from_pretrained` 函数中相应地指定 `load_in_4bit=True` 或 `load_in_low_bit` 参数。
+对于 Llama 2 (7B)，您可以简单地导入 `ipex_llm.transformers.AutoModelForCausalLM` 而不是 `transformers.AutoModelForCausalLM`，并在 `from_pretrained` 函数中相应地指定 `load_in_4bit=True` 或 `load_in_low_bit` 参数。
 
 对于英特尔 GPU，您应在 `from_pretrained` 函数中**特别设置 `optimize_model=False`** 。**一旦获得低精度模型，请将其设置为 `to('xpu')`**。
 
 **用于 INT4 优化（通过使用 `load_in_4bit=True`）：**
 
 ```python
-from bigdl.llm.transformers import AutoModelForCausalLM
+from ipex_llm.transformers import AutoModelForCausalLM
 
 model_in_4bit = AutoModelForCausalLM.from_pretrained(pretrained_model_name_or_path="meta-llama/Llama-2-7b-chat-hf",
                                                      load_in_4bit=True,
@@ -62,14 +62,14 @@ model_in_4bit_gpu = model_in_4bit.to('xpu')
 ```
 
 > **注意**
-> BigDL-LLM 支持 `AutoModel`, `AutoModelForCausalLM`, `AutoModelForSpeechSeq2Seq` 以及 `AutoModelForSeq2SeqLM`.
+> IPEX-LLM 支持 `AutoModel`, `AutoModelForCausalLM`, `AutoModelForSpeechSeq2Seq` 以及 `AutoModelForSeq2SeqLM`.
 >
 > 如果您已经下载了 Llama 2 (7B) 模型并跳过了步骤 [7.1.2.2](#712-optional-download-llama-2-7b)，您可以将`pretrained_model_name_or_path`设置为模型路径。
 
 **(可选) 用于 INT8 优化（通过使用 `load_in_low_bit="sym_int8"`）:**
 
 ```python
-# 请注意，这里的 AutoModelForCausalLM 是从 bigdl.llm.transformers 导入的
+# 请注意，这里的 AutoModelForCausalLM 是从 ipex_llm.transformers 导入的
 model_in_8bit = AutoModelForCausalLM.from_pretrained(
     pretrained_model_name_or_path="meta-llama/Llama-2-7b-chat-hf",
     load_in_low_bit="sym_int8",
@@ -79,13 +79,13 @@ model_in_8bit_gpu = model_in_8bit.to('xpu')
 ```
 
 > **注意**
-> * 目前英特尔 GPU 上的 BigDL-LLM 支持 `'sym_int4'`, `'asym_int4'`, `'sym_int5'`, `'asym_int5'` 或 `'sym_int8'`选项，其中 'sym' 和 'asym' 用于区分对称量化与非对称量化。选项 `'nf4'` ，也就是 4-bit NormalFloat，同样也是支持的。
+> * 目前英特尔 GPU 上的 IPEX-LLM 支持 `'sym_int4'`, `'asym_int4'`, `'sym_int5'`, `'asym_int5'` 或 `'sym_int8'`选项，其中 'sym' 和 'asym' 用于区分对称量化与非对称量化。选项 `'nf4'` ，也就是 4-bit NormalFloat，同样也是支持的。
 >
 > * `load_in_4bit=True` 等价于 `load_in_low_bit='sym_int4'`.
 
 ## 6.1.4 加载 Tokenizer 
 
-LLM 推理也需要一个 tokenizer. 您可以使用 [Huggingface transformers](https://huggingface.co/docs/transformers/index) API 来直接加载 tokenizer. 它可以与 BigDL-LLM 加载的模型无缝配合使用。对于 Llama 2，对应的 tokenizer 类为 `LlamaTokenizer`.
+LLM 推理也需要一个 tokenizer. 您可以使用 [Huggingface transformers](https://huggingface.co/docs/transformers/index) API 来直接加载 tokenizer. 它可以与 IPEX-LLM 加载的模型无缝配合使用。对于 Llama 2，对应的 tokenizer 类为 `LlamaTokenizer`.
 
 ```python
 from transformers import LlamaTokenizer
@@ -98,7 +98,7 @@ tokenizer = LlamaTokenizer.from_pretrained(pretrained_model_name_or_path="meta-l
 
 ## 6.1.5 运行模型
 
-您可以用与官方 `transformers` API 几乎相同的方式在英特尔 GPU 上使用 BigDL-LLM 优化进行模型推理。**唯一的区别是为 token id 设置 `to('xpu')`**。这里我们为模型创建了一个问答对话模板让其补全。
+您可以用与官方 `transformers` API 几乎相同的方式在英特尔 GPU 上使用 IPEX-LLM 优化进行模型推理。**唯一的区别是为 token id 设置 `to('xpu')`**。这里我们为模型创建了一个问答对话模板让其补全。
 
 ```python
 import torch
@@ -150,7 +150,7 @@ You are a helpful, respectful and honest assistant, who always answers as helpfu
 What is AI? [/INST] AI is a term used to describe the development of computer systems that can perform tasks that typically require human intelligence, such as understanding natural language, recognizing images. </s><s> [INST] Is it dangerous? [INST]
 ```
 
-这里我们展示了一个运行在 BigDL-LLM 优化过的 Llama 2 (7B) 模型上的支持流式显示的多轮对话实例。
+这里我们展示了一个运行在 IPEX-LLM 优化过的 Llama 2 (7B) 模型上的支持流式显示的多轮对话实例。
 
 首先，定义对话上下文格式[^1]，以便模型完成对话：
 

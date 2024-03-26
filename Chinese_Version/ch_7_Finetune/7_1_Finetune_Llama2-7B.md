@@ -1,22 +1,22 @@
 # 7.1 使用 QLoRA 微调 Llama 2 (7B)
 
-为了帮助您更好地理解 QLoRA 微调过程，在本教程中，我们提供了一个实用指南，利用 BigDL-LLM 将大语言模型对特定的下游任务进行微调。 这里使用 [Llama-2-7b-hf](https://huggingface.co/meta-llama/Llama-2-7b-hf) 作为示例来完成文本生成任务。
+为了帮助您更好地理解 QLoRA 微调过程，在本教程中，我们提供了一个实用指南，利用 IPEX-LLM 将大语言模型对特定的下游任务进行微调。 这里使用 [Llama-2-7b-hf](https://huggingface.co/meta-llama/Llama-2-7b-hf) 作为示例来完成文本生成任务。
 
-## 7.1.1 在 Intel GPU 上启用 BigDL-LLM
+## 7.1.1 在 Intel GPU 上启用 IPEX-LLM
 
-### 7.1.1.1 安装 BigDL-LLM
+### 7.1.1.1 安装 IPEX-LLM
 
-按照[Readme](./README.md#70-environment-setup)中的步骤设置环境后，您可以使用以下命令在终端中安装 BigDL-LLM 以及相应的依赖环境：
+按照[Readme](./README.md#70-environment-setup)中的步骤设置环境后，您可以使用以下命令在终端中安装 IPEX-LLM 以及相应的依赖环境：
 
 ```bash
-pip install --pre --upgrade bigdl-llm[xpu] -f https://developer.intel.com/ipex-whl-stable-xpu
+pip install --pre --upgrade ipex-llm[xpu] -f https://developer.intel.com/ipex-whl-stable-xpu
 pip install transformers==4.34.0
 pip install peft==0.5.0
 pip install accelerate==0.23.0
 ```
 
 > **注意**
-> 如果您使用了旧版本的`bigdl-llm`(早于`2.5.0b20240104`版本)，您需要在代码开头手动导入`import intel_extension_for_pytorch as ipex`。
+> 如果您使用了旧版本的`ipex-llm`(早于`2.5.0b20240104`版本)，您需要在代码开头手动导入`import intel_extension_for_pytorch as ipex`。
 
 ### 7.1.1.2 配置 oneAPI 环境变量
 
@@ -40,7 +40,7 @@ source /opt/intel/oneapi/setvars.sh
 > 您可以使用 Huggingface 库 id 或本地模型路径来指定参数 `pretrained_model_name_or_path`。
 > 如果您已经下载了 Llama 2 (7B) 模型，您可以将 `pretrained_model_name_or_path` 指定为本地模型路径。
 
-通过 BigDL-LLM 优化，您可以使用`bigdl.llm.transformers.AutoModelForCausalLM`替代`transformers.AutoModelForCausalLM`来加载模型来进行隐式量化。
+通过 IPEX-LLM 优化，您可以使用`ipex_llm.transformers.AutoModelForCausalLM`替代`transformers.AutoModelForCausalLM`来加载模型来进行隐式量化。
 
 对于英特尔 GPU，您应在`from_pretrained`函数中特别设置 `optimize_model=False`。一旦获得低精度模型，请将其设置为`to('xpu')`。
 
@@ -58,10 +58,10 @@ model = model.to('xpu')
 
 ### 7.1.2.2 准备训练模型
 
-我们可以应用`bigdl.llm.transformers.qlora`中的`prepare_model_for_kbit_training`对模型进行预处理，以进行训练的准备。
+我们可以应用`ipex_llm.transformers.qlora`中的`prepare_model_for_kbit_training`对模型进行预处理，以进行训练的准备。
 
 ```python
-from bigdl.llm.transformers.qlora import prepare_model_for_kbit_training
+from ipex_llm.transformers.qlora import prepare_model_for_kbit_training
 model.gradient_checkpointing_enable() #可以进一步减少内存使用但速度较慢
 model = prepare_model_for_kbit_training(model)
 ```
@@ -69,7 +69,7 @@ model = prepare_model_for_kbit_training(model)
 接下来，我们可以从预处理后的模型中创建一个 PEFT 模型并配置它的参数，如下所示：
 
 ```python
-from bigdl.llm.transformers.qlora import get_peft_model
+from ipex_llm.transformers.qlora import get_peft_model
 from peft import LoraConfig
 
 config = LoraConfig(r=8, 
@@ -83,7 +83,7 @@ model = get_peft_model(model, config)
 ```
 > **注意**
 >
-> 我们从`bigdl.llm.transformers.qlora`导入与BigDL-LLM兼容的 PEFT 模型，替代原先使用 bitandbytes 库和 cuda 的`from peft importprepare_model_for_kbit_training, get_peft_model`用法。其使用方法和用`peft`库进行 QLoRA 微调方法相同。
+> 我们从`ipex_llm.transformers.qlora`导入与IPEX-LLM兼容的 PEFT 模型，替代原先使用 bitandbytes 库和 cuda 的`from peft importprepare_model_for_kbit_training, get_peft_model`用法。其使用方法和用`peft`库进行 QLoRA 微调方法相同。
 > 
 > **注意**
 >
@@ -105,7 +105,7 @@ data = data.map(lambda samples: tokenizer(samples["quote"]), batched=True)
 
 ### 7.1.2.4 加载Tokenizer
 
-分词器可以在 LLM 训练和推理中实现分词和去分词过程。您可以使用 [Huggingface Transformers](https://huggingface.co/docs/transformers/index) API来加载 LLM 推理需要的分词器，它可以与 BigDL-LLM 加载的模型无缝配合使用。对于Llama 2，对应的tokenizer类为`LlamaTokenizer`。
+分词器可以在 LLM 训练和推理中实现分词和去分词过程。您可以使用 [Huggingface Transformers](https://huggingface.co/docs/transformers/index) API来加载 LLM 推理需要的分词器，它可以与 IPEX-LLM 加载的模型无缝配合使用。对于Llama 2，对应的tokenizer类为`LlamaTokenizer`。
 
 ```python
 from transformers import LlamaTokenizer
@@ -191,7 +191,7 @@ base_model = AutoModelForCausalLM.from_pretrained(
 然后我们可以加载训练出的LoRA权重来准备合并。
 
 ```python
-from bigdl.llm.transformers.qlora import PeftModel
+from ipex_llm.transformers.qlora import PeftModel
 adapter_path = "./outputs/checkpoint-200"
 lora_model = PeftModel.from_pretrained(
         base_model,
@@ -203,7 +203,7 @@ lora_model = PeftModel.from_pretrained(
 
 > **注意**
 >
-> 我们用`import PeftModel from bigdl.llm.transformers.qlora`替代`from peft import PeftModel`来导入 BigDL-LLM 兼容的 PEFT 模型。
+> 我们用`import PeftModel from ipex_llm.transformers.qlora`替代`from peft import PeftModel`来导入 IPEX-LLM 兼容的 PEFT 模型。
 
 > **注意**
 > 
@@ -249,7 +249,7 @@ tokenizer.save_pretrained(output_path)
 ## 7.1.4 使用微调模型进行推理
 
 合并和部署模型后，我们可以测试微调模型的性能。
-使用BigDL-LLM优化的推理过程详细说明可以在[第6章](../ch_6_GPU_Acceleration/6_1_GPU_Llama2-7B.md)中找到，这里我们快速完成模型推理的准备工作。
+使用IPEX-LLM优化的推理过程详细说明可以在[第6章](../ch_6_GPU_Acceleration/6_1_GPU_Llama2-7B.md)中找到，这里我们快速完成模型推理的准备工作。
 
 ### 7.1.4.1 使用微调模型进行推理
 
@@ -287,7 +287,7 @@ The paradox of time and eternity is
 The paradox of time and eternity is that, on the one hand, we experience time as linear and progressive, and on the other hand, we experience time as cyclical. And the
 ```
 
-我们可以看到微调模型的推理结果与新增数据集中有相同的词汇以及近似的文本风格。基于 BigDL-LLM 的优化，我们可以在仅仅几分钟的训练之内达到这个效果。
+我们可以看到微调模型的推理结果与新增数据集中有相同的词汇以及近似的文本风格。基于 IPEX-LLM 的优化，我们可以在仅仅几分钟的训练之内达到这个效果。
 
 以下是更多预训练模型和微调模型的对比结果：
 

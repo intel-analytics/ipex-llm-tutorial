@@ -1,8 +1,8 @@
 # Chapter 6 GPU Acceleration
 
-Apart from the significant acceleration capabilites on Intel CPUs, BigDL-LLM also supports optimizations and acceleration for running LLMs (large language models) on Intel GPUs.
+Apart from the significant acceleration capabilites on Intel CPUs, IPEX-LLM also supports optimizations and acceleration for running LLMs (large language models) on Intel GPUs.
 
-BigDL-LLM supports optimizations of any [*HuggingFace transformers*](https://huggingface.co/docs/transformers/index) model on Intel GPUs with the help of low-bit techniques, modern hardware accelerations and latest software optimizations.
+IPEX-LLM supports optimizations of any [*HuggingFace transformers*](https://huggingface.co/docs/transformers/index) model on Intel GPUs with the help of low-bit techniques, modern hardware accelerations and latest software optimizations.
 
 #### 6B model running on Intel Arc GPU (real-time screen capture):
 
@@ -18,7 +18,7 @@ BigDL-LLM supports optimizations of any [*HuggingFace transformers*](https://hug
 
 </p>
 
-In Chapter 6, you will learn how to run LLMs, as well as implement stream chat functionalities, using BigDL-LLM optimizations on Intel GPUs. Popular open source models are used as examples:
+In Chapter 6, you will learn how to run LLMs, as well as implement stream chat functionalities, using IPEX-LLM optimizations on Intel GPUs. Popular open source models are used as examples:
 
 + [Llama2-7B](./6_1_GPU_Llama2-7B.md)
 
@@ -44,4 +44,4 @@ In Chapter 6, you will learn how to run LLMs, as well as implement stream chat f
 
 ## 6.1 Environment Setup
 
-Please refer to the [GPU installation guide](https://bigdl.readthedocs.io/en/latest/doc/LLM/Overview/install_gpu.html) for mode details. It is strongly recommended that you follow the corresponding steps below to configure your environment properly.
+Please refer to the [GPU installation guide](https://ipex-llm.readthedocs.io/en/latest/doc/LLM/Overview/install_gpu.html) for mode details. It is strongly recommended that you follow the corresponding steps below to configure your environment properly.

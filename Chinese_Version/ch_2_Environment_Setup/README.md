@@ -53,7 +53,7 @@ conda init
 
 ### 2.2.2 创建环境
 > **注意**
-> 推荐使用 Python 3.9 运行 BigDL-LLM.
+> 推荐使用 Python 3.9 运行 IPEX-LLM.
 
 创建一个 Python 3.9 环境，名称由您选择，例如 `llm-tutorial`:
 ```
@@ -64,11 +64,11 @@ conda create -n llm-tutorial python=3.9
 conda activate llm-tutorial
 ```
 
-## 2.3 安装 BigDL-LLM
+## 2.3 安装 IPEX-LLM
 
-下面这一行命令将安装最新版本的`bigdl-llm`以及所有常见LLM应用程序开发所需的依赖项。
+下面这一行命令将安装最新版本的`ipex-llm`以及所有常见LLM应用程序开发所需的依赖项。
 ```
-pip install --pre --upgrade bigdl-llm[all]
+pip install --pre --upgrade ipex-llm[all]
 ```
 
 ## 2.4 安装 Jupyter 服务
@@ -120,4 +120,4 @@ numactl -C 0-47 -m 0 jupyter notebook
 
 要从Huggingface下载模型，您可以使用git或Huggingface提供的API。有关如何下载模型的详细信息，请参阅[从Huggingface下载模型](https://huggingface.co/docs/hub/models-downloading) 。
 
-通常从Huggingface下载的模型可以使用[Huggingface Transformers库](https://huggingface.co/docs/transformers/index)加载。BigDL-LLM提供了API，可以轻松地与这些模型一起使用。请阅读本教程后续章节了解更多信息。
+通常从Huggingface下载的模型可以使用[Huggingface Transformers库](https://huggingface.co/docs/transformers/index)加载。IPEX-LLM提供了API，可以轻松地与这些模型一起使用。请阅读本教程后续章节了解更多信息。

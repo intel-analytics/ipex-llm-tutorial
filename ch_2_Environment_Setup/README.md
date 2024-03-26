@@ -52,7 +52,7 @@ Open a WSL2 shell and run the same commands as in [2.2.1.1 Linux](#2211-linux) s
 
 ### 2.2.2 Create Environment
 > **Note**
-> Python 3.9 is recommended for running BigDL-LLM.
+> Python 3.9 is recommended for running IPEX-LLM.
 
 Create a Python 3.9 environment with the name you choose, for example `llm-tutorial`:
 ```
@@ -63,11 +63,11 @@ Then activate the environment `llm-tutorial`:
 conda activate llm-tutorial
 ```
 
-## 2.3 Install BigDL-LLM
+## 2.3 Install IPEX-LLM
 
-The one-line command below will install the latest `bigdl-llm` with all the dependencies for common LLM application development.
+The one-line command below will install the latest `ipex-llm` with all the dependencies for common LLM application development.
 ```
-pip install --pre --upgrade bigdl-llm[all]
+pip install --pre --upgrade ipex-llm[all]
 ```
 
 ## 2.4 Setup Jupyter Service
@@ -118,7 +118,7 @@ An example model homepage hosted on huggingface looks like this.
 
 To download models from huggingface, you can either use git or huggingface provided APIs. Refer to [Download Model from Huggingface](https://huggingface.co/docs/hub/models-downloading) for details about how to download models. 
 
-Usually, the models downloaded from Huggingface can be loaded using [Huggingface Transformers library API](https://huggingface.co/docs/transformers/index). BigDL-LLM provides APIs to easily work with such models. Read the following chapters to to find out more. 
+Usually, the models downloaded from Huggingface can be loaded using [Huggingface Transformers library API](https://huggingface.co/docs/transformers/index). IPEX-LLM provides APIs to easily work with such models. Read the following chapters to to find out more. 
  
 
 
