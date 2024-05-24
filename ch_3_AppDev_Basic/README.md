@@ -2,7 +2,7 @@
 
 This chapter will get you started quickly with IPEX-LLM, and you'll learn how to build your very first LLM application. 
 
-The accompanying notebook  [3_BasicApp.ipynb](./3_BasicApp.ipynb) in this chapter introduces some essential APIs of IPEX-LLM and walks you through the process of building a basic chat application.
+The accompanying notebook  [3_OpenLlamaBasicApp.ipynb](./3_OpenLlamaBasicApp.ipynb) in this chapter introduces some essential APIs of IPEX-LLM and walks you through the process of building a basic chat application, based on `open_llama_3b_v2` model. And [3_Baichuan2_BasicApp.ipynb](./3_Baichuan2_BasicApp.ipynb) demonstrates how to do that on `Baichuan2-7b-chat`.
 
 ## What's Next
 
