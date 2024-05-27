@@ -1,10 +1,10 @@
-# 6.1 Run Baichuan 2 (7B) on Intel GPUs
+# 6.2 Run Baichuan 2 (7B) on Intel GPUs
 
-You can use IPEX-LLM to load any Hugging Face *transformers* model for acceleration on Intel GPUs. With IPEX-LLM, PyTorch models (in FP16/BF16/FP32) hosted on Hugging Face can be loaded and optimized automatically on Intel GPUs with low-bit quantization (supported precisions include INT4/NF4/INT5/INT8).
+You can use IPEX-LLM to load any Hugging Face *transformers* model for acceleration on Intel GPUs. With IPEX-LLM, PyTorch models (in FP16/BF16/FP32) hosted on Hugging Face can be loaded and optimized automatically on Intel GPUs with low-bit quantization (supported precisions include  INT4/NF4/INT5/FP8/INT8).
 
-In this tutorial, you will learn how to run LLMs on Intel GPUs with IPEX-LLM optimizations, and based on that build a stream chatbot. A popular open-source LLM [baichuan-inc/Baichuan2-7B-Chat](https://huggingface.co/baichuan-inc/Baichuan2-7B-Chat) is used as an example.
+In this tutorial, you will learn how to run LLMs on Intel GPUs with IPEX-LLM optimizations, and based on that build a stream chatbot. A popular open-source LLM [baichuan-inc/Baichuan2-7B-Chat](https://www.modelscope.cn/models/baichuan-inc/Baichuan2-7B-Chat) is used as an example.
 
-## 6.1.1 Load Model in Low Precision
+## 6.2.1 Load Model in Low Precision
 
 One common use case is to load a Hugging Face *transformers* model in low precision, i.e. conduct **implicit** quantization while loading.
 
@@ -22,7 +22,8 @@ from ipex_llm.transformers import AutoModelForCausalLM
 model_in_4bit = AutoModelForCausalLM.from_pretrained(pretrained_model_name_or_path="baichuan-inc/Baichuan2-7B-Chat",
                                                      load_in_4bit=True,
                                                      trust_remote_code=True,
-                                                     use_cache=True)
+                                                     use_cache=True,
+                                                     model_hub='modelscope')
 model_in_4bit_gpu = model_in_4bit.to('xpu')
 ```
 
@@ -37,12 +38,12 @@ model_in_4bit_gpu = model_in_4bit.to('xpu')
 >
 > * `load_in_4bit=True` is equivalent to `load_in_low_bit='sym_int4'`.
 
-## 6.1.2 Load Tokenizer 
+## 6.2.2 Load Tokenizer 
 
 A tokenizer is also needed for LLM inference. You can use [Huggingface transformers](https://huggingface.co/docs/transformers/index) API to load the tokenizer directly. It can be used seamlessly with models loaded by IPEX-LLM. For Baichuan 2, the corresponding tokenizer class is `AutoTokenizer`.
 
 ```python
-from transformers import AutoTokenizer
+from modelscope import AutoTokenizer
 
 tokenizer = AutoTokenizer.from_pretrained(pretrained_model_name_or_path="baichuan-inc/Baichuan2-7B-Chat",
                                           trust_remote_code=True)
@@ -51,7 +52,7 @@ tokenizer = AutoTokenizer.from_pretrained(pretrained_model_name_or_path="baichua
 > **Note**
 > If you have already downloaded the Baichuan 2 (7B) model, you could specify `pretrained_model_name_or_path` to the model path.
 
-## 6.1.3 Run Model
+## 6.2.3 Run Model
 
 You can then do model inference with IPEX-LLM optimizations on Intel GPUs almostly the same way as using official `transformers` API. **The only difference is to set `to('xpu')` for token ids**. A Q&A dialog template is created for the model to complete.
 
@@ -82,7 +83,7 @@ with torch.inference_mode():
 >
 > For the next section of stream chat, we could treat this time of generation in section 6.1.3 as a warm-up.
 
-## 6.1.4 Stream Chat
+## 6.2.4 Stream Chat
 
 Now, let's build a stream chatbot that runs on Intel GPUs, allowing LLMs to engage in interactive conversations. Chatbot interaction is no magic - it still relies on the prediction and generation of next tokens by LLMs. We will use Baichuan 2's built-in `chat` function to build a stream chatbot here. 
 
