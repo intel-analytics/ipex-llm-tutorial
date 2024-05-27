@@ -1,12 +1,12 @@
 # 6.2 Run Baichuan 2 (7B) on Intel GPUs
 
-You can use IPEX-LLM to load any Hugging Face *transformers* model for acceleration on Intel GPUs. With IPEX-LLM, PyTorch models (in FP16/BF16/FP32) hosted on Hugging Face can be loaded and optimized automatically on Intel GPUs with low-bit quantization (supported precisions include  INT4/NF4/INT5/FP8/INT8).
+You can use IPEX-LLM to load any ModelScope model for acceleration on Intel GPUs. With IPEX-LLM, PyTorch models (in FP16/BF16/FP32) hosted on ModelScope can be loaded and optimized automatically on Intel GPUs with low-bit quantization (supported precisions include INT4/NF4/INT5/FP8/INT8).
 
 In this tutorial, you will learn how to run LLMs on Intel GPUs with IPEX-LLM optimizations, and based on that build a stream chatbot. A popular open-source LLM [baichuan-inc/Baichuan2-7B-Chat](https://www.modelscope.cn/models/baichuan-inc/Baichuan2-7B-Chat) is used as an example.
 
 ## 6.2.1 Load Model in Low Precision
 
-One common use case is to load a Hugging Face *transformers* model in low precision, i.e. conduct **implicit** quantization while loading.
+One common use case is to load a ModelScope model in low precision, i.e. conduct **implicit** quantization while loading.
 
 For Baichuan 2 (7B), you could simply import `ipex_llm.transformers.AutoModelForCausalLM` instead of `transformers.AutoModelForCausalLM`, and specify `load_in_4bit=True` or `load_in_low_bit` parameter accordingly in the `from_pretrained` function.
 
@@ -40,7 +40,7 @@ model_in_4bit_gpu = model_in_4bit.to('xpu')
 
 ## 6.2.2 Load Tokenizer 
 
-A tokenizer is also needed for LLM inference. You can use [Huggingface transformers](https://huggingface.co/docs/transformers/index) API to load the tokenizer directly. It can be used seamlessly with models loaded by IPEX-LLM. For Baichuan 2, the corresponding tokenizer class is `AutoTokenizer`.
+A tokenizer is also needed for LLM inference. You can use [ModelScope](https://www.modelscope.cn/docs/ModelScope%20Library%E6%A6%82%E8%A7%88%E4%BB%8B%E7%BB%8D) API to load the tokenizer directly. It can be used seamlessly with models loaded by IPEX-LLM. For Baichuan 2, the corresponding tokenizer class is `AutoTokenizer`.
 
 ```python
 from modelscope import AutoTokenizer
