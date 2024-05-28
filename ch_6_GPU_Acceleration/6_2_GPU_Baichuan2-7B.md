@@ -31,16 +31,19 @@ model_in_4bit_gpu = model_in_4bit.to('xpu')
 > IPEX-LLM has supported `AutoModel`, `AutoModelForCausalLM`, `AutoModelForSpeechSeq2Seq` and `AutoModelForSeq2SeqLM`, etc.
 >
 > If you have already downloaded the Baichuan 2 (7B) model, you could specify `pretrained_model_name_or_path` to the model path.
-> 
->  When running LLMs on Intel iGPUs for Windows users, we recommend setting `cpu_embedding=True` in the from_pretrained function.
-> This will allow the memory-intensive embedding layer to utilize the CPU instead of iGPU.
-> It is important to set `model_hub='modelscope'`, otherwise model hub is default to be huggingface
 
+> [!NOTE]
+> It is important to set `model_hub='modelscope'`, otherwise model hub is default to be huggingface
 
 > [!NOTE]
 > * Currently, `load_in_low_bit` supports options `'sym_int4'`, `'asym_int4'`, `'sym_int5'`, `'asym_int5'`, `'sym_int8'`, `'nf3'`, `'nf4'`, `'fp4'`, `'fp8'`, `'fp8_e4m3'`, `'fp8_e5m2'`, `'fp6'`, `'gguf_iq2_xxs'`, `'gguf_iq2_xs'`, `'gguf_iq1_s'`, `'gguf_q4k_m'`, `'gguf_q4k_s'`, `'fp16'`, `'bf16'`, `'sym_int4'` means symmetric int 4, `'asym_int4'` means asymmetric int 4, `'nf4'` means 4-bit NormalFloat, etc. Relevant low bit optimizations will be applied to the model.
 >
 > * `load_in_4bit=True` is equivalent to `load_in_low_bit='sym_int4'`.
+
+> [!NOTE]
+>  When running LLMs on Intel iGPUs for Windows users, we recommend setting `cpu_embedding=True` in the from_pretrained function.
+> 
+> This will allow the memory-intensive embedding layer to utilize the CPU instead of iGPU.
 
 ## 6.2.2 Load Tokenizer 
 
