@@ -4,11 +4,13 @@ You can use IPEX-LLM to load any ModelScope model for acceleration on Intel GPUs
 
 In this tutorial, you will learn how to run LLMs on Intel GPUs with IPEX-LLM optimizations, and based on that build a stream chatbot. A popular open-source LLM [baichuan-inc/Baichuan2-7B-Chat](https://www.modelscope.cn/models/baichuan-inc/Baichuan2-7B-Chat) is used as an example.
 
+> [!NOTE]
+> Please make sure that you have prepared the environment for IPEX-LLM on GPU before you started.
+
+
 ## 6.2.1 Load Model in Low Precision
 
-One common use case is to load a ModelScope model in low precision, i.e. conduct **implicit** quantization while loading.
-
-For Baichuan 2 (7B), you could simply import `ipex_llm.transformers.AutoModelForCausalLM` instead of `transformers.AutoModelForCausalLM`, and specify `load_in_4bit=True` or `load_in_low_bit` parameter accordingly in the `from_pretrained` function.
+One common use case is to load a ModelScope model in low precision. For Baichuan 2 (7B), you could simply import `ipex_llm.transformers.AutoModelForCausalLM` instead of `transformers.AutoModelForCausalLM`, and specify `load_in_4bit=True` or `load_in_low_bit` parameter accordingly in the `from_pretrained` function.
 
 For Intel GPUs, **once you have the model in low precision, set it to `to('xpu')`.**
 
@@ -28,14 +30,18 @@ model_in_4bit = AutoModelForCausalLM.from_pretrained(pretrained_model_name_or_pa
 model_in_4bit_gpu = model_in_4bit.to('xpu')
 ```
 
-> **Note**
-> IPEX-LLM has supported `AutoModel`, `AutoModelForCausalLM`, `AutoModelForSpeechSeq2Seq` and `AutoModelForSeq2SeqLM`.
+> [!NOTE]
+> IPEX-LLM has supported `AutoModel`, `AutoModelForCausalLM`, `AutoModelForSpeechSeq2Seq` and `AutoModelForSeq2SeqLM`, etc.
 >
 > If you have already downloaded the Baichuan 2 (7B) model, you could specify `pretrained_model_name_or_path` to the model path.
+> 
+>  When running LLMs on Intel iGPUs for Windows users, we recommend setting `cpu_embedding=True` in the from_pretrained function.
+> This will allow the memory-intensive embedding layer to utilize the CPU instead of iGPU.
+> It is important to set `model_hub='modelscope'`, otherwise model hub is default to be huggingface
 
 
-> **Note**
-> * Currently, `load_in_low_bit` supports options `'sym_int4'`, `'asym_int4'`, `'sym_int5'`, `'asym_int5'` or `'sym_int8'`, in which 'sym' and 'asym' differentiate between symmetric and asymmetric quantization. Option `'nf4'` is also supported, referring to 4-bit NormalFloat. Floating point precisions `'fp4'`, `'fp8'`, `'fp16'` and mixed precisions including `'mixed_fp4'` and `'mixed_fp8'` are also supported.
+> [!NOTE]
+> * Currently, `load_in_low_bit` supports options `'sym_int4'`, `'asym_int4'`, `'sym_int5'`, `'asym_int5'`, `'sym_int8'`, `'nf3'`, `'nf4'`, `'fp4'`, `'fp8'`, `'fp8_e4m3'`, `'fp8_e5m2'`, `'fp6'`, `'gguf_iq2_xxs'`, `'gguf_iq2_xs'`, `'gguf_iq1_s'`, `'gguf_q4k_m'`, `'gguf_q4k_s'`, `'fp16'`, `'bf16'`, `'sym_int4'` means symmetric int 4, `'asym_int4'` means asymmetric int 4, `'nf4'` means 4-bit NormalFloat, etc. Relevant low bit optimizations will be applied to the model.
 >
 > * `load_in_4bit=True` is equivalent to `load_in_low_bit='sym_int4'`.
 
@@ -79,7 +85,9 @@ with torch.inference_mode():
     print(output_str)
 ```
 
-> **Note**
+> [!NOTE]
+> For the first time that each model runs on Intel iGPU/Intel Arc™ A300-Series or Pro A60, it may take several minutes to compile. 
+> 
 > The initial generation of optimized LLMs on Intel GPUs could be slow. Therefore, it's advisable to perform a **warm-up** run before the actual generation.
 >
 > For the next section of stream chat, we could treat this time of generation in section 6.1.3 as a warm-up.
