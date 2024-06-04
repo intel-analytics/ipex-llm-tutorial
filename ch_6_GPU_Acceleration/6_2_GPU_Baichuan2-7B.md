@@ -34,7 +34,7 @@ model_in_4bit_gpu = model_in_4bit.to('xpu')
 >
 > * Currently, `load_in_low_bit` supports options `'sym_int4'`, `'asym_int4'`, `'sym_int8'`, `'nf4'`, `'fp6'`, `'fp8'`,`'fp16'`, etc., in which `'sym_int4'` means symmetric int 4, `'asym_int4'` means asymmetric int 4, and `'nf4'` means 4-bit NormalFloat, etc. Relevant low bit optimizations will be applied to the model.
 >
-> * `load_in_4bit=True` is equivalent to `load_in_low_bit='sym_int4'`.
+>   `load_in_4bit=True` is equivalent to `load_in_low_bit='sym_int4'`.
 >
 > * When running LLMs on Intel iGPUs for Windows users, we recommend setting `cpu_embedding=True` in the from_pretrained function.
 > 
