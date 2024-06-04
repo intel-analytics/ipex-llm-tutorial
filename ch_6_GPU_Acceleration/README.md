@@ -21,6 +21,7 @@ IPEX-LLM supports optimizations of any [*HuggingFace transformers*](https://hugg
 In Chapter 6, you will learn how to run LLMs, as well as implement stream chat functionalities, using IPEX-LLM optimizations on Intel GPUs. Popular open source models are used as examples:
 
 + [Llama2-7B](./6_1_GPU_Llama2-7B.md)
++ [Baichuan2-7B](./6_2_GPU_Baichuan2-7B.md)
 
 
 ## 6.0 System Support
