@@ -5,7 +5,7 @@ You can use IPEX-LLM to load any ModelScope model for acceleration on Intel GPUs
 In this tutorial, you will learn how to run LLMs on Intel GPUs with IPEX-LLM optimizations, and based on that build a stream chatbot. A popular open-source LLM [baichuan-inc/Baichuan2-7B-Chat](https://www.modelscope.cn/models/baichuan-inc/Baichuan2-7B-Chat) is used as an example.
 
 > [!NOTE]
-> Please make sure that you have prepared the environment for IPEX-LLM on GPU before you started.
+> Please make sure that you have prepared the environment for IPEX-LLM on GPU before you started. Refer to [here](https://ipex-llm.readthedocs.io/en/latest/doc/LLM/Overview/install_gpu.html) for more information.
 
 
 ## 6.2.1 Load Model in Low Precision
@@ -28,26 +28,25 @@ model_in_4bit_gpu = model_in_4bit.to('xpu')
 ```
 
 > [!NOTE]
-> IPEX-LLM has supported `AutoModel`, `AutoModelForCausalLM`, `AutoModelForSpeechSeq2Seq` and `AutoModelForSeq2SeqLM`, etc.
+> * IPEX-LLM has supported `AutoModel`, `AutoModelForCausalLM`, `AutoModelForSpeechSeq2Seq` and `AutoModelForSeq2SeqLM`, etc.
 >
-> If you have already downloaded the Baichuan 2 (7B) model, you could specify `pretrained_model_name_or_path` to the model path.
-
-> [!NOTE]
-> It is important to set `model_hub='modelscope'`, otherwise model hub is default to be huggingface
-
-> [!NOTE]
-> * Currently, `load_in_low_bit` supports options `'sym_int4'`, `'asym_int4'`, `'sym_int5'`, `'asym_int5'`, `'sym_int8'`, `'nf3'`, `'nf4'`, `'fp4'`, `'fp8'`, `'fp8_e4m3'`, `'fp8_e5m2'`, `'fp6'`, `'gguf_iq2_xxs'`, `'gguf_iq2_xs'`, `'gguf_iq1_s'`, `'gguf_q4k_m'`, `'gguf_q4k_s'`, `'fp16'`, `'bf16'`, `'sym_int4'` means symmetric int 4, `'asym_int4'` means asymmetric int 4, `'nf4'` means 4-bit NormalFloat, etc. Relevant low bit optimizations will be applied to the model.
+>   If you have already downloaded the Baichuan 2 (7B) model, you could specify `pretrained_model_name_or_path` to the model path.
+>
+> * It is important to set `model_hub='modelscope'`, otherwise model hub is default to be huggingface
+>
+> * Currently, `load_in_low_bit` supports options `'sym_int4'`, `'asym_int4'`, `'sym_int8'`, `'nf4'`, `'fp6'`, `'fp8'`,`'fp16'`, etc., in which `'sym_int4'` means symmetric int 4, `'asym_int4'` means asymmetric int 4, and `'nf4'` means 4-bit NormalFloat, etc. Relevant low bit optimizations will be applied to the model.
 >
 > * `load_in_4bit=True` is equivalent to `load_in_low_bit='sym_int4'`.
-
-> [!NOTE]
->  When running LLMs on Intel iGPUs for Windows users, we recommend setting `cpu_embedding=True` in the from_pretrained function.
+>
+> * When running LLMs on Intel iGPUs for Windows users, we recommend setting `cpu_embedding=True` in the from_pretrained function.
 > 
-> This will allow the memory-intensive embedding layer to utilize the CPU instead of iGPU.
+>   This will allow the memory-intensive embedding layer to utilize the CPU instead of iGPU.
+>
+> * You could refer to the [API documentation](https://ipex-llm.readthedocs.io/en/latest/doc/PythonAPI/LLM/transformers.html) for more information.
 
 ## 6.2.2 Load Tokenizer 
 
-A tokenizer is also needed for LLM inference. You can use [ModelScope](https://www.modelscope.cn/docs/ModelScope%20Library%E6%A6%82%E8%A7%88%E4%BB%8B%E7%BB%8D) API to load the tokenizer directly. It can be used seamlessly with models loaded by IPEX-LLM. For Baichuan 2, the corresponding tokenizer class is `AutoTokenizer`.
+A tokenizer is also needed for LLM inference. You can use [ModelScope Library](https://www.modelscope.cn/docs/ModelScope%20Library%E6%A6%82%E8%A7%88%E4%BB%8B%E7%BB%8D) to load the tokenizer directly. It can be used seamlessly with models loaded by IPEX-LLM. For Baichuan 2, the corresponding tokenizer class is `AutoTokenizer`.
 
 ```python
 from modelscope import AutoTokenizer
@@ -56,7 +55,7 @@ tokenizer = AutoTokenizer.from_pretrained(pretrained_model_name_or_path="baichua
                                           trust_remote_code=True)
 ```
 
-> **Note**
+> [!NOTE]
 > If you have already downloaded the Baichuan 2 (7B) model, you could specify `pretrained_model_name_or_path` to the model path.
 
 ## 6.2.3 Run Model
@@ -114,5 +113,5 @@ while True:
     chat_history.append({"role": "assistant", "content": response})
 ```
 
-> **Note**
+> [!NOTE]
 > To successfully observe the text streaming behavior in standard output, we need to set the environment variable `PYTHONUNBUFFERED=1` to ensure that the standard output streams are directly sent to the terminal without being buffered first.
