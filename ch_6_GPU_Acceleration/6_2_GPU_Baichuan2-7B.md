@@ -10,7 +10,7 @@ In this tutorial, you will learn how to run LLMs on Intel GPUs with IPEX-LLM opt
 
 ## 6.2.1 Load Model in Low Precision
 
-One common use case is to load a model from ModelScope hub with IPEX-LLM low-bit precision optimization. For Baichuan 2 (7B), you could simply import `ipex_llm.transformers.AutoModelForCausalLM` instead of `transformers.AutoModelForCausalLM`, and specify `load_in_4bit=True` or `load_in_low_bit` parameter accordingly in the `from_pretrained` function.
+One common use case is to load a model from [ModelScope hub](https://www.modelscope.cn/models) with IPEX-LLM low-bit precision optimization. For Baichuan 2 (7B), you could simply import `ipex_llm.transformers.AutoModelForCausalLM` instead of `transformers.AutoModelForCausalLM`, and specify `load_in_4bit=True` or `load_in_low_bit` parameter accordingly in the `from_pretrained` function. Besides, it is important to set `model_hub='modelscope'`, otherwise model hub is default to be huggingface.
 
 For Intel GPUs, **once you have the model in low precision, set it to `to('xpu')`.**
 
@@ -31,8 +31,6 @@ model_in_4bit_gpu = model_in_4bit.to('xpu')
 > * IPEX-LLM has supported `AutoModel`, `AutoModelForCausalLM`, `AutoModelForSpeechSeq2Seq` and `AutoModelForSeq2SeqLM`, etc.
 >
 >   If you have already downloaded the Baichuan 2 (7B) model, you could specify `pretrained_model_name_or_path` to the model path.
->
-> * It is important to set `model_hub='modelscope'`, otherwise model hub is default to be huggingface
 >
 > * Currently, `load_in_low_bit` supports options `'sym_int4'`, `'asym_int4'`, `'sym_int8'`, `'nf4'`, `'fp6'`, `'fp8'`,`'fp16'`, etc., in which `'sym_int4'` means symmetric int 4, `'asym_int4'` means asymmetric int 4, and `'nf4'` means 4-bit NormalFloat, etc. Relevant low bit optimizations will be applied to the model.
 >
