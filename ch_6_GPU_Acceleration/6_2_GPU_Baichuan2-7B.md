@@ -104,7 +104,7 @@ while True:
         break
     chat_history.append({"role": "user", "content": prompt})
     position = 0
-    for response in model_in_4bit.chat(tokenizer, chat_history, stream=True):
+    for response in model_in_4bit_gpu.chat(tokenizer, chat_history, stream=True):
         print(response[position:], end='', flush=True)
         position = len(response)
     print()
