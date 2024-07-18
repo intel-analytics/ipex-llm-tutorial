@@ -8,7 +8,7 @@ In this tutorial, you will learn how to run LLMs on Intel GPUs with IPEX-LLM opt
 > Please make sure that you have prepared the environment for IPEX-LLM on GPU before you started. Refer to [here](https://ipex-llm.readthedocs.io/en/latest/doc/LLM/Overview/install_gpu.html) for more information regarding installation and environment preparation. Besides, to process audio files, you also need to install `librosa` by performing `pip install -U librosa`.
 
 ## 6.2.1 Download Audio Files
-To start with, the first thing to do is preparing some audio files for this demo. As an example, you can download [an English example](https://datasets-server.huggingface.co/assets/patrickvonplaten/librispeech_asr_dummy/--/clean/validation/2/audio/audio.wav) from English audio dataset [librispeech_asr_dummy](https://huggingface.co/datasets/patrickvonplaten/librispeech_asr_dummy) and [one Chinese example](https://datasets-server.huggingface.co/assets/carlot/AIShell/--/692ef58020d79b21f54eb25b15a4813d4f9650d7/--/default/train/84/audio/audio.wav) from the Chinese audio dataset [AIShell](https://huggingface.co/datasets/carlot/AIShell). You are free to pick other recording clips found within or outside the dataset. 
+To start with, the first thing to do is preparing some audio files for this demo. As an example, you can download an English example from multilingual audio dataset [voxpopuli](https://huggingface.co/datasets/facebook/voxpopuli) and one Chinese example from the Chinese audio dataset [AIShell](https://huggingface.co/datasets/carlot/AIShell). You are free to pick other recording clips found within or outside the dataset. 
 
 
 ## 6.2.2 Load Model in Low Precision
@@ -82,10 +82,10 @@ forced_decoder_ids = processor.get_decoder_prompt_ids(language="english", task="
 
 with torch.inference_mode():
     # extract input features for the Whisper model
-    input_features = processor(data_en, sampling_rate=sample_rate_en, return_tensors="pt").input_features
+    input_features = processor(data_en, sampling_rate=sample_rate_en, return_tensors="pt").input_features.to('xpu')
 
     # predict token ids for transcription
-    predicted_ids = model.generate(input_features, forced_decoder_ids=forced_decoder_ids,max_new_tokens=200)
+    predicted_ids = model_in_4bit_gpu.generate(input_features, forced_decoder_ids=forced_decoder_ids,max_new_tokens=200)
 
     # decode token ids into texts
     transcribe_str = processor.batch_decode(predicted_ids, skip_special_tokens=True)
@@ -111,8 +111,8 @@ data_zh, sample_rate_zh = librosa.load("audio_zh.wav", sr=16000)
 forced_decoder_ids = processor.get_decoder_prompt_ids(language="chinese", task="transcribe")
 
 with torch.inference_mode():
-    input_features = processor(data_zh, sampling_rate=sample_rate_zh, return_tensors="pt").input_features
-    predicted_ids = model.generate(input_features, forced_decoder_ids=forced_decoder_ids)
+    input_features = processor(data_zh, sampling_rate=sample_rate_zh, return_tensors="pt").input_features.to('xpu')
+    predicted_ids = model_in_4bit.generate(input_features, forced_decoder_ids=forced_decoder_ids)
     transcribe_str = processor.batch_decode(predicted_ids, skip_special_tokens=True)
 
     print('-'*20, 'Chinese Transcription', '-'*20)
@@ -122,8 +122,8 @@ with torch.inference_mode():
 forced_decoder_ids = processor.get_decoder_prompt_ids(language="chinese", task="translate")
 
 with torch.inference_mode():
-    input_features = processor(data_zh, sampling_rate=sample_rate_zh, return_tensors="pt").input_features
-    predicted_ids = model.generate(input_features, forced_decoder_ids=forced_decoder_ids, max_new_tokens=200)
+    input_features = processor(data_zh, sampling_rate=sample_rate_zh, return_tensors="pt").input_features.to('xpu')
+    predicted_ids = model_in_4bit.generate(input_features, forced_decoder_ids=forced_decoder_ids, max_new_tokens=200)
     translate_str = processor.batch_decode(predicted_ids, skip_special_tokens=True)
 
     print('-'*20, 'Chinese to English Translation', '-'*20)
