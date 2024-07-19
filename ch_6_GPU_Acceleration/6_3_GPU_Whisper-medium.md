@@ -2,7 +2,7 @@
 
 You can use IPEX-LLM to load Transformer-based automatic speech recognition (ASR) models for acceleration on Intel GPUs. With IPEX-LLM, PyTorch models (in FP16/BF16/FP32) for ASR can be loaded and optimized automatically on Intel GPUs with low-bit quantization (supported precisions include INT4/NF4/INT5/FP8/INT8).
 
-In this tutorial, you will learn how to run LLMs on Intel GPUs with IPEX-LLM optimizations, and based on that build a speech recognition application. A popular open-source model for both ASR and speech translation, [openai/whisper-medium](https://huggingface.co/openai/whisper-medium) is used as an example.
+In this tutorial, you will learn how to run speech models on Intel GPUs with IPEX-LLM optimizations, and based on that build a speech recognition application. A popular open-source model for both ASR and speech translation, [openai/whisper-medium](https://huggingface.co/openai/whisper-medium) is used as an example.
 
 > [!NOTE]
 > Please make sure that you have prepared the environment for IPEX-LLM on GPU before you started. Refer to [here](https://ipex-llm.readthedocs.io/en/latest/doc/LLM/Overview/install_gpu.html) for more information regarding installation and environment preparation. Besides, to process audio files, you also need to install `librosa` by performing `pip install -U librosa`.
