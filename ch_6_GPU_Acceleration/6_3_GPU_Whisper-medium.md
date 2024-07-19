@@ -1,6 +1,6 @@
 # 6.2 Run Whisper (medium) on Intel GPUs
 
-You can use IPEX-LLM to load Transformer-based automatic speech recognition (ASR) models for acceleration on Intel GPUs. With IPEX-LLM, PyTorch models (in FP16/BF16/FP32) for ASR can be loaded and optimized automatically on Intel GPUs with low-bit quantization (supported precisions include INT4/NF4/INT5/FP8/INT8).
+You can use IPEX-LLM to load Transformer-based automatic speech recognition (ASR) models for acceleration on Intel GPUs. With IPEX-LLM, PyTorch models (in FP16/BF16/FP32) for ASR can be loaded and optimized automatically on Intel GPUs with low-bit quantization (supported precisions include INT4/NF4/INT5/FP6/FP8/INT8).
 
 In this tutorial, you will learn how to run speech models on Intel GPUs with IPEX-LLM optimizations, and based on that build a speech recognition application. A popular open-source model for both ASR and speech translation, [openai/whisper-medium](https://huggingface.co/openai/whisper-medium) is used as an example.
 
@@ -22,9 +22,10 @@ For Intel GPUs, **once you have the model in low precision, set it to `to('xpu')
 ```python
 from ipex_llm.transformers import AutoModelForSpeechSeq2Seq
 
-model_in_4bit = AutoModelForSpeechSeq2Seq.from_pretrained(pretrained_model_name_or_path="openai/whisper-medium",
-                                                  load_in_4bit=True)
-model_in_4bit_gpu = model_in_4bit.to('xpu')
+model_in_4bit = AutoModelForSpeechSeq2Seq.from_pretrained(
+    pretrained_model_name_or_path="openai/whisper-medium", load_in_4bit=True
+)
+model_in_4bit_gpu = model_in_4bit.to("xpu")
 ```
 
 > [!NOTE]
@@ -59,7 +60,7 @@ processor = WhisperProcessor.from_pretrained(pretrained_model_name_or_path="open
 
 Once you have optimized the Whisper model using IPEX-LLM with INT4 optimization and loaded the Whisper processor, you are ready to begin transcribing the audio through model inference.
 
-Let's start with the English audio file `audio_en.wav`. Before we feed it into Whisper processor, we need to extract sequence data from raw speech waveform:
+Let's start with the English audio file `audio_en.wav`, taken from [voxpopuli](https://huggingface.co/datasets/facebook/voxpopuli) dataset. Before we feed it into Whisper processor, we need to extract sequence data from raw speech waveform:
 
 ```python
 import librosa
@@ -101,7 +102,7 @@ with torch.inference_mode():
 
 ## 6.2.5 Run Model to Transcribe Chinese Audio and Translate to English
 
-Next, let's move to the Chinese audio `audio_zh.wav`. Whisper offers capability to transcribe multilingual audio files, and translate the recognized text into English. The only difference here is to define specific context token through `forced_decoder_ids`:
+Next, let's move to the Chinese audio `audio_zh.wav`, which is randomly taken from the [AIShell](https://huggingface.co/datasets/carlot/AIShell) dataset. Whisper offers capability to transcribe multilingual audio files, and translate the recognized text into English. The only difference here is to define specific context token through `forced_decoder_ids`:
 
 ```python
 # extract sequence data
