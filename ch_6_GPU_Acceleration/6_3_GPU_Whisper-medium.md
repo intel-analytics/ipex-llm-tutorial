@@ -1,4 +1,4 @@
-# 6.2 Run Whisper (medium) on Intel GPUs
+# 6.3 Run Whisper (medium) on Intel GPUs
 
 You can use IPEX-LLM to load Transformer-based automatic speech recognition (ASR) models for acceleration on Intel GPUs. With IPEX-LLM, PyTorch models (in FP16/BF16/FP32) for ASR can be loaded and optimized automatically on Intel GPUs with low-bit quantization (supported precisions include INT4/NF4/INT5/FP6/FP8/INT8).
 
@@ -7,11 +7,11 @@ In this tutorial, you will learn how to run speech models on Intel GPUs with IPE
 > [!NOTE]
 > Please make sure that you have prepared the environment for IPEX-LLM on GPU before you started. Refer to [here](https://ipex-llm.readthedocs.io/en/latest/doc/LLM/Overview/install_gpu.html) for more information regarding installation and environment preparation. Besides, to process audio files, you also need to install `librosa` by performing `pip install -U librosa`.
 
-## 6.2.1 Download Audio Files
+## 6.3.1 Download Audio Files
 To start with, the first thing to do is preparing some audio files for this demo. As an example, you can download an English example from multilingual audio dataset [voxpopuli](https://huggingface.co/datasets/facebook/voxpopuli) and one Chinese example from the Chinese audio dataset [AIShell](https://huggingface.co/datasets/carlot/AIShell). You are free to pick other recording clips found within or outside the dataset. 
 
 
-## 6.2.2 Load Model in Low Precision
+## 6.3.2 Load Model in Low Precision
 
 One common use case is to load a model from Hugging Face with IPEX-LLM low-bit precision optimization. For Whisper (medium), you could simply import `ipex_llm.transformers.AutoModelForSpeechSeq2Seq` instead of `transformers.AutoModelForSpeechSeq2Seq`, and specify `load_in_4bit=True` parameter accordingly in the `from_pretrained` function.
 
@@ -43,7 +43,7 @@ model_in_4bit_gpu = model_in_4bit.to("xpu")
 >
 > * You could refer to the [API documentation](https://ipex-llm.readthedocs.io/en/latest/doc/PythonAPI/LLM/transformers.html) for more information.
 
-## 6.2.3 Load Whisper Processor
+## 6.3.3 Load Whisper Processor
 
 A Whisper processor is also needed for both audio pre-processing, and post-processing model outputs from tokens to texts. IPEX-LLM does not provide a customized implementation for that, so you might want to use the official `transformers` API to load `WhisperProcessor`:
 
@@ -56,7 +56,7 @@ processor = WhisperProcessor.from_pretrained(pretrained_model_name_or_path="open
 > [!NOTE]
 > If you have already downloaded the Whisper (medium) model, you could specify `pretrained_model_name_or_path` to the model path.
 
-## 6.2.4 Run Model to Transcribe English Audio
+## 6.3.4 Run Model to Transcribe English Audio
 
 Once you have optimized the Whisper model using IPEX-LLM with INT4 optimization and loaded the Whisper processor, you are ready to begin transcribing the audio through model inference.
 
@@ -100,7 +100,7 @@ with torch.inference_mode():
 > 
 
 
-## 6.2.5 Run Model to Transcribe Chinese Audio and Translate to English
+## 6.3.5 Run Model to Transcribe Chinese Audio and Translate to English
 
 Next, let's move to the Chinese audio `audio_zh.wav`, which is randomly taken from the [AIShell](https://huggingface.co/datasets/carlot/AIShell) dataset. Whisper offers capability to transcribe multilingual audio files, and translate the recognized text into English. The only difference here is to define specific context token through `forced_decoder_ids`:
 
