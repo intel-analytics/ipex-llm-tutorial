@@ -16,7 +16,7 @@ The tutorials are organized as follows:
 - [Chapter 4 **`Chinese Support`**](./ch_4_Chinese_Support/) shows the usage of some LLMs which suppports Chinese input/output, e.g. ChatGLM2, Baichuan  
 - [Chapter 5 **`Application Development: Intermediate`**](./ch_5_AppDev_Intermediate/) introduces intermediate-level knowledge for application development using _IPEX-LLM_, e.g. How to build a more sophisticated Chatbot, Speech recoginition, etc. 
 - [Chapter 6 **`GPU Acceleration`**](./ch_6_GPU_Acceleration/) introduces how to use Intel GPU to accelerate LLMs using _IPEX-LLM_.
-- [Chapter 7 **`Finetune`**](./ch_7_Finetune/) introduces how to do Finetune using _IPEX-LLM_.
+- [Chapter 7 **`Finetune`**](./ch_7_Finetune/) introduces how to do finetune using _IPEX-LLM_.
 - [Chapter 8 **`Application Development: Advanced`**](./ch_8_AppDev_Advanced/) introduces advanced-level knowledge for application development using _IPEX-LLM_, e.g. langchain usage. 
 
 [^1]: Performance varies by use, configuration and other factors. `ipex-llm` may not optimize to the same degree for non-Intel products. Learn more at www.Intel.com/PerformanceIndex.
